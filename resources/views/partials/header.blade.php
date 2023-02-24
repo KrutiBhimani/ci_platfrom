@@ -90,7 +90,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="/storage/uplodes/avatar-9.jpg" class="rounded-circle col p-0" style="height: 30px;width: 30px;">
-                            <label>hardi bhimani</label>
+                            <label>{{Auth::user()->first_name}}</label>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="edit_user">My Profile</a></li>

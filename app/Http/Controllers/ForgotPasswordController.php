@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\User; 
 use Mail; 
 use Hash;
+use App\Models\Banner;
 use Illuminate\Support\Str;
   
 class ForgotPasswordController extends Controller
@@ -15,7 +16,8 @@ class ForgotPasswordController extends Controller
 
     public function showForgetPasswordForm()
     {
-        return view('forgot');
+        $banners = Banner::where('deleted_at', null)->orderBy('sort_order','asc')->get();
+        return view('forgot', compact('banners'));
     }
   
 

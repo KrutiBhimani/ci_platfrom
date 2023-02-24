@@ -71,10 +71,8 @@
 <div class="col-lg-10 col-md-10 col-sm-10 col-10 m-0 p-0 position-relative">
 <div class="position-sticky top-0" style="z-index: 2">
     <div class="d-flex justify-content-between hd ">
-        <div class="p-3">
-            <!-- Tuesday, February 21, 2023, 06:15 PM   -->
-            <?php //echo date('l, F d, Y, h:i A'); ?>       
-            {{now()->toRfc850String()}}
+        <div class="p-3"> 
+            {{ date('l, F d, Y, h:i A') }}
         </div>
         <nav class="navbar navbar-expand" style="background-color:white ;">
             <div class="collapse navbar-collapse" id="navbarSupportedContent1">
@@ -82,11 +80,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle me-4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="/storage/uplodes/avatar-5.jpg" class="rounded-circle m-2 mt-0 mb-0 col" width="29" height="29">
-                        <label>admin123 patel</label>
+                        <label>fdhgf</label>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="edit_admin?edit=MVNFQ1JFVF9TVFVGRg==">My Profile</a></li>
-                            <li><a class="dropdown-item" href="logout">Logout</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -25,17 +25,16 @@ class UserController extends Controller
             }
             return view('admin.user', compact('users'));
         }
-   
         return redirect("login")->with('error', 'are not allowed to access');
     }
+
     public function add_user()
     {
         if(Auth::check()){
-            $countries = Country::where('deleted_at', null)->get();
-            $cities = City::where('deleted_at', null)->get();
+            $countries = Country::get();
+            $cities = City::get();
             return view('admin.add_user',compact('countries','cities'));
         }
-   
         return redirect("login")->with('error', 'are not allowed to access');
     }
 
@@ -76,8 +75,8 @@ class UserController extends Controller
     {
         if(Auth::check()){
             $user = User::where(['user_id' => $user_id])->first();
-            $countries = Country::where('deleted_at', null)->get();
-            $cities = City::where('deleted_at', null)->get();
+            $countries = Country::get();
+            $cities = City::get();
             return view('admin.edit_user',compact('countries','cities','user'));
         }
         return redirect("login")->with('error', 'are not allowed to access');

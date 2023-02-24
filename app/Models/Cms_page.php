@@ -15,6 +15,10 @@ class Cms_page extends Authenticatable
     protected $table='cms_page';
     protected $primaryKey = 'cms_page_id';
     protected $fillable = [
+        'title',
+        'description',
+        'slug',
+        'status'
     ];
 
 }

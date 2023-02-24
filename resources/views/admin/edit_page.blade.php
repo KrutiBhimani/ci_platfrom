@@ -1,8 +1,19 @@
 @extends('layouts.admin_header')
 
 @section('content')
+@if (Session::has('message'))
+    <div class="alert alert-success" role="alert">
+        {{ Session::get('message') }}
+    </div>
+@endif
+@if (Session::has('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ Session::get('error') }}
+    </div>
+@endif
 <br/>
-<form class="m-3" method="post" enctype="multipart/form-data">
+<form action="{{ route('page.edit') }}" method="POST" enctype="multipart/form-data">
+    @csrf
     <table class="table table-borderless" style="border: 1px solid #dee2e6;">
         <thead class="table-light border-bottom">
             <tr>
@@ -12,16 +23,17 @@
         <tbody>
             <tr>
                 <td class="p-3 fs-6">
+                    <input type="hidden" name="cms_page_id" class="popup" value="{{$page->cms_page_id}}">
                     <p class="mb-1" style="font-size:14px;">Title</p>
-                    <input type="text" name="title" class="popup" value="Introduction" required="">
+                    <input type="text" name="title" class="popup" value="{{$page->title}}">
                     <p class="mb-1 mt-4" style="font-size:14px;">Description</p>
-                    <textarea rows="8" name="description" class="popup1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecatcupi datat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+                    <textarea rows="8" name="description" class="popup1">{{ strip_tags($page->description) }}</textarea>
                     <p class="mb-1 mt-4" style="font-size:14px;">Slug</p>
-                    <input type="text" name="slug" class="popup" value="policy" required="">
+                    <input type="text" name="slug" class="popup" value="{{$page->slug}}">
                     <p class="mb-1 mt-4" style="font-size:14px;">Status</p>
                     <select class="popup pt-0 pb-0" name="status">
-                        <option value="1">1</option>
-                        <option value="0">0</option>                    
+                        <option value="1" {{ $page->status==1 ? 'selected' : '' }}>Active</option>
+                        <option value="0" {{ $page->status==0 ? 'selected' : '' }}>Inactive</option>
                     </select>
                 </td>
             </tr>

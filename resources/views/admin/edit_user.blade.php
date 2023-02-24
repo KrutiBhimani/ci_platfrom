@@ -23,7 +23,7 @@
         <tbody>
             <tr>
                 <td class="p-3 fs-6">
-                <input type="hidden" name="user_id" class="popup" value="{{$user->user_id}}">
+                    <input type="hidden" name="user_id" class="popup" value="{{$user->user_id}}">
                     <p class="mb-1" style="font-size:14px;">First Name</p>
                     <input type="text" name="first_name" class="popup" value="{{$user->first_name}}">
                     <p class="mb-1 mt-4" style="font-size:14px;">Last Name</p>

@@ -1,8 +1,19 @@
 @extends('layouts.admin_header')
 
 @section('content')
+@if (Session::has('message'))
+    <div class="alert alert-success" role="alert">
+        {{ Session::get('message') }}
+    </div>
+@endif
+@if (Session::has('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ Session::get('error') }}
+    </div>
+@endif
 <br/>
-<form class="m-3" method="post" enctype="multipart/form-data">
+<form action="{{ route('theme.add') }}" method="POST" enctype="multipart/form-data">
+    @csrf
     <table class="table table-borderless" style="border: 1px solid #dee2e6;">
         <thead class="table-light border-bottom">
             <tr>
@@ -13,7 +24,10 @@
             <tr>
                 <td class="p-3 fs-6">
                     <p class="mb-1" style="font-size:14px;">Title</p>
-                    <input type="text" name="title" class="popup" required="">
+                    <input type="text" name="title" class="popup">
+                    @if ($errors->has('title'))
+                        <span class="text-danger">{{ $errors->first('title') }}</span>
+                    @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Status</p>
                     <select class="popup pt-0 pb-0" name="status">
                         <option value="1">Active</option>

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\User; 
 use Mail; 
 use Hash;
+use App\Models\Banner;
 use Illuminate\Support\Str;
   
 class ResetPasswordController extends Controller
@@ -20,7 +21,8 @@ class ResetPasswordController extends Controller
             return redirect('/forget-password')->with('error', 'Your time is over enter email address again!');
         }
         else{
-            return view('reset', ['token' => $token]);
+            $banners = Banner::where('deleted_at', null)->orderBy('sort_order','asc')->get();
+            return view('reset', ['token' => $token], compact('banners'));
         }
     }
 

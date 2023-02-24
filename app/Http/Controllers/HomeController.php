@@ -19,12 +19,5 @@ class HomeController extends Controller
         
         return redirect('/login')->with('error', 'you are not allowed to access please try login!');
     }
-     
- 
-    public function signOut() {
-        Session::flush();
-        Auth::logout();
-   
-        return Redirect('login');
-    }
+
 }

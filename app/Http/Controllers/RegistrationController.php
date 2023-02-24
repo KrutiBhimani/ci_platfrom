@@ -7,6 +7,7 @@ use Hash;
 use Session;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Banner;
 use Illuminate\Support\Facades\Auth;
  
 class RegistrationController extends Controller
@@ -14,7 +15,8 @@ class RegistrationController extends Controller
  
     public function registration()
     {
-        return view('registration');
+        $banners = Banner::where('deleted_at', null)->orderBy('sort_order','asc')->get();
+        return view('registration', compact('banners'));
     }
        
  

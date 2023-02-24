@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('banner', function (Blueprint $table) {
             $table->bigInteger('banner_id')->unsigned()->autoIncrement();
             $table->string('image',512);
+            $table->string('title',255);
             $table->text('text');
             $table->integer('sort_order')->default(0);
             $table->timestamps();

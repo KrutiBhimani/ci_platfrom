@@ -1,6 +1,16 @@
 @extends('layouts.admin_header')
 
 @section('content')
+@if (Session::has('message'))
+    <div class="alert alert-success mb-0 mt-3" role="alert">
+        {{ Session::get('message') }}
+    </div>
+@endif
+@if (Session::has('error'))
+    <div class="alert alert-danger mb-0 mt-3" role="alert">
+        {{ Session::get('error') }}
+    </div>
+@endif
 <div class="p-3">
     <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -9,13 +19,14 @@
         </li>
     </ul>
     <div class="d-flex justify-content-between mt-4 mb-4">
-        <form class="m-0" method="post" enctype="multipart/form-data">
+        <form class="m-0" action="{{ route('page') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div style="border: 2px solid #dee2e6; border-radius:5px;">
                 <div class="input-group">
                     <span class="input-group-text" style="background-color:transparent; border:none;">
                     <img src="/storage/images/search.png" height="15px">
                     </span>
-                    <input type="text" name="search" placeholder="search" class="form-control" style="border:none;border-radius:5px;background-color:transparent;">
+                    <input type="text" name="search" value="{{ request()->input('search') }}" placeholder="search" class="form-control" style="border:none;border-radius:5px;background-color:transparent;">
                 </div>
             </div>
         </form>
@@ -41,8 +52,8 @@
                             <td class="p-3 pe-0" style="font-size:13px;">{{ $page->title }}</td>
                             <td class="p-3 pe-0" style="font-size:13px;color: #7ed470;">{{ $page->status=='1' ? 'Active' : 'Inactive' }}</td>
                             <td class="p-3 pe-0 p-0" style="font-size:20px;">
-                                <a href="edit_page"><i class="fa fa-pencil-square-o" style="color: #f88634;" aria-hidden="true"></i></a>
-                                <div id="popup20" class="modal">
+                                <a href="edit_page/{{ $page->cms_page_id }}"><i class="fa fa-pencil-square-o" style="color: #f88634;" aria-hidden="true"></i></a>
+                                <div id="popup{{ $page->cms_page_id }}" class="modal">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content p-2">
                                             <div class="modal-header pb-0" style="border-bottom:0 ;">
@@ -55,12 +66,12 @@
                                             <div class="modal-footer mt-3 justify-content-center" style="border-top:0 ;">
                                                 <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
                                                 </button>
-                                                <a href="page?source=delete_page&amp;delete=MjBTRUNSRVRfU1RVRkY=" class="col-example7">Delete</a>
+                                                <a href="delete_page/{{ $page->cms_page_id }}" class="col-example7">Delete</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#popup20"><i class="fa fa-trash-o text-dark" aria-hidden="true"></i></a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#popup{{ $page->cms_page_id }}"><i class="fa fa-trash-o text-dark" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                         @endforeach

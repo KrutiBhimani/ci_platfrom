@@ -15,6 +15,10 @@ class Banner extends Authenticatable
     protected $table='banner';
     protected $primaryKey = 'banner_id';
     protected $fillable = [
+        'title',
+        'text',
+        'sort_order',
+        'image'
     ];
 
 }

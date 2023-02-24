@@ -37,10 +37,4 @@ class MissionController extends Controller
         return redirect("login")->with('error', 'are not allowed to access');
     }
  
-    public function signOut() {
-        Session::flush();
-        Auth::logout();
-   
-        return Redirect('login');
-    }
 }

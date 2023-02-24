@@ -7,6 +7,7 @@ use Hash;
 use Session;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Banner;
 use Illuminate\Support\Facades\Auth;
  
 class LoginController extends Controller
@@ -14,7 +15,8 @@ class LoginController extends Controller
  
     public function index()
     {
-        return view('login');
+        $banners = Banner::where('deleted_at', null)->orderBy('sort_order','asc')->get();
+        return view('login', compact('banners'));
     }  
     public function customLogin(Request $request){
         $request->validate([
@@ -22,16 +24,15 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
+        
+        if (Auth::guard('admin')->attempt($credentials)) {
+            return redirect()->intended('admin/user');
+        }
+        elseif (Auth::attempt($credentials)) {
             return redirect()->intended('home');
         }
         else{
-            if (Auth::guard('admin')->attempt($credentials)) {
-                return redirect()->intended('admin/user');
-            }
-            else{
-                return redirect('/login')->with('error', 'Login details are not valid');
-            }
+            return redirect('/login')->with('error', 'Login details are not valid');
         }
         
     }
