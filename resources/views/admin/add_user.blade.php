@@ -24,16 +24,16 @@
             <tr>
                 <td class="p-3 fs-6">
                     <p class="mb-1" style="font-size:14px;">First Name</p>
-                    <input type="text" name="first_name" class="popup">
+                    <input type="text" name="first_name" class="popup" value="{{ old('first_name') }}">
                     <p class="mb-1 mt-4" style="font-size:14px;">Last Name</p>
-                    <input type="text" name="last_name" class="popup">
+                    <input type="text" name="last_name" class="popup" value="{{ old('last_name') }}">
                     <p class="mb-1 mt-4" style="font-size:14px;">Email</p>
-                    <input type="email" name="email" class="popup">
+                    <input type="email" name="email" class="popup" value="{{ old('email') }}">
                     @if ($errors->has('email'))
                         <span class="text-danger">{{ $errors->first('email') }}</span>
                     @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Phone number</p>
-                    <input type="text" name="phone_number" class="popup">
+                    <input type="text" name="phone_number" class="popup" value="{{ old('phone_number') }}">
                     @if ($errors->has('phone_number'))
                         <span class="text-danger">{{ $errors->first('phone_number') }}</span>
                     @endif
@@ -48,9 +48,9 @@
                         <span class="text-danger">{{ $errors->first('avatar') }}</span>
                     @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Employee ID</p>
-                    <input type="text" name="employee_id" class="popup">
+                    <input type="text" name="employee_id" class="popup" value="{{ old('employee_id') }}">
                     <p class="mb-1 mt-4" style="font-size:14px;">Department</p>
-                    <input type="text" name="department" class="popup">
+                    <input type="text" name="department" class="popup" value="{{ old('department') }}">
                     <p class="mb-1 mt-4" style="font-size:14px;">Country</p>
                     <select class="popup pt-0 pb-0" id="selectCountries" name="country_id">
                         <option value="none" selected="" disabled="" hidden=""></option>
@@ -73,7 +73,7 @@
                         <span class="text-danger">{{ $errors->first('city_id') }}</span>
                     @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Profile text</p>
-                    <textarea rows="5" name="profile_text" class="popup1"></textarea>
+                    <textarea rows="5" name="profile_text" class="popup1">{{ old('profile_text') }}</textarea>
                     <p class="mb-1 mt-4" style="font-size:14px;">Status</p>
                     <select class="popup pt-0 pb-0" name="status">
                         <option value="1">Active</option>

@@ -15,6 +15,10 @@ class Time_mission extends Authenticatable
     protected $table='time_mission';
     protected $primaryKey = 'time_mission';
     protected $fillable = [
+        'total_seat',
+        'deadline',
+        'mission_id',
+
     ];
 
 }

@@ -24,22 +24,22 @@
             <tr>
                 <td class="p-3 fs-6">
                     <p class="mb-1" style="font-size:14px;">Title</p>
-                    <input type="text" name="title" class="popup">
+                    <input type="text" name="title" class="popup" value="{{ old('title') }}">
                     @if ($errors->has('title'))
                         <span class="text-danger">{{ $errors->first('title') }}</span>
                     @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Description</p>
-                    <textarea rows="5" name="text" class="popup1"></textarea>
+                    <textarea rows="5" name="text" class="popup1">{{ old('text') }}</textarea>
                     @if ($errors->has('text'))
                         <span class="text-danger">{{ $errors->first('text') }}</span>
                     @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Sort Order</p>
-                    <input type="number" name="sort_order" class="popup">
+                    <input type="number" name="sort_order" class="popup" value="{{ old('sort_order') }}">
                     @if ($errors->has('sort_order'))
                         <span class="text-danger">{{ $errors->first('sort_order') }}</span>
                     @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Image</p>
-                    <input type="file" name="image" value="">
+                    <input type="file" name="image">
                     @if ($errors->has('image'))
                         <span class="text-danger">{{ $errors->first('image') }}</span>
                     @endif

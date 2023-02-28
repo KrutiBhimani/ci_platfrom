@@ -24,7 +24,7 @@
             <tr>
                 <td class="p-3 fs-6">
                     <p class="mb-1" style="font-size:14px;">Title</p>
-                    <input type="text" name="skill_name" class="popup">
+                    <input type="text" name="skill_name" class="popup" value="{{ old('skill_name') }}">
                     @if ($errors->has('skill_name'))
                         <span class="text-danger">{{ $errors->first('skill_name') }}</span>
                     @endif

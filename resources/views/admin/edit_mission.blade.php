@@ -1,8 +1,19 @@
 @extends('layouts.admin_header')
 
 @section('content')
+@if (Session::has('message'))
+    <div class="alert alert-success" role="alert">
+        {{ Session::get('message') }}
+    </div>
+@endif
+@if (Session::has('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ Session::get('error') }}
+    </div>
+@endif
 <br/>
-<form class="m-3" method="post" enctype="multipart/form-data">
+<form action="{{ route('mission.edit') }}" method="POST" enctype="multipart/form-data">
+    @csrf
     <table class="table table-borderless" style="border: 1px solid #dee2e6;">
         <thead class="table-light border-bottom">
             <tr>
@@ -12,112 +23,95 @@
         <tbody>
             <tr>
                 <td class="p-3 fs-6">
+                    <input type="hidden" class="popup" name="mission_id" value="{{$mission->mission_id}}" >
                     <p class="mb-1" style="font-size:14px;">Title</p>
-                    <input type="text" class="popup" name="title" value="Grow Trees – On the path to environment sustainability" required="">
+                    <input type="text" class="popup" name="title" value="{{$mission->title}}" >
+                    @if ($errors->has('title'))
+                        <span class="text-danger">{{ $errors->first('title') }}</span>
+                    @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Short Description</p>
-                    <input type="text" class="popup" name="short_description" value="Lorem ipsum dolor sit amet, consectetur  adipiscing elit, sed do eiusmod tempor incididunt ut labore..." required="">
+                    <input type="text" class="popup" name="short_description" value="{{$mission->short_description}}">
+                    @if ($errors->has('short_description'))
+                        <span class="text-danger">{{ $errors->first('short_description') }}</span>
+                    @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Description</p>
-                    <textarea rows="5" name="description" class="popup1">IntroductionLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Challenge Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+                    <textarea rows="5" name="description" class="popup1">{{$mission->description}}</textarea>
                     <p class="mb-1 mt-4" style="font-size:14px;">City</p>
-                    <select class="popup pt-0 pb-0" name="city_id" required="">
-                        <option value="2" selected="" hidden="">Toronto</option>
-                        <option value="1">gujarat</option>
-                        <option value="2">Toronto</option>
-                        <option value="3">Melbourne</option>
-                        <option value="4">Barcelona</option>
-                        <option value="5">London</option>
-                        <option value="6">Cape Town</option>
-                        <option value="7">Paris</option>
-                        <option value="8">New York</option>
-                        <option value="9">Sydney</option>
-                        <option value="10">Berlin</option>
+                    <select class="popup pt-0 pb-0" name="city_id">
+                        @foreach ($cities as $city)
+                            <option value="{{ $city->city_id }}" {{$city->city_id==$mission->city_id? 'selected' : ''}}>{{ $city->name }}</option>
+                        @endforeach
                     </select>
+                    @if ($errors->has('city_id'))
+                        <span class="text-danger">{{ $errors->first('city_id') }}</span>
+                    @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Country</p>
-                    <select class="popup pt-0 pb-0" name="country_id" required="">
-                        <option value="2" selected="" hidden="">canada</option>
-                        <option value="1">india</option>
-                        <option value="2">canada</option>
-                        <option value="3">australia</option>
-                        <option value="4">spain</option>
-                        <option value="5">the united kingdom</option>
-                        <option value="6">south africa</option>
-                        <option value="7">france</option>
-                        <option value="8">new york</option>
-                        <option value="9">germany</option>
+                    <select class="popup pt-0 pb-0" id="selectCountries" name="country_id">
+                        @foreach ($countries as $country)
+                            <option value="{{ $country->country_id }}" {{$country->country_id==$mission->country_id? 'selected' : ''}}>{{ $country->name }}</option>
+                        @endforeach
                     </select>
+                    @if ($errors->has('country_id'))
+                        <span class="text-danger">{{ $errors->first('country_id') }}</span>
+                    @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Organisation Name</p>
-                    <input type="text" class="popup" name="organization_name" value="Tree Canada">
+                    <input type="text" class="popup" name="organization_name" value="{{$mission->organization_name}}">
                     <p class="mb-1 mt-4" style="font-size:14px;">Organisation Detail</p>
-                    <input type="text" class="popup" name="organization_detail" value="Optimy organizations working on environmental, social, advocacy and human rights. They can work to promote social or political change on a broad scale or very locally. NGOs play a critical part in developing society, improving communities, and promoting citizen participation.">
+                    <input type="text" class="popup" name="organization_detail" value="{{$mission->organization_detail}}">
                     <p class="mb-1 mt-4" style="font-size:14px;">Start Date</p>
-                    <input type="datetime-local" step="1" class="popup" name="start_date" value="2019-01-10 17:46:59">
+                    <input type="datetime-local" step="1" class="popup" name="start_date" value="{{$mission->start_date}}">
                     <p class="mb-1 mt-4" style="font-size:14px;">End Date</p>
-                    <input type="datetime-local" step="1" class="popup" name="end_date" value="2023-02-24 17:47:31">
+                    <input type="datetime-local" step="1" class="popup" name="end_date" value="{{$mission->end_date}}">
                     <p class="mb-1 mt-4" style="font-size:14px;">type</p>
-                    <select class="popup pt-0 pb-0" id="selecttype" name="mission_type" required="">
-                        <option value="TIME">TIME</option>
-                        <option value="GOAL">GOAL</option>
+                    <select class="popup pt-0 pb-0" id="selecttype" name="mission_type">
+                        <option value="TIME" {{$mission->mission_type=='TIME' ? 'selected' : ''}}>TIME</option>
+                        <option value="GOAL" {{$mission->mission_type=='GOAL' ? 'selected' : ''}}>GOAL</option>
                     </select>
-                    <div id="divresult1">
-                        <p class="mb-1 mt-4" style="font-size:14px;">Total Seats</p>
-                        <input type="number" class="popup" name="total_seat" value="20">
-                        <p class="mb-1 mt-4" style="font-size:14px;">Registration Deadline</p>
-                        <input type="datetime-local" step="1" class="popup" name="deadline" value="2023-02-25 00:00:00">
+                    <div id='divresult1'>
+                        @if($mission->mission_type=='TIME')
+                            <p class='mb-1 mt-4' style='font-size:14px;'>Total Seats</p>
+                            <input type='number' class='popup' name='total_seat' value="{{$time->total_seat}}">
+                            <p class='mb-1 mt-4' style='font-size:14px;'>Registration Deadline</p>
+                            <input type="datetime-local" step="1" class='popup' name='deadline' value="{{$time->deadline}}">
+                        @else
+                            <p class='mb-1 mt-4' style='font-size:14px;'>Goal</p>
+                            <input type='text' class='popup' name='goal_objective_text' value="{{$goal->goal_objective_text}}">
+                            <p class='mb-1 mt-4' style='font-size:14px;'>Goal Value</p>
+                            <input type="number" step="1" class='popup' name='goal_value' value="{{$goal->goal_value}}">
+                        @endif
                     </div>
+                    
                     <div id="divResult"></div>
                     <p class="mb-1 mt-4" style="font-size:14px;">theme</p>
-                    <select class="popup pt-0 pb-0" name="theme_id" required="">
-                        <option value="1" selected="">Environment</option>
-                        <option value="1">Environment</option>
-                        <option value="2">Children</option>
-                        <option value="3">Nutrition</option>
-                        <option value="4">Animals</option>
-                        <option value="5">Health</option>
-                        <option value="6">Education</option>
+                    <select class="popup pt-0 pb-0" name="theme_id">
+                    <option value="none" selected="" disabled="" hidden=""></option>
+                        @foreach ($themes as $theme)
+                            <option value="{{ $theme->mission_theme_id }}" {{$theme->mission_theme_id==$mission->theme_id? 'selected' : ''}}>{{ $theme->title }}</option>
+                        @endforeach
                     </select>
+                    @if ($errors->has('theme_id'))
+                        <span class="text-danger">{{ $errors->first('theme_id') }}</span>
+                    @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">skill</p>
-                    <select class="popup pt-0 pb-0 h-50" name="mission_skill_id[]" multiple="multiple" size="6">
-                        <option value="19" selected="">Agronomy </option>
-                        <option value="25" selected="">Environmental Policy</option>
-                        <option value="1" selected="">Anthropology</option>
-                        <option value="1">Anthropology</option>
-                        <option value="2">Archeology</option>
-                        <option value="3">Astronomy</option>
-                        <option value="4">Computer Science</option>
-                        <option value="5">Environmental Science</option>
-                        <option value="6">History</option>
-                        <option value="7">Library Sciences</option>
-                        <option value="8">Mathematics</option>
-                        <option value="9">Music Theory</option>
-                        <option value="10">Research</option>
-                        <option value="11">Administrative Support</option>
-                        <option value="12">Customer Service</option>
-                        <option value="13">Data Entry</option>
-                        <option value="14">Executive Admin</option>
-                        <option value="15">Office Management</option>
-                        <option value="16">Office Reception</option>
-                        <option value="17">Program Management</option>
-                        <option value="18">Transactions</option>
-                        <option value="19">Agronomy </option>
-                        <option value="20">Animal Care / Handling </option>
-                        <option value="21">Animal Therapy </option>
-                        <option value="22">Aquarium Maintenance</option>
-                        <option value="23">Botany</option>
-                        <option value="24">Environmental Education</option>
-                        <option value="25">Environmental Policy</option>
-                        <option value="26">Farming</option>
+                    <select class="popup pt-0 pb-0 h-50" name="skill_id[]" multiple="multiple" size="6">
+                        @foreach ($skills as $skill)
+                            <option value="{{ $skill->skill_id }}" @foreach ($selected_skills as $selected_skill) {{$selected_skill->skill_id==$skill->skill_id ? 'selected':''}}@endforeach>{{ $skill->skill_name }}</option>
+                        @endforeach
                     </select>
                     <p class="mb-1 mt-4" style="font-size:14px;">Image</p>
-                    <input type="file" name="media_name[]" multiple="">
+                    <input type="file" name="media_name[]" multiple="" >
+                    @if ($errors->has('media_name'))
+                        <span class="text-danger">{{ $errors->first('media_name') }}</span>
+                    @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Document</p>
                     <input type="file" name="document_name[]" multiple="">
                     <p class="mb-1 mt-4" style="font-size:14px;">Availability</p>
                     <select class="popup pt-0 pb-0" name="availability">
-                        <option value="daily" selected="">daily</option>
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="week-end">Weekend</option>
-                        <option value="monthly">Monthly</option>
+                        <option value="none" selected="" disabled="" hidden=""></option>
+                        <option value="daily" {{$mission->availability=='daily' ? 'selected' : ''}}>Daily</option>
+                        <option value="weekly" {{$mission->availability=='weekly' ? 'selected' : ''}}>Weekly</option>
+                        <option value="weekend" {{$mission->availability=='weekend' ? 'selected' : ''}}>Weekend</option>
+                        <option value="monthly" {{$mission->availability=='monthly' ? 'selected' : ''}}>Monthly</option>
                     </select>
                 </td>
             </tr>
@@ -132,4 +126,24 @@
         </button>
     </div>
 </form>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#selecttype').change(function() {
+            var selectedOptions = $('#selecttype option:selected');
+            if (selectedOptions.length > 0) {
+                var resultString = '';
+                selectedOptions.each(function() {
+                    var val = $(this).val();
+                    if (val == "TIME") {
+                        resultString += "<p class='mb-1 mt-4' style='font-size:14px;'>Total Seats</p><input type='number' class='popup' name='total_seat'><p class='mb-1 mt-4' style='font-size:14px;' >Registration Deadline</p><input type='date' class='popup' name='deadline'>";
+
+                    } else
+                        resultString += "<p class='mb-1 mt-4' style='font-size:14px;'>Goal</p><input type='text' class='popup' name='goal_objective_text'><p class='mb-1 mt-4' style='font-size:14px;' >Goal Value*</p><input type='number' class='popup' name='goal_value'>";
+                    $("#divresult1").remove();
+                });
+                $('#divResult').html(resultString);
+            }
+        });
+    });
+</script>
 @endsection

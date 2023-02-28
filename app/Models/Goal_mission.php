@@ -15,7 +15,9 @@ class Goal_mission extends Authenticatable
     protected $table='goal_mission';
     protected $primaryKey = 'goal_mission_id';
     protected $fillable = [
-
+        'goal_objective_text',
+        'goal_value',
+        'mission_id',
     ];
 
 }

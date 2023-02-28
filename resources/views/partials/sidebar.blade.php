@@ -79,11 +79,10 @@
                 <ul class="navbar-nav me-auto mb-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle me-4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/storage/uplodes/avatar-5.jpg" class="rounded-circle m-2 mt-0 mb-0 col" width="29" height="29">
-                        <label>fdhgf</label>
+                        <img src="/storage/images/user1.png" class="rounded-circle m-2 mt-0 mb-0 col" width="29" height="29">
+                        <label> admin </label>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="edit_admin?edit=MVNFQ1JFVF9TVFVGRg==">My Profile</a></li>
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </li>

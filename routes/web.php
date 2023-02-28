@@ -78,11 +78,20 @@ Route::get('admin/delete_banner/{banner_id}',[BannerController::class, 'delete_b
 
 Route::get('admin/mission',[MissionController::class, 'mission'])->name('mission');
 Route::get('admin/add_mission',[MissionController::class, 'add_mission']);
-Route::get('admin/edit_mission',[MissionController::class, 'edit_mission']);
+Route::get('admin/edit_mission/{mission_id}',[MissionController::class, 'edit_mission']);
+Route::post('add-mission', [MissionController::class, 'mission_add'])->name('mission.add'); 
+Route::post('edit-mission', [MissionController::class, 'mission_edit'])->name('mission.edit');
 Route::post('admin/mission',[MissionController::class, 'mission']);
-
-Route::get('admin/app',[AppController::class, 'app'])->name('app');
-Route::post('admin/app',[AppController::class, 'app'])->name('app');
+Route::get('admin/delete_mission/{mission_id}',[MissionController::class, 'delete_mission']); 
 
 Route::get('admin/story',[StoryController::class, 'story'])->name('story');
 Route::post('admin/story',[StoryController::class, 'story'])->name('story');
+Route::get('admin/delete_story/{story_id}',[StoryController::class, 'delete_story']); 
+Route::get('admin/view_story/{story_id}',[StoryController::class, 'view_story']); 
+Route::get('admin/approve_story/{story_id}',[StoryController::class, 'approve_story']); 
+Route::get('admin/decline_story/{story_id}',[StoryController::class, 'decline_story']); 
+
+Route::get('admin/app',[AppController::class, 'app'])->name('app');
+Route::post('admin/app',[AppController::class, 'app'])->name('app');
+Route::get('admin/approve_app/{mission_application_id}',[AppController::class, 'approve_app']); 
+Route::get('admin/decline_app/{mission_application_id}',[AppController::class, 'decline_app']); 

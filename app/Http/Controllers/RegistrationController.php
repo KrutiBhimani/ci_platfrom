@@ -31,6 +31,11 @@ class RegistrationController extends Controller
         $data = $request->all();
         $check = $this->create($data);
 
+        $credentials = $request->only('email', 'password');
+        
+        if (Auth::attempt($credentials)) {
+          return redirect()->intended('home');
+        }
         return redirect('/login')->with('message', 'Your Registration is sucessfull');
     }
  

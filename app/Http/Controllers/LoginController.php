@@ -25,11 +25,11 @@ class LoginController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         
-        if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->intended('admin/user');
-        }
-        elseif (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
             return redirect()->intended('home');
+        }
+        elseif (Auth::guard('admin')->attempt($credentials)) {
+            return redirect()->intended('admin/user');
         }
         else{
             return redirect('/login')->with('error', 'Login details are not valid');

@@ -15,6 +15,10 @@ class Mission_document extends Authenticatable
     protected $table='mission_document';
     protected $primaryKey = 'mission_document_id';
     protected $fillable = [
+        'mission_id',
+        'document_name',
+        'document_type',
+        'document_path',
     ];
 
 }

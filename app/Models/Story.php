@@ -15,6 +15,13 @@ class Story extends Authenticatable
     protected $table='story';
     protected $primaryKey = 'story_id';
     protected $fillable = [
+        'user_id',
+        'mission_id',
+        'title',
+        'description',
+        'status',
+        'published_at',
+        'story_id'
     ];
 
 }

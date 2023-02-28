@@ -15,6 +15,7 @@
         <script src="/../js/jquery.backstretch.min.js"></script>
         <script src="/../js/wow.min.js"></script>
         <script src="/../js/scripts.js"></script>
+        <script src="/../js/script.js"></script>
         <link href="/../css/style1.css" rel="stylesheet">
         <!-- for popup -->
         <script src="js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

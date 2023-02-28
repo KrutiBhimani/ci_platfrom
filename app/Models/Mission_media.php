@@ -15,6 +15,10 @@ class Mission_media extends Authenticatable
     protected $table='mission_media';
     protected $primaryKey = 'mission_media';
     protected $fillable = [
+        'mission_id',
+        'media_name',
+        'media_type',
+        'media_path',
     ];
 
 }

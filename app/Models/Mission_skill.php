@@ -15,6 +15,13 @@ class Mission_skill extends Authenticatable
     protected $table='mission_skill';
     protected $primaryKey = 'mission_skill_id';
     protected $fillable = [
+        'mission_id',
+        'skill_id',
     ];
-
+    public function mission(){
+        return $this->belongsTo(Mission::class,'mission_id','mission_id');
+    }
+    public function skill(){
+        return $this->belongsTo(Skill::class,'skill_id','skill_id');
+    }
 }

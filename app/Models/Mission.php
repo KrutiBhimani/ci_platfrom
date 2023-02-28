@@ -15,6 +15,19 @@ class Mission extends Authenticatable
     protected $table='mission';
     protected $primaryKey = 'mission_id';
     protected $fillable = [
+        'mission_id',
+        'title',
+        'short_description',
+        'description',
+        'city_id',
+        'country_id',
+        'organization_name',
+        'organization_detail',
+        'start_date',
+        'end_date',
+        'mission_type',
+        'theme_id',
+        'availability',
     ];
 
 }

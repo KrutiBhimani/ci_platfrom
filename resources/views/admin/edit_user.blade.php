@@ -44,7 +44,9 @@
                         <span class="text-danger">{{ $errors->first('password') }}</span>
                     @endif
                     <p class="mb-1 mt-4" style="font-size:14px;">Avatar</p>
-                    <img class="m-2" style="height:50px" src="/storage/uplodes/{{$user->avatar}}">
+                    @if($user->avatar != null)
+                        <img class="m-2" style="height:50px" src="/storage/uplodes/{{$user->avatar}}">
+                    @endif
                     @if ($errors->has('avatar'))
                         <span class="text-danger">{{ $errors->first('avatar') }}</span>
                     @endif

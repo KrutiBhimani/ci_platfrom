@@ -15,7 +15,10 @@ class Mission_application extends Authenticatable
     protected $table='mission_application';
     protected $primaryKey = 'mission_application_id';
     protected $fillable = [
-
+        'user_id',
+        'mission_id',
+        'applied_at',
+        'approval_status'
     ];
 
 }

@@ -16,4 +16,4 @@
         @include('partials.sidebar')
         @yield('content')
     </body>
-</html
+</html>
