@@ -16,7 +16,8 @@ class Mission_theme extends Authenticatable
     protected $primaryKey = 'mission_theme_id';
     protected $fillable = [
         'title',
-        'status'
+        'status',
+        'mission_theme_id'
     ];
 
 }

@@ -15,6 +15,8 @@ class Favourite_mission extends Authenticatable
     protected $table='favourite_mission';
     protected $primaryKey = 'favourite_mission_id';
     protected $fillable = [
+        'user_id',
+        'mission_id'
     ];
 
 }

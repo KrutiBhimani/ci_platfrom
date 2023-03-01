@@ -15,6 +15,8 @@ class Mission_rating extends Authenticatable
     protected $table='mission_rating';
     protected $primaryKey = 'mission_rating_id';
     protected $fillable = [
+        'mission_id',
+        'rating',
     ];
 
 }
