@@ -15,6 +15,9 @@ class Mission_invite extends Authenticatable
     protected $table='mission_invite';
     protected $primaryKey = 'mission_invite_id';
     protected $fillable = [
+        'from_user_id',
+        'to_user_id',
+        'mission_id',
     ];
 
 }

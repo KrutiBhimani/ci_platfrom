@@ -12,6 +12,7 @@ use App\Http\Controllers\StoriesController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\EditUserController;
 use App\Http\Controllers\TimesheetController;
+use App\Http\Controllers\VolunteeringController;
  
  
 use App\Http\Controllers\admin\UserController;
@@ -34,14 +35,20 @@ Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPassw
 Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ResetPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
+
+Route::post('home', [HomeController::class, 'home'])->name('home'); 
 Route::get('home', [HomeController::class, 'home']); 
+Route::get('like/{mission_id}',[HomeController::class, 'like']); 
+Route::get('unlike/{mission_id}',[HomeController::class, 'unlike']); 
+Route::get('apply/{mission_id}',[HomeController::class, 'apply']); 
+Route::post('invite-user', [HomeController::class, 'invite'])->name('invite.user'); 
+Route::get('volunteering_mission/{mission_id}', [VolunteeringController::class, 'volunteering_mission'])->name('volunteering_mission');
+
 Route::get('stories', [StoriesController::class, 'story']); 
 Route::get('policy', [PolicyController::class, 'policy']); 
 Route::get('edit_user', [EditUserController::class, 'edit_user']); 
 Route::get('timesheet', [TimesheetController::class, 'timesheet']); 
-Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
-Route::post('home', [HomeController::class, 'home'])->name('home'); 
-
 
 
 // admin side

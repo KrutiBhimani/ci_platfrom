@@ -15,6 +15,10 @@ class Comment extends Authenticatable
     protected $table='comment';
     protected $primaryKey = 'comment_id';
     protected $fillable = [
+        'user_id',
+        'mission_id',
+        'comment_text',
+        'approval_status'
     ];
 
 }

@@ -1,5 +1,17 @@
 @extends('layouts.home_header1')
 @section('content')
+<div class="container-lg">
+@if (Session::has('message'))
+    <div class="alert alert-success mb-0 mt-3" role="alert">
+        {{ Session::get('message') }}
+    </div>
+@endif
+@if (Session::has('error'))
+    <div class="alert alert-danger mb-0 mt-3" role="alert">
+        {{ Session::get('error') }}
+    </div>
+@endif
+</div>
 <main id="main">
     <section id="story">
         <div class="container-lg">
@@ -64,21 +76,22 @@
                                         @endif
                                     @endforeach
                                     @if($key == 1)
-                                        <a href=""><i class="fa fa-heart text-danger" aria-hidden="true"></i></a>
+                                        <a href="unlike/{{ $mission->missionid }}"><i class="fa fa-heart text-danger" aria-hidden="true"></i></a>
                                     @else
-                                        <a href=""><i class="fa fa-heart-o" aria-hidden="true" style="color:white"></i></a>
+                                        <a href="like/{{ $mission->missionid }}"><i class="fa fa-heart-o" aria-hidden="true" style="color:white"></i></a>
                                     @endif     
                                 </div>
-                                <div class="d-flex align-items-center third-txt p-2"><a href="" style="color: black;" data-bs-toggle="modal" data-bs-target="#popup91"><img src="/storage/images/user.png" alt="" class="img-fluid" style="height:17px"></a></div>
-                                <div id="popup91" class="modal">
+                                <div class="d-flex align-items-center third-txt p-2"><a href="" style="color: black;" data-bs-toggle="modal" data-bs-target="#popup{{$mission->missionid}}"><img src="/storage/images/user.png" alt="" class="img-fluid" style="height:17px"></a></div>
+                                <div id="popup{{$mission->missionid}}" class="modal">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content p-2">
                                             <div class="modal-header pb-0" style="border-bottom:0 ;">
                                                 <p class="mb-0" style="font-size:20px ;">Invite</p>
                                                 <img class="text-end mt-2 mb-2" src="/storage/images/cancel1.png" data-bs-dismiss="modal" style="cursor: pointer;height:13px">
                                             </div>
-                                            <form class="m-0" method="post" enctype="multipart/form-data">
-                                                <input type="text" name="m_id" value="91" hidden="">
+                                            <form action="{{ route('invite.user') }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="text" name="mission_id" value="{{$mission->missionid}}" hidden="">
                                                 <div class="modal-body pb-0">
                                                     <p class="mb-1 mt-3">Email </p>
                                                     <input type="email" class="popup" name="email" place-holder="enter user email to invite">
@@ -100,7 +113,7 @@
                             <div class="row">
                                 <div class="col-md-12" style="color:black">
                                     <div class="card-body pb-3 remove">
-                                        <a href="Volunteering_Mission?id=OTFTRUNSRVRfU1RVRkY=" style="color:black;">
+                                        <a href="volunteering_mission/{{ $mission->missionid }}" style="color:black;">
                                             <h2 class="card-title mb-2" style="font-size:calc(15px + 0.3vw);">{{$mission->mission_title}}</h2>
                                         </a>
                                         <p class="mb-2" style="color:gray; font-size:calc(11px + 0.1vw);">
@@ -204,9 +217,9 @@
                             <hr class="div">
                             <div class="d-flex align-items-center justify-content-center">
                                 @if($a == 0)
-                                    <a href="home?source=apply&amp;id=91" style="color: inherit;"><button class=" col-example mt-3" style="font-size:calc(13px + 0.1vw);">Apply<i class="fa fa-arrow-right ps-2"></i></button></a>
+                                    <a href="apply/{{ $mission->missionid }}" style="color: inherit;"><button class=" col-example mt-3" style="font-size:calc(13px + 0.1vw);">Apply<i class="fa fa-arrow-right ps-2"></i></button></a>
                                 @else
-                                    <a href="Volunteering_Mission?id=OThTRUNSRVRfU1RVRkY=" style="color: inherit;"><button class=" col-example mt-3" style="font-size:calc(13px + 0.1vw);">View Detail<i class="fa fa-arrow-right ps-2"></i></button></a>
+                                    <a href="volunteering_mission/{{ $mission->missionid }}" style="color: inherit;"><button class=" col-example mt-3" style="font-size:calc(13px + 0.1vw);">View Detail<i class="fa fa-arrow-right ps-2"></i></button></a>
                                 @endif
                             </div>
                         </div>
@@ -423,14 +436,34 @@
                 </div>
             </div> 
             <nav aria-label="Page navigation example">
-                <ul class="pagination pager justify-content-center">
-                    <li class="page-item"><a class="page-link" style="border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;"><img src="/storage/images/previous.png" alt=""></a></li>
-                    <li class="page-item"><a class="page-link" style="border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;"><img src="/storage/images/left.png" alt=""></a></li>
-                    <li class="page-item"><a class="page-link active text-center" href="home?page=1" style="border-radius:5px; padding:5px; height:30px; width:30px; margin:4px; font-size:15px;"><b>1</b></a></li>
-                    <li class="page-item"><a class="page-link" style="border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;"><img src="/storage/images/arrow.png" alt=""></a></li>
-                    <li class="page-item"><a class="page-link" style="border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;"><img src="/storage/images/next.png" alt=""></a></li>
-                </ul>
-            </nav>
+          <ul class="pagination pager justify-content-center">
+            @php
+            $next = $page + 1;
+            $previous = $page - 1;
+            @endphp
+            @if ($page == 1) 
+              <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/previous.png' alt=''></a></li>
+              <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/left.png' alt=''></a></li>
+            @else
+              <li class='page-item'><a class='page-link' href='home?page=1' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/previous.png' alt=''></a></li>
+              <li class='page-item'><a class='page-link' href='home?page={{$previous}}' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/left.png' alt=''></a></li>
+            @endif
+            @for ($i = 1; $i <= $cnt; $i++) 
+              @if ($i == $page)
+                <li class='page-item'><a class='page-link active text-center' href='home?page={{$i}}' style='border-radius:5px; padding:5px; height:30px; width:30px; margin:4px; font-size:15px;'><b>{{$i}}</b></a></li>
+              @else
+                <li class='page-item'><a class='page-link text-center' href='home?page={{$i}}' style='border-radius:5px; padding:5px; height:30px; width:30px; margin:4px; font-size:15px; color:black;'>{{$i}}</a></li>
+              @endif
+            @endfor
+            @if ($page == $cnt) 
+              <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/arrow.png' alt=''></a></li>
+              <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/next.png' alt=''></a></li>
+            @else 
+              <li class='page-item'><a class='page-link' href='home?page={{$next}}' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/arrow.png' alt=''></a></li>
+              <li class='page-item'><a class='page-link' href='home?page={{$cnt}}' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/next.png' alt=''></a></li>
+            @endif
+          </ul>
+        </nav>
             <br>
         </div>
     </section>

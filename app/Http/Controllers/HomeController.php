@@ -9,8 +9,11 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Mission; 
 use App\Models\Mission_application; 
-use App\Models\Favourite_mission; 
-use DB; 
+use App\Models\Favourite_mission;  
+use App\Models\Mission_invite; 
+use DB;  
+use Mail; 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
  
 class HomeController extends Controller
@@ -26,7 +29,9 @@ class HomeController extends Controller
             ->groupby('mission.mission_id')
             ->get();
 
-            $applies = Mission_application::where('approval_status', 'APPROVE')->get();
+            $applies = Mission_application::where(function ($query) { 
+                $query->where('mission_application.approval_status', 'APPROVE')->orWhere('mission_application.approval_status', 'PENDING');   
+            })->get();
 
             $favs = Favourite_mission::where('user_id', Auth::user()->user_id)->get();
 
@@ -125,14 +130,74 @@ class HomeController extends Controller
             }
             
             $listing->groupby('mission.mission_id');
+            
+            $pagecount = 3;
+            if (isset($_REQUEST['page'])) {
+              $page = $_REQUEST['page'];
+            } else
+              $page = 1;
+            if ($page == "" || $page == 1) {
+              $postno = 0;
+            } else
+              $postno = ($page * $pagecount) - $pagecount;
 
-            $missions = $listing->get();
+            $cnts = $listing->get()->count();
+            $cnt = ceil($cnts / $pagecount);
+
+            $missions = $listing->skip($postno)->take($pagecount)->get();
             $mission_count = $missions->count();
 
-            return view('home',compact('missions','applications','favs','applies','themes','cities','countries','skills','mission_count'));
+            return view('home',compact('missions','applications','favs','applies','themes','cities','countries','skills','mission_count','page','cnt'));
         }
         
         return redirect('/login')->with('error', 'you are not allowed to access please try login!');
     }
 
+    public function like($mission_id){
+        if(Auth::check()){
+            Favourite_mission::insert([
+                "mission_id" => $mission_id,
+                "user_id" => Auth::user()->user_id,
+            ]);
+            return back()->with('message', 'Mission Liked');
+        }
+    }
+
+    public function unlike($mission_id){
+        if(Auth::check()){
+            Favourite_mission::where(['mission_id' => $mission_id , 'user_id'=> Auth::user()->user_id])->delete();
+            return back()->with('message', 'Mission Disliked');
+        }
+        return redirect('/login')->with('error', 'you are not allowed to access please try login!');
+    }
+
+    public function invite(Request $request)
+    {
+        $user_id = User::where('email',$request->email)->first()->user_id;
+  
+        Mail::send('email.invite', ['mission_id' => $request->mission_id], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('Invited');
+        });
+
+        Mission_invite::insert([
+            'mission_id' => $request->mission_id, 
+            'from_user_id' => Auth::user()->user_id, 
+            'to_user_id' => $user_id,
+        ]);
+
+        return back()->with('message', 'We have sended invite request!');
+    }
+
+    public function apply($mission_id){
+        if(Auth::check()){
+            Mission_application::insert([
+                "mission_id" => $mission_id,
+                "user_id" => Auth::user()->user_id,
+                "applied_at" => Carbon::now()->toDateTimeString()
+            ]);
+            return back()->with('message', 'Applied Successfully');
+        }
+        return redirect('/login')->with('error', 'you are not allowed to access please try login!');
+    }
 }
