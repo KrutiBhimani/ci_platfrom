@@ -6,3 +6,31 @@
         </div>
     </div>
 </footer>
+<div id="popup22" class="modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-2">
+      <div class="modal-header pb-0" style="border-bottom:0 ;">
+        <p class="mb-0" style="font-size:20px ;">contact Us</p>
+        <img class="text-end mt-2 mb-2" src="mvc/Assets/images/cancel1.png" data-bs-dismiss="modal" style="cursor: pointer;height:13px">
+      </div>
+      <form class="m-0" method="post" enctype="multipart/form-data">
+        <div class="modal-body pb-0">
+          <p class="mb-1">Name*</p>
+          <input type="text" class="popup" name="" value="{{Auth::user()->first_name.' '.Auth::user()->last_name}}" disabled>
+          <p class="mb-1 mt-3">Email Address*</p>
+          <input type="email" class="popup" name="" value="{{Auth::user()->email}}" disabled>
+          <p class="mb-1 mt-3">Subject*</p>
+          <input type="text" class="popup" name="subject" placeholder="Enter your subject">
+          <p class="mb-1 mt-3">Message*</p>
+          <textarea class="popup1" rows="4" name="message" placeholder="Enter your message"></textarea>
+        </div>
+        <div class="modal-footer" style="border-top:0 ;">
+          <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
+          </button>
+          <button type="submit" name='contact' class="col-example7" data-bs-dismiss="modal">Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

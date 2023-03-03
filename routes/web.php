@@ -8,6 +8,10 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\StoriesController;
+use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\EditUserController;
+use App\Http\Controllers\TimesheetController;
  
  
 use App\Http\Controllers\admin\UserController;
@@ -31,7 +35,12 @@ Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPa
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ResetPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 Route::get('home', [HomeController::class, 'home']); 
+Route::get('stories', [StoriesController::class, 'story']); 
+Route::get('policy', [PolicyController::class, 'policy']); 
+Route::get('edit_user', [EditUserController::class, 'edit_user']); 
+Route::get('timesheet', [TimesheetController::class, 'timesheet']); 
 Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
+Route::post('home', [HomeController::class, 'home'])->name('home'); 
 
 
 
