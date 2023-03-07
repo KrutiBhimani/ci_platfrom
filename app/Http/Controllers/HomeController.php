@@ -142,14 +142,15 @@ class HomeController extends Controller
               $postno = ($page * $pagecount) - $pagecount;
 
             $cnts = $listing->get()->count();
+
             $cnt = ceil($cnts / $pagecount);
 
             $missions = $listing->skip($postno)->take($pagecount)->get();
+
             $mission_count = $missions->count();
 
             return view('home',compact('missions','applications','favs','applies','themes','cities','countries','skills','mission_count','page','cnt'));
         }
-        
         return redirect('/login')->with('error', 'you are not allowed to access please try login!');
     }
 
@@ -179,13 +180,11 @@ class HomeController extends Controller
             $message->to($request->email);
             $message->subject('Invited');
         });
-
         Mission_invite::insert([
             'mission_id' => $request->mission_id, 
             'from_user_id' => Auth::user()->user_id, 
             'to_user_id' => $user_id,
         ]);
-
         return back()->with('message', 'We have sended invite request!');
     }
 

@@ -3,8 +3,8 @@
 <div class="container-lg">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-            <div style="height:100%;">
-                <img id="mainImage" class="ps-1 pe-1 mt-2" src="{{$mission->media_path}}" height="80%" width="100%" style="object-fit: cover;">
+            <div class="h-100">
+                <img id="mainImage" class="ps-1 pe-1 mt-2 w-100" src="{{$mission->media_path}}" height="80%" style="object-fit: cover;">
                 <div class="row pe-3 ps-3 pt-1">
                     <div class="top-content p-0" id="style-sheet-modern">
                         <div class="container-fluid p-0 m-0">
@@ -12,15 +12,15 @@
                                 <div class="carousel-inner row w-100 mx-auto" role="listbox">
                                     @foreach ($medias as $key => $media) 
                                     <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 p-1 {{$key==0 ? 'active' : ''}}">
-                                        <img src="{{$media->media_path}}" class="img-fluid mx-auto d-block" style="object-fit: cover;height: 100px; width:100%" alt="img1">
+                                        <img src="{{$media->media_path}}" class="img-fluid mx-auto d-block w-100" style="object-fit: cover;height: 100px;" alt="img1">
                                     </div>
                                     @endforeach
                                 </div>
-                                <a class="carousel-control-prev" href="#carousel-example" role="button" data-slide="prev" style="z-index:0;background-color: black; width:5%;top:4px;bottom:4px;left:3px;">
+                                <a class="carousel-control-prev text-bg-dark icon-css" href="#carousel-example" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="carousel-control-next" href="#carousel-example" role="button" data-slide="next" style="z-index:0;background-color: black; width:5%;top:4px;bottom:4px;right:3px;">
+                                <a class="carousel-control-next text-bg-dark icon-css" href="#carousel-example" role="button" data-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                                 </a>
@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
             <p class="mb-3" style="font-size:calc(15px + 1vw);">{{$mission->mission_title}}</p>
-            <p class="mb-3" style="color: gray; font-size: calc(11px + 0.15vw);">{{$mission->short_description}}</p>
+            <p class="mb-3 text-secondary" style=" font-size: calc(11px + 0.15vw);">{{$mission->short_description}}</p>
             <div class="d-flex align-items-center">
                 <hr class="flex-grow-1 div">
                 <div class="bdg2">
@@ -51,7 +51,7 @@
             <div class="d-flex justify-content-around mt-2 mb-2">
                 @if($mission->mission_type == 'TIME')
                 @if($mission->total_seat != null)
-                <div style="color:black;">
+                <div class="text-dark">
                     <div class="d-flex justify-content-around">
                         <div class="pe-3">
                             <img src="/storage/images/Seats-left.png" alt="" style="height:23px">
@@ -60,14 +60,14 @@
                             @foreach($applications as $application)
                             @if($application->missionid == $mission->missionid)
                             {{$mission->total_seat - $application->count}}
-                            <h6 class="mb-2" style="font-size:12px ;color:gray;">Seats Left</h6>
+                            <h6 class="mb-2 text-secondary" style="font-size:12px ;">Seats Left</h6>
                             @endif
                             @endforeach
                         </div>
                     </div>
                 </div>
                 @else
-                <div style="color:black;">
+                <div class="text-dark">
                     <div class="d-flex justify-content-around">
                         <div class="pe-3">
                             <img src="/storage/images/Already-volunteered.png" alt="" style="height:20px">
@@ -76,7 +76,7 @@
                             @foreach($applications as $application)
                             @if($application->missionid == $mission->missionid)
                             {{$application->count}}
-                            <h6 class="mb-2" style="font-size:12px ;color:gray;">Already volunteered</h6>
+                            <h6 class="mb-2 text-secondary" style="font-size:12px;">Already volunteered</h6>
                             @endif
                             @endforeach
                         </div>
@@ -84,7 +84,7 @@
                 </div>
                 @endif
                 @if($mission->deadline != null)
-                <div style="color:black;">
+                <div class="text-dark">
                     <div class="d-flex justify-content-around">
                         <div class="pe-3">
                             <img src="/storage/images/deadline.png" alt="" style="height:28px">
@@ -93,23 +93,23 @@
                             <h4 class="mb-2" style="font-size:calc(13px + 0.1vw);">
                                 {{date("d-m-Y", strtotime($mission->deadline))}}                                
                             </h4>
-                            <h6 class="mb-2" style="font-size:12px ;color:gray;">Deadline</h6>
+                            <h6 class="mb-2 text-secondary" style="font-size:12px ;">Deadline</h6>
                         </div>
                     </div>
                 </div>
                 @endif
                 @else
-                <div style="color:black;">
+                <div class="text-dark">
                     <div class="d-flex justify-content-around">
                         <div class="pe-3">
                             <img src="/storage/images/achieved.png" alt="" style="height:22px">
                         </div>
-                        <div style="width: 100%;">
-                            <div class="mt-1 mb-3" style="background-color:#EEEEEE; height:7px; width:100%; border-radius: 10px;">
+                        <div class="w-100">
+                            <div class="mt-1 mb-3 w-100" style="background-color:#EEEEEE; height:7px; border-radius: 10px;">
                                 <div style="background-color:#f88634; height:7px; border-radius: 10px; width:80%;">
                                 </div>
                             </div>
-                            <h6 class="mb-2" style="font-size:12px ;color:gray;">8000 achieved</h6>
+                            <h6 class="mb-2 text-secondary" style="font-size:12px ;">8000 achieved</h6>
                         </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                         @if($key == 1)
                         <a href="/unlike/{{ $mission->missionid }}" style="color: inherit; text-decoration: inherit;"><i class="fa fa-heart text-danger me-2" aria-hidden="true"></i>Remove From Favourite</a>
                         @else
-                        <a href="/like/{{ $mission->missionid }}" style="color: inherit; text-decoration: inherit;"><i class="fa fa-heart-o text-dark me-2" aria-hidden="true" style="color:white"></i>Add to Favourite</a>
+                        <a href="/like/{{ $mission->missionid }}" style="color: inherit; text-decoration: inherit;"><i class="fa fa-heart-o text-dark me-2 text-white" aria-hidden="true"></i>Add to Favourite</a>
                         @endif
                     </div>
                 </div>
@@ -210,17 +210,17 @@
             <div class="row mt-3 mb-3 ms-1 me-1">
                 <div class="col col-example3 pe-2 ps-2">
                     <img src="/storage/images/pin1.png" style="height:18px;">
-                    <h6 class="mt-3 mb-1" style="color:gray; font-size:10px">City</h6>
+                    <h6 class="mt-3 mb-1 text-secondary" style=" font-size:10px">City</h6>
                     <h4 class="mb-0" style="font-size:calc(11px + 0.1vw);">{{$mission->name}}</h4>
                 </div>
                 <div class="col col-example3 pe-2 ps-2">
                     <img src="/storage/images/web.png" style="height:18px;">
-                    <h6 class="mt-3 mb-1" style="color:gray; font-size:10px">Theme</h6>
+                    <h6 class="mt-3 mb-1 text-secondary" style=" font-size:10px">Theme</h6>
                     <h4 class="mb-0" style="font-size:calc(11px + 0.1vw);">{{$mission->title}}</h4>
                 </div>
                 <div class="col col-example3 pe-2 ps-2">
                     <img src="/storage/images/calender.png" style="height:17px;">
-                    <h6 class="mt-3 mb-1" style="color:gray; font-size:10px">Date</h6>
+                    <h6 class="mt-3 mb-1 text-secondary" style=" font-size:10px">Date</h6>
                     <h4 class="mb-0" style="font-size:calc(11px + 0.1vw);">
                         @if($mission->mission_type == 'TIME')
                         @if($mission->start_date == null && $mission->end_date == null)
@@ -235,7 +235,7 @@
                 </div>
                 <div class="col col-example3 pe-2 ps-2">
                     <img src="/storage/images/organization.png" style="height:15px;">
-                    <h6 class="mt-3 mb-1" style="color:gray; font-size:10px">Organization</h6>
+                    <h6 class="mt-3 mb-1 text-secondary" style=" font-size:10px">Organization</h6>
                     <h4 class="mb-0" style="font-size:calc(11px + 0.1vw);">{{$mission->organization_name}}</h4>
                 </div>
             </div>
@@ -327,7 +327,7 @@
                     @if($comment_count > 0)
                     <div class="pt-1 pb-1 ps-3 pe-3" style="background-color:#f7f7f7; {{$comment_count > 3 ? 'height: 450px;overflow-y: auto':''}}">
                         @foreach ($comments as $comment) 
-                        <div class="row mt-2 mb-2 p-3 ms-0 me-0" style="background-color:white;">
+                        <div class="row mt-2 mb-2 p-3 ms-0 me-0 " style="background-color:white;">
                             <div class="col-lg-1 col-md-2 col-sm-2 col-12 p-0">
                                 <img src="{{$comment->avatar!=null ? '/storage/uplodes/'.$comment->avatar : '/storage/images/user1.png'}}" class="rounded-circle" height="45px">
                             </div>
@@ -374,8 +374,8 @@
                                     <td>{{$mission->availability}}</td>
                                 </tr>
                                 <tr>
-                                    <td style="border-bottom: 0;">Rating</td>
-                                    <td style="border-bottom: 0;">
+                                    <td class="border-bottom-0">Rating</td>
+                                    <td class="border-bottom-0">
                                         @for ($x = 0; $x < 5; $x++)
                                         @if ($x < $mission->rating) 
                                         <img src="/storage/images/selected-star.png" height="15px">
@@ -416,11 +416,11 @@
                 </div>
                 <table class="table table-bordered m-0 text-center">
                     <tbody>
-                        <tr style="border-bottom: 0; border-start:0;">
-                            <td style="border-bottom: 0; border-start: 0;"><img src="/storage/images/left.png" height="12px">
+                        <tr class="border-bottom-0 border-start-0">
+                            <td class="border-bottom-0 border-start-0"><img src="/storage/images/left.png" height="12px">
                             </td>
-                            <td style="border-bottom: 0; border-start: 0;">{{$count}} Recent Volunteers</td>
-                            <td style="border-bottom: 0; border-end: 0;"><img src="/storage/images/right-arrow1.png" height="12px">
+                            <td class="border-bottom-0 border-start-0">{{$count}} Recent Volunteers</td>
+                            <td class="border-bottom-0 border-end-0"><img src="/storage/images/right-arrow1.png" height="12px">
                             </td>
                         </tr>
                     </tbody>
@@ -439,7 +439,7 @@
         <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5 d-flex align-items-stretch">
             <div class="card box border-0">
                 <div class="gfg">
-                    <img src="{{$mission->media_path}}" alt="" class="img-fluid" style="width:100%;">
+                    <img src="{{$mission->media_path}}" alt="" class="img-fluid w-100">
                     <div class="d-flex align-items-center first-txt"><img src="/storage/images/pin.png" alt="" class="img-fluid pe-1" style="height:12px;">
                         {{$mission->name}}
                     </div>
@@ -470,7 +470,7 @@
                     @endif
                     @endif
                     @if($a == 1)
-                    <div class="d-flex align-items-center five-txt" style="background-color:red;">CLOSED</div>
+                    <div class="d-flex align-items-center five-txt text-bg-danger">CLOSED</div>
                     @endif
                     @foreach($applies as $apply)
                     @if($apply->mission_id == $mission->missionid && $apply->user_id == Auth::user()->user_id)
@@ -494,14 +494,14 @@
                         @if($key == 1)
                         <a href="unlike/{{ $mission->missionid }}"><i class="fa fa-heart text-danger" aria-hidden="true"></i></a>
                         @else
-                        <a href="like/{{ $mission->missionid }}"><i class="fa fa-heart-o" aria-hidden="true" style="color:white"></i></a>
+                        <a href="like/{{ $mission->missionid }}"><i class="fa fa-heart-o text-white" aria-hidden="true"></i></a>
                         @endif     
                     </div>
-                    <div class="d-flex align-items-center third-txt p-2"><a href="" style="color: black;" data-bs-toggle="modal" data-bs-target="#popup{{$mission->missionid}}"><img src="/storage/images/user.png" alt="" class="img-fluid" style="height:17px"></a></div>
+                    <div class="d-flex align-items-center third-txt p-2"><a href="" class="text-dark" data-bs-toggle="modal" data-bs-target="#popup{{$mission->missionid}}"><img src="/storage/images/user.png" alt="" class="img-fluid" style="height:17px"></a></div>
                     <div id="popup{{$mission->missionid}}" class="modal">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content p-2">
-                                <div class="modal-header pb-0" style="border-bottom:0 ;">
+                                <div class="modal-header pb-0 border-bottom-0">
                                     <p class="mb-0" style="font-size:20px ;">Invite</p>
                                     <img class="text-end mt-2 mb-2" src="/storage/images/cancel1.png" data-bs-dismiss="modal" style="cursor: pointer;height:13px">
                                 </div>
@@ -512,7 +512,7 @@
                                         <p class="mb-1 mt-3">Email </p>
                                         <input type="email" class="popup" name="email" place-holder="enter user email to invite">
                                     </div>
-                                    <div class="modal-footer mt-4" style="border-top:0 ;">
+                                    <div class="modal-footer mt-4 border-top-0">
                                         <button type="reset" class="col-example8" data-bs-dismiss="modal">Cancle
                                         </button>
                                         <button type="submit" id="button1" name="inviteuser" class="col-example7" data-bs-dismiss="modal">Invite
@@ -527,12 +527,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12" style="color:black">
+                    <div class="col-md-12 text-dark">
                         <div class="card-body pb-3 remove">
-                            <a href="volunteering_mission/{{ $mission->missionid }}" style="color:black;">
+                            <a href="volunteering_mission/{{ $mission->missionid }}" class="text-dark">
                                 <h2 class="card-title mb-2" style="font-size:calc(15px + 0.3vw);">{{$mission->mission_title}}</h2>
                             </a>
-                            <p class="mb-2" style="color:gray; font-size:calc(11px + 0.1vw);">
+                            <p class="mb-2 text-secondary" style="font-size:calc(11px + 0.1vw);">
                                 {{$a == 1 ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit...' : $mission->short_description }}                  
                             </p>
                             <div class="d-flex justify-content-between">
@@ -571,28 +571,28 @@
                         <div class="row">
                             @if($mission->mission_type == 'TIME')
                             @if($mission->total_seat != null)
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-6" style="color:black;">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6" class="text-dark">
                                 <div class="row">
                                     <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/Seats-left.png" alt="" style="height:23px"></div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                         @foreach($applications as $application)
                                         @if($application->missionid == $mission->missionid)
                                         {{$mission->total_seat - $application->count}}
-                                        <h6 class="mb-2" style="font-size:12px ;color:gray;">Seats Left</h6>
+                                        <h6 class="mb-2 text-secondary" style="font-size:12px ;">Seats Left</h6>
                                         @endif
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                             @else
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-6" style="color:black;">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6" class="text-dark">
                                 <div class="row">
                                     <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/Already-volunteered.png" alt="" style="height:20px"></div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                         @foreach($applications as $application)
                                         @if($application->missionid == $mission->missionid)
                                         {{$application->count}}
-                                        <h6 class="mb-2" style="font-size:12px ;color:gray;">Already volunteered</h6>
+                                        <h6 class="mb-2 text-secondary" style="font-size:12px ;">Already volunteered</h6>
                                         @endif
                                         @endforeach
                                     </div>
@@ -600,20 +600,20 @@
                             </div>
                             @endif
                             @if($mission->deadline != null)
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-6" style="color:black;">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6" class="text-dark">
                                 <div class="row">
                                     <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/deadline.png" alt="" style="height:28px"></div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                         <h4 class="mb-2" style="font-size:calc(13px + 0.1vw);">
                                             {{date("d-m-Y", strtotime($mission->deadline))}}                                  
                                         </h4>
-                                        <h6 class="mb-2" style="font-size:12px ;color:gray;">Deadline</h6>
+                                        <h6 class="mb-2 text-secondary" style="font-size:12px ;">Deadline</h6>
                                     </div>
                                 </div>
                             </div>
                             @endif
                             @else
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-6" style="color:black;">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6" class="text-dark">
                                 <div class="row">
                                     <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/achieved.png" alt="" style="height:22px"></div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-9">
@@ -621,7 +621,7 @@
                                             <div style="background-color:#f88634; height:7px; border-radius: 10px; width:80%;">
                                             </div>
                                         </div>
-                                        <h6 class="mb-2" style="font-size:12px ;color:gray;">8000 achieved</h6>
+                                        <h6 class="mb-2 text-secondary" style="font-size:12px ;">8000 achieved</h6>
                                     </div>
                                 </div>
                             </div>

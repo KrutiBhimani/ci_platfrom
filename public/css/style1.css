@@ -496,6 +496,22 @@ body a {
   font-size: 12px;
 }
 
+.peginate{
+  border-radius:5px; 
+  padding:9px; 
+  height:30px; 
+  width:30px; 
+  margin:4px;
+}
+
+.icon-css{
+  z-index:0; 
+  width:5%;
+  top:4px;
+  bottom:4px;
+  right:3px;
+}
+
 .textarea {
   width: 100%;
   border: solid 1px #d9d9d9;

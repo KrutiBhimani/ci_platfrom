@@ -78,6 +78,26 @@ class VolunteeringController extends Controller
             ->leftJoin('mission_rating', 'mission.mission_id', '=', 'mission_rating.mission_id')
             ->where('mission.deleted_at', null)
             ->where('mission.mission_id','!=' ,$mission->missionid)->groupby('mission.mission_id')->get();
+
+            // $a = $missions->where('city.name',$mission->name)->groupby('mission.mission_id')->get();
+            // if($a->isEmpty()){
+            //     $a = $missions->where('country.name',$mission->country_name)->groupby('mission.mission_id')->get();
+            //     if($a->isEmpty()){
+            //         $a = $missions->where('mission_theme.title',$mission->title)->groupby('mission.mission_id')->get();
+            //         if($a->isEmpty()){
+            //             echo 'no mission found';
+            //         }
+            //         else{
+            //             $missions = $missions->where('mission_theme.title',$mission->title)->groupby('mission.mission_id')->get();
+            //         }
+            //     }
+            //     else{
+            //         $missions = $missions->where('country.name',$mission->country_name)->groupby('mission.mission_id')->get();
+            //     }
+            // }
+            // else{
+            //     $missions = $missions->where('city.name',$mission->name)->groupby('mission.mission_id')->get();
+            // }
             
             return view('volunteering_mission',compact('mission','applications','favs','documents','comments','comment_count','skills','rate_count','vols','medias','rateduser','rating','applies','missions'));
         }
