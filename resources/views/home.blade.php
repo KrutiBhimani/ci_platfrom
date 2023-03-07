@@ -1,16 +1,16 @@
 @extends('layouts.home_header1')
 @section('content')
 <div class="container-lg">
-@if (Session::has('message'))
+    @if (Session::has('message'))
     <div class="alert alert-success mb-0 mt-3" role="alert">
         {{ Session::get('message') }}
     </div>
-@endif
-@if (Session::has('error'))
+    @endif
+    @if (Session::has('error'))
     <div class="alert alert-danger mb-0 mt-3" role="alert">
         {{ Session::get('error') }}
     </div>
-@endif
+    @endif
 </div>
 <main id="main">
     <section id="story">
@@ -28,57 +28,57 @@
                                     {{$mission->name}}
                                 </div>
                                 @php
-                                    $a = 0;
+                                $a = 0;
                                 @endphp
                                 @if($mission->mission_type == 'TIME')
-                                    @php
-                                        $current = date("Y-m-d h:i:s");
-                                    @endphp
-                                    @if ($mission->deadline != null && $current > $mission->deadline) 
-                                        @php
-                                            $a = 1;
-                                        @endphp
-                                    @elseif ($mission->end_date != null && $current > $mission->end_date)
-                                        @php
-                                            $a = 1;
-                                        @endphp
-                                    @endif
-                                    @if($mission->total_seat != null)
-                                        @foreach($applications as $application)
-                                            @if($application->missionid == $mission->missionid && ($mission->total_seat - $application->count == 0))
-                                                @php
-                                                    $a = 1;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                    @endif
+                                @php
+                                $current = date("Y-m-d h:i:s");
+                                @endphp
+                                @if ($mission->deadline != null && $current > $mission->deadline) 
+                                @php
+                                $a = 1;
+                                @endphp
+                                @elseif ($mission->end_date != null && $current > $mission->end_date)
+                                @php
+                                $a = 1;
+                                @endphp
+                                @endif
+                                @if($mission->total_seat != null)
+                                @foreach($applications as $application)
+                                @if($application->missionid == $mission->missionid && ($mission->total_seat - $application->count == 0))
+                                @php
+                                $a = 1;
+                                @endphp
+                                @endif
+                                @endforeach
+                                @endif
                                 @endif
                                 @if($a == 1)
-                                    <div class="d-flex align-items-center five-txt" style="background-color:red;">CLOSED</div>
+                                <div class="d-flex align-items-center five-txt" style="background-color:red;">CLOSED</div>
                                 @endif
                                 @foreach($applies as $apply)
-                                    @if($apply->mission_id == $mission->missionid && $apply->user_id == Auth::user()->user_id)
-                                        <div class="d-flex align-items-center five-txt">APPLIED</div>
-                                        @php
-                                            $a = 1;
-                                        @endphp
-                                    @endif
+                                @if($apply->mission_id == $mission->missionid && $apply->user_id == Auth::user()->user_id)
+                                <div class="d-flex align-items-center five-txt">APPLIED</div>
+                                @php
+                                $a = 1;
+                                @endphp
+                                @endif
                                 @endforeach
                                 <div class="d-flex align-items-center second-txt2 p-2">
                                     @php
-                                        $key = 0;
+                                    $key = 0;
                                     @endphp
                                     @foreach($favs as $fav)
-                                        @if($fav->mission_id == $mission->missionid)
-                                            @php
-                                                $key = 1;
-                                            @endphp    
-                                        @endif
+                                    @if($fav->mission_id == $mission->missionid)
+                                    @php
+                                    $key = 1;
+                                    @endphp    
+                                    @endif
                                     @endforeach
                                     @if($key == 1)
-                                        <a href="unlike/{{ $mission->missionid }}"><i class="fa fa-heart text-danger" aria-hidden="true"></i></a>
+                                    <a href="unlike/{{ $mission->missionid }}"><i class="fa fa-heart text-danger" aria-hidden="true"></i></a>
                                     @else
-                                        <a href="like/{{ $mission->missionid }}"><i class="fa fa-heart-o" aria-hidden="true" style="color:white"></i></a>
+                                    <a href="like/{{ $mission->missionid }}"><i class="fa fa-heart-o" aria-hidden="true" style="color:white"></i></a>
                                     @endif     
                                 </div>
                                 <div class="d-flex align-items-center third-txt p-2"><a href="" style="color: black;" data-bs-toggle="modal" data-bs-target="#popup{{$mission->missionid}}"><img src="/storage/images/user.png" alt="" class="img-fluid" style="height:17px"></a></div>
@@ -125,11 +125,11 @@
                                             </div>
                                             <div class="icon">
                                                 @for ($x = 0; $x < 5; $x++)
-                                                    @if ($x < $mission->rating) 
-                                                        <img src="/storage/images/selected-star.png" alt="" class="star">
-                                                    @else
-                                                        <img src='/storage/images/star.png' alt='' class='star'>
-                                                    @endif
+                                                @if ($x < $mission->rating) 
+                                                <img src="/storage/images/selected-star.png" alt="" class="star">
+                                                @else
+                                                <img src='/storage/images/star.png' alt='' class='star'>
+                                                @endif
                                                 @endfor
                                             </div>
                                         </div>
@@ -140,13 +140,13 @@
                                     <hr class="flex-grow-1 div m-0">
                                     <div class="bdg">
                                         @if($mission->mission_type == 'TIME')
-                                            @if($mission->start_date == null && $mission->end_date == null)
-                                                Ongoing Opportunity
-                                            @else
-                                                From {{date("d-m-Y", strtotime($mission->start_date))}} until {{date("d-m-Y", strtotime($mission->end_date))}}
-                                            @endif
+                                        @if($mission->start_date == null && $mission->end_date == null)
+                                        Ongoing Opportunity
                                         @else
-                                            {{ $mission->goal_objective_text }}
+                                        From {{date("d-m-Y", strtotime($mission->start_date))}} until {{date("d-m-Y", strtotime($mission->end_date))}}
+                                        @endif
+                                        @else
+                                        {{ $mission->goal_objective_text }}
                                         @endif                  
                                     </div>
                                     <hr class="flex-grow-1 div m-0">
@@ -160,10 +160,10 @@
                                                 <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/Seats-left.png" alt="" style="height:23px"></div>
                                                 <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                     @foreach($applications as $application)
-                                                        @if($application->missionid == $mission->missionid)
-                                                            {{$mission->total_seat - $application->count}}
-                                                            <h6 class="mb-2" style="font-size:12px ;color:gray;">Seats Left</h6>
-                                                        @endif
+                                                    @if($application->missionid == $mission->missionid)
+                                                    {{$mission->total_seat - $application->count}}
+                                                    <h6 class="mb-2" style="font-size:12px ;color:gray;">Seats Left</h6>
+                                                    @endif
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -174,10 +174,10 @@
                                                 <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/Already-volunteered.png" alt="" style="height:20px"></div>
                                                 <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                     @foreach($applications as $application)
-                                                        @if($application->missionid == $mission->missionid)
-                                                            {{$application->count}}
-                                                            <h6 class="mb-2" style="font-size:12px ;color:gray;">Already volunteered</h6>
-                                                        @endif
+                                                    @if($application->missionid == $mission->missionid)
+                                                    {{$application->count}}
+                                                    <h6 class="mb-2" style="font-size:12px ;color:gray;">Already volunteered</h6>
+                                                    @endif
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -217,23 +217,23 @@
                             <hr class="div">
                             <div class="d-flex align-items-center justify-content-center">
                                 @if($a == 0)
-                                    <a href="apply/{{ $mission->missionid }}" style="color: inherit;"><button class=" col-example mt-3" style="font-size:calc(13px + 0.1vw);">Apply<i class="fa fa-arrow-right ps-2"></i></button></a>
+                                <a href="apply/{{ $mission->missionid }}" style="color: inherit;"><button class=" col-example mt-3" style="font-size:calc(13px + 0.1vw);">Apply<i class="fa fa-arrow-right ps-2"></i></button></a>
                                 @else
-                                    <a href="volunteering_mission/{{ $mission->missionid }}" style="color: inherit;"><button class=" col-example mt-3" style="font-size:calc(13px + 0.1vw);">View Detail<i class="fa fa-arrow-right ps-2"></i></button></a>
+                                <a href="volunteering_mission/{{ $mission->missionid }}" style="color: inherit;"><button class=" col-example mt-3" style="font-size:calc(13px + 0.1vw);">View Detail<i class="fa fa-arrow-right ps-2"></i></button></a>
                                 @endif
                             </div>
                         </div>
                     </div>
                     @endforeach
                     @else
-                        <div class="m-5 p-5 text-center">no mission found</div>
+                    <div class="m-5 p-5 text-center">no mission found</div>
                     @endif
                 </div>
             </div>
             <div id="divlist" style="display:none">
                 <div class="row row-eq-height justify-content-center">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
-                    @foreach($missions as $mission)
+                        @foreach($missions as $mission)
                         <div class="card box border-0 mb-4">
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-3 position-relative">
@@ -244,57 +244,57 @@
                                     </div>
                                     @php
                                     $a = 0;
-                                @endphp
-                                @if($mission->mission_type == 'TIME')
+                                    @endphp
+                                    @if($mission->mission_type == 'TIME')
                                     @php
-                                        $current = date("Y-m-d h:i:s");
+                                    $current = date("Y-m-d h:i:s");
                                     @endphp
                                     @if ($mission->deadline != null && $current > $mission->deadline) 
-                                        @php
-                                            $a = 1;
-                                        @endphp
+                                    @php
+                                    $a = 1;
+                                    @endphp
                                     @elseif ($mission->end_date != null && $current > $mission->end_date)
-                                        @php
-                                            $a = 1;
-                                        @endphp
+                                    @php
+                                    $a = 1;
+                                    @endphp
                                     @endif
                                     @if($mission->total_seat != null)
-                                        @foreach($applications as $application)
-                                            @if($application->missionid == $mission->missionid && ($mission->total_seat - $application->count == 0))
-                                                @php
-                                                    $a = 1;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endif
-                                @if($a == 1)
-                                    <div class="d-flex align-items-center five-txt" style="background-color:red;">CLOSED</div>
-                                @endif
-                                @foreach($applies as $apply)
-                                    @if($apply->mission_id == $mission->missionid && $apply->user_id == Auth::user()->user_id)
-                                        <div class="d-flex align-items-center five-txt">APPLIED</div>
-                                        @php
-                                            $a = 1;
-                                        @endphp
-                                    @endif
-                                @endforeach
-                                    <div class="d-flex align-items-center second-txt1 p-2">
+                                    @foreach($applications as $application)
+                                    @if($application->missionid == $mission->missionid && ($mission->total_seat - $application->count == 0))
                                     @php
-                                        $key = 0;
+                                    $a = 1;
                                     @endphp
-                                    @foreach($favs as $fav)
-                                        @if($fav->mission_id == $mission->missionid)
-                                            @php
-                                                $key = 1;
-                                            @endphp    
-                                        @endif
+                                    @endif
                                     @endforeach
-                                    @if($key == 1)
+                                    @endif
+                                    @endif
+                                    @if($a == 1)
+                                    <div class="d-flex align-items-center five-txt" style="background-color:red;">CLOSED</div>
+                                    @endif
+                                    @foreach($applies as $apply)
+                                    @if($apply->mission_id == $mission->missionid && $apply->user_id == Auth::user()->user_id)
+                                    <div class="d-flex align-items-center five-txt">APPLIED</div>
+                                    @php
+                                    $a = 1;
+                                    @endphp
+                                    @endif
+                                    @endforeach
+                                    <div class="d-flex align-items-center second-txt1 p-2">
+                                        @php
+                                        $key = 0;
+                                        @endphp
+                                        @foreach($favs as $fav)
+                                        @if($fav->mission_id == $mission->missionid)
+                                        @php
+                                        $key = 1;
+                                        @endphp    
+                                        @endif
+                                        @endforeach
+                                        @if($key == 1)
                                         <a href=""><i class="fa fa-heart text-danger" aria-hidden="true"></i></a>
-                                    @else
+                                        @else
                                         <a href=""><i class="fa fa-heart-o" aria-hidden="true" style="color:white"></i></a>
-                                    @endif                       
+                                        @endif                       
                                     </div>
                                     <div class="d-flex align-items-center third-txt1 p-2">
                                         <img src="/storage/images/user.png" alt="" class="img-fluid" style="height:17px">
@@ -313,12 +313,12 @@
                                                 <span class="black">{{$mission->organization_name}}</span>
                                             </div>
                                             <div class="icon">
-                                            @for ($x = 0; $x < 5; $x++)
-                                                    @if ($x < $mission->rating) 
-                                                        <img src="/storage/images/selected-star.png" alt="" class="star">
-                                                    @else
-                                                        <img src='/storage/images/star.png' alt='' class='star'>
-                                                    @endif
+                                                @for ($x = 0; $x < 5; $x++)
+                                                @if ($x < $mission->rating) 
+                                                <img src="/storage/images/selected-star.png" alt="" class="star">
+                                                @else
+                                                <img src='/storage/images/star.png' alt='' class='star'>
+                                                @endif
                                                 @endfor
                                             </div>
                                         </div>
@@ -332,18 +332,18 @@
                                             <div>
                                                 @if($a == 0)
                                                 <div class="row">
-                                                @if($mission->mission_type == 'TIME')
-                                                @if($mission->total_seat != null)
+                                                    @if($mission->mission_type == 'TIME')
+                                                    @if($mission->total_seat != null)
                                                     <div class="col" style="color:black;">
                                                         <div class="row">
                                                             <div class="col-lg-1 col-md-1 col-sm-1 col-1"><img src="/storage/images/Seats-left.png" alt="" style="height:21px"></div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
-                                                            @foreach($applications as $application)
-                                                        @if($application->missionid == $mission->missionid)
-                                                            {{$mission->total_seat - $application->count}}
-                                                            <h6 class="mb-2" style="font-size:12px ;color:gray;">Seats Left</h6>
-                                                        @endif
-                                                    @endforeach
+                                                                @foreach($applications as $application)
+                                                                @if($application->missionid == $mission->missionid)
+                                                                {{$mission->total_seat - $application->count}}
+                                                                <h6 class="mb-2" style="font-size:12px ;color:gray;">Seats Left</h6>
+                                                                @endif
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                     </div>
@@ -352,23 +352,23 @@
                                                         <div class="row">
                                                             <div class="col-lg-1 col-md-1 col-sm-1 col-1"><img src="/storage/images/Seats-left.png" alt="" style="height:21px"></div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
-                                                            @foreach($applications as $application)
-                                                        @if($application->missionid == $mission->missionid)
-                                                            {{$application->count}}
-                                                            <h6 class="mb-2" style="font-size:12px ;color:gray;">Already volunteered</h6>
-                                                        @endif
-                                                    @endforeach
+                                                                @foreach($applications as $application)
+                                                                @if($application->missionid == $mission->missionid)
+                                                                {{$application->count}}
+                                                                <h6 class="mb-2" style="font-size:12px ;color:gray;">Already volunteered</h6>
+                                                                @endif
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                     </div>
                                                     @endif
-                                                @if($mission->deadline != null)
+                                                    @if($mission->deadline != null)
                                                     <div class="col" style="color:black;">
                                                         <div class="row">
                                                             <div class="col-lg-1 col-md-1 col-sm-1 col-1"><img src="/storage/images/deadline.png" alt="" style="height:28px"></div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                 <h4 class="mb-1" style="font-size:calc(12px + 0.1vw);">
-                                                                {{date("d-m-Y", strtotime($mission->deadline))}}                                       
+                                                                    {{date("d-m-Y", strtotime($mission->deadline))}}                                       
                                                                 </h4>
                                                                 <h6 class="mb-0" style="font-size:12px ;color:gray;">Deadline</h6>
                                                             </div>
@@ -378,31 +378,30 @@
                                                     @else
                                                     <div class="col" style="color:black;">
                                                         <div class="row">
-                                                        <div class="col-lg-1 col-md-1 col-sm-1 col-1"><img src="/storage/images/achieved.png" alt="" style="height:22px"></div>
+                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1"><img src="/storage/images/achieved.png" alt="" style="height:22px"></div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
-                                                              <div class="mt-2 mb-2" id="forwidth" style="background-color:#EEEEEE; height:7px; width:100%; border-radius: 10px;">
-                                                                <div style="background-color:#f88634; height:7px; border-radius: 10px; width:80%;" class="6"></div>
-                                                              </div>
-                                                              <h6 class="mb-0" style="font-size:12px ;color:gray;">8000 achieved</h6>
+                                                                <div class="mt-2 mb-2" id="forwidth" style="background-color:#EEEEEE; height:7px; width:100%; border-radius: 10px;">
+                                                                    <div style="background-color:#f88634; height:7px; border-radius: 10px; width:80%;" class="6"></div>
+                                                                </div>
+                                                                <h6 class="mb-0" style="font-size:12px ;color:gray;">8000 achieved</h6>
                                                             </div>
-                                                          </div>
                                                         </div>
-
-                                                @endif
+                                                    </div>
+                                                    @endif
                                                     <div class="col" style="color:black;">
                                                         <div class="row">
                                                             <div class="col-lg-1 col-md-1 col-sm-1 col-1"><img src="/storage/images/calender.png" alt="" style="height:20px"></div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                 <h4 class="mb-1" style="font-size:11px;">
-                                                    @if($mission->mission_type == 'TIME')
-                                                                        @if($mission->start_date == null && $mission->end_date == null)
-                                                                        Ongoing Opportunity
+                                                                    @if($mission->mission_type == 'TIME')
+                                                                    @if($mission->start_date == null && $mission->end_date == null)
+                                                                    Ongoing Opportunity
                                                                     @else
-                                                                        From {{date("d-m-Y", strtotime($mission->start_date))}} until {{date("d-m-Y", strtotime($mission->end_date))}}
+                                                                    From {{date("d-m-Y", strtotime($mission->start_date))}} until {{date("d-m-Y", strtotime($mission->end_date))}}
                                                                     @endif
-                                                                @else
+                                                                    @else
                                                                     {{ $mission->goal_objective_text }}
-                                                                @endif                                
+                                                                    @endif                                
                                                                 </h4>
                                                             </div>
                                                         </div>
@@ -417,71 +416,71 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                        @endif
+                                                @endif
                                             </div>
                                             <div>
-                                            @if($a == 0)
-                                    <a href="home?source=apply&amp;id=91" style="color: inherit;"><button class=" col-example" style="font-size:calc(13px + 0.1vw);">Apply</button></a>
-                                @else
-                                    <a href="Volunteering_Mission?id=OThTRUNSRVRfU1RVRkY=" style="color: inherit;"><button class=" col-example" style="font-size:calc(13px + 0.1vw);">View Detail</button></a>
-                                @endif
+                                                @if($a == 0)
+                                                <a href="home?source=apply&amp;id=91" style="color: inherit;"><button class=" col-example" style="font-size:calc(13px + 0.1vw);">Apply</button></a>
+                                                @else
+                                                <a href="Volunteering_Mission?id=OThTRUNSRVRfU1RVRkY=" style="color: inherit;"><button class=" col-example" style="font-size:calc(13px + 0.1vw);">View Detail</button></a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                        @endforeach
                     </div>
                 </div>
-            </div> 
+            </div>
             <nav aria-label="Page navigation example">
-          <ul class="pagination pager justify-content-center">
-            @php
-            $next = $page + 1;
-            $previous = $page - 1;
-            @endphp
-            @if ($page == 1) 
-              <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/previous.png' alt=''></a></li>
-              <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/left.png' alt=''></a></li>
-            @else
-              <li class='page-item'><a class='page-link' href='home?page=1' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/previous.png' alt=''></a></li>
-              <li class='page-item'><a class='page-link' href='home?page={{$previous}}' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/left.png' alt=''></a></li>
-            @endif
-            @for ($i = 1; $i <= $cnt; $i++) 
-              @if ($i == $page)
-                <li class='page-item'><a class='page-link active text-center' href='home?page={{$i}}' style='border-radius:5px; padding:5px; height:30px; width:30px; margin:4px; font-size:15px;'><b>{{$i}}</b></a></li>
-              @else
-                <li class='page-item'><a class='page-link text-center' href='home?page={{$i}}' style='border-radius:5px; padding:5px; height:30px; width:30px; margin:4px; font-size:15px; color:black;'>{{$i}}</a></li>
-              @endif
-            @endfor
-            @if ($page == $cnt) 
-              <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/arrow.png' alt=''></a></li>
-              <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/next.png' alt=''></a></li>
-            @else 
-              <li class='page-item'><a class='page-link' href='home?page={{$next}}' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/arrow.png' alt=''></a></li>
-              <li class='page-item'><a class='page-link' href='home?page={{$cnt}}' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/next.png' alt=''></a></li>
-            @endif
-          </ul>
-        </nav>
+                <ul class="pagination pager justify-content-center">
+                    @php
+                    $next = $page + 1;
+                    $previous = $page - 1;
+                    @endphp
+                    @if ($page == 1) 
+                    <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/previous.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/left.png' alt=''></a></li>
+                    @else
+                    <li class='page-item'><a class='page-link' href='home?page=1' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/previous.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link' href='home?page={{$previous}}' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/left.png' alt=''></a></li>
+                    @endif
+                    @for ($i = 1; $i <= $cnt; $i++) 
+                    @if ($i == $page)
+                    <li class='page-item'><a class='page-link active text-center' href='home?page={{$i}}' style='border-radius:5px; padding:5px; height:30px; width:30px; margin:4px; font-size:15px;'><b>{{$i}}</b></a></li>
+                    @else
+                    <li class='page-item'><a class='page-link text-center' href='home?page={{$i}}' style='border-radius:5px; padding:5px; height:30px; width:30px; margin:4px; font-size:15px; color:black;'>{{$i}}</a></li>
+                    @endif
+                    @endfor
+                    @if ($page == $cnt) 
+                    <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/arrow.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/next.png' alt=''></a></li>
+                    @else 
+                    <li class='page-item'><a class='page-link' href='home?page={{$next}}' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/arrow.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link' href='home?page={{$cnt}}' style='border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;'><img src='/storage/images/next.png' alt=''></a></li>
+                    @endif
+                </ul>
+            </nav>
             <br>
         </div>
     </section>
 </main>
 <script>
-  $(document).ready(function() {
-    $("#gridlink").click(function() {
-      $("#divlist").hide();
-      $("#divgrid").show();
-      $("#h2").removeClass("Ellipse-574");
-      $("#h1").addClass("Ellipse-574");
-    });
-    $("#listlink").click(function() {
-      $("#divlist").show();
-      $("#divgrid").hide();
-      $("#h1").removeClass("Ellipse-574");
-      $("#h2").addClass("Ellipse-574");
-    });
-  })
+    $(document).ready(function() {
+      $("#gridlink").click(function() {
+        $("#divlist").hide();
+        $("#divgrid").show();
+        $("#h2").removeClass("Ellipse-574");
+        $("#h1").addClass("Ellipse-574");
+      });
+      $("#listlink").click(function() {
+        $("#divlist").show();
+        $("#divgrid").hide();
+        $("#h1").removeClass("Ellipse-574");
+        $("#h2").addClass("Ellipse-574");
+      });
+    })
 </script>
 @endsection

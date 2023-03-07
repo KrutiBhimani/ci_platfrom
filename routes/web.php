@@ -43,7 +43,11 @@ Route::get('like/{mission_id}',[HomeController::class, 'like']);
 Route::get('unlike/{mission_id}',[HomeController::class, 'unlike']); 
 Route::get('apply/{mission_id}',[HomeController::class, 'apply']); 
 Route::post('invite-user', [HomeController::class, 'invite'])->name('invite.user'); 
+
 Route::get('volunteering_mission/{mission_id}', [VolunteeringController::class, 'volunteering_mission'])->name('volunteering_mission');
+Route::get('edit_rating/{rating}/{mission_id}',[VolunteeringController::class, 'edit_rating']); 
+Route::get('add_rating/{rating}/{mission_id}',[VolunteeringController::class, 'add_rating']);
+Route::post('add-comment', [VolunteeringController::class, 'add_comment'])->name('add.comment'); 
 
 Route::get('stories', [StoriesController::class, 'story']); 
 Route::get('policy', [PolicyController::class, 'policy']); 

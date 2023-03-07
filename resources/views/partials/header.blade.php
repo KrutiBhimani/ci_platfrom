@@ -2,7 +2,7 @@
     <div class="container-lg">
         <div class="d-flex justify-content-between position-relative">
             <nav class="navbar navbar-expand-sm ps-0 pe-0 " style="background-color:white ;">
-                <a href="home"><img class="d-none d-sm-block" src="/storage/images/logo.png"></a>
+                <a href="/home"><img class="d-none d-sm-block" src="/storage/images/logo.png"></a>
                 <div class="container-fluid">
                     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"><img src="/storage/images/list.png"></span>
@@ -10,10 +10,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="stories">Stories</a>
+                                <a class="nav-link" href="/stories">Stories</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="policy">Policy</a>
+                                <a class="nav-link" href="/policy">Policy</a>
                             </li>
                         </ul>
                     </div>

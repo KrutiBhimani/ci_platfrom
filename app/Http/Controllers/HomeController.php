@@ -131,7 +131,7 @@ class HomeController extends Controller
             
             $listing->groupby('mission.mission_id');
             
-            $pagecount = 3;
+            $pagecount = 9;
             if (isset($_REQUEST['page'])) {
               $page = $_REQUEST['page'];
             } else
@@ -174,8 +174,8 @@ class HomeController extends Controller
     public function invite(Request $request)
     {
         $user_id = User::where('email',$request->email)->first()->user_id;
-  
-        Mail::send('email.invite', ['mission_id' => $request->mission_id], function($message) use($request){
+        $title = Mission::where('mission_id', $request->mission_id)->first()->title;
+        Mail::send('email.invite', ['title' => $title], function($message) use($request){
             $message->to($request->email);
             $message->subject('Invited');
         });

@@ -1,6 +1,5 @@
 
 @extends('layouts.auth_header')
-
 @section('content')
 <div class="col-md-4 col-sm-12 d-md-flex align-items-center position-relative">
     <div class="Layer-52">
