@@ -32,14 +32,14 @@
             <button class="login" type="submit">Login</button>
         </form>
         <p class="text-center mb-3 mt-3">
-            <a href="forget-password" class="lost">Lost your password?</a>
+            <a href="/forget-password" class="lost">Lost your password?</a>
         </p>
         <p class="text-center lost mb-0">
             Don't have an account?
-            <a href="registration" style="color:blue;">Create an account</a>
+            <a href="/registration" style="color:blue;">Create an account</a>
         </p>
         <br><br>
     </div>
-    <a href="policy" class="text-center position-absolute bottom-0 start-50 translate-middle p-0 m-0 mt-3 Privacy-Policy">Privacy Policy</a>
+    <a href="/policy" class="text-center position-absolute bottom-0 start-50 translate-middle p-0 m-0 mt-3 Privacy-Policy">Privacy Policy</a>
 </div>
 @endsection

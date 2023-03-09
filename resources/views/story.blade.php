@@ -8,7 +8,7 @@
             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
             laboris nisi ut aliquip
         </p>
-        <a href="share_story">
+        <a href="/share_story">
             <div class="text text-center">Share your Story
                 <i class="fa fa-arrow-right pl-2"></i>
             </div>
@@ -22,7 +22,7 @@
                 <div class="gfg1">
                     <img src="/storage/uplodes/Grow-Trees-On-the-path-to-environment-sustainability.png" alt="" class="img-fluid image2" style="width:100%; height:170px">
                     <div class="middle1">
-                        <a href="story_detail?key=MTdTRUNSRVRfU1RVRkY=">
+                        <a href="/story_detail?key=MTdTRUNSRVRfU1RVRkY=">
                             <div class="text1 text-center">View Detail
                                 <i class="fa fa-arrow-right pl-2"></i>
                             </div>

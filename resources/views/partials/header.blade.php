@@ -27,9 +27,9 @@
                             <img src="/storage/uplodes/avatar-9.jpg" class="rounded-circle col" style="height: 30px;width: 60px;">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="edit_user">My Profile</a></li>
-                                <li><a class="dropdown-item" href="timesheet">volunteering timesheet</a></li>
-                                <li><a class="dropdown-item" href="logout">Logout</a></li>
+                                <li><a class="dropdown-item" href="/edit_user">My Profile</a></li>
+                                <li><a class="dropdown-item" href="/timesheet">volunteering timesheet</a></li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -78,9 +78,9 @@
                             <label>{{Auth::user()->first_name.' '.Auth::user()->last_name}}</label>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="edit_user">My Profile</a></li>
-                                <li><a class="dropdown-item" href="timesheet">volunteering timesheet</a></li>
-                                <li><a class="dropdown-item" href="logout">Logout</a></li>
+                                <li><a class="dropdown-item" href="/edit_user">My Profile</a></li>
+                                <li><a class="dropdown-item" href="/timesheet">volunteering timesheet</a></li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
                             </ul>
                         </li>
                     </ul>

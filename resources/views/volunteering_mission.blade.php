@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="h-100">
-                <img id="mainImage" class="ps-1 pe-1 mt-2 w-100" src="{{$mission->media_path}}" height="80%" style="object-fit: cover;">
+                <img id="mainImage" class="ps-1 pe-1 mt-2 w-100 ofit" src="{{$mission->media_path}}" height="80%">
                 <div class="row pe-3 ps-3 pt-1">
                     <div class="top-content p-0" id="style-sheet-modern">
                         <div class="container-fluid p-0 m-0">
@@ -12,7 +12,7 @@
                                 <div class="carousel-inner row w-100 mx-auto" role="listbox">
                                     @foreach ($medias as $key => $media) 
                                     <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 p-1 {{$key==0 ? 'active' : ''}}">
-                                        <img src="{{$media->media_path}}" class="img-fluid mx-auto d-block w-100" style="object-fit: cover;height: 100px;" alt="img1">
+                                        <img src="{{$media->media_path}}" class="img-fluid mx-auto d-block w-100 ofit h100" alt="img1">
                                     </div>
                                     @endforeach
                                 </div>
@@ -31,8 +31,8 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
-            <p class="mb-3" style="font-size:calc(15px + 1vw);">{{$mission->mission_title}}</p>
-            <p class="mb-3 text-secondary" style=" font-size: calc(11px + 0.15vw);">{{$mission->short_description}}</p>
+            <p class="mb-3 fs1501">{{$mission->mission_title}}</p>
+            <p class="mb-3 text-secondary fs1115">{{$mission->short_description}}</p>
             <div class="d-flex align-items-center">
                 <hr class="flex-grow-1 div">
                 <div class="bdg2">
@@ -54,13 +54,13 @@
                 <div class="text-dark">
                     <div class="d-flex justify-content-around">
                         <div class="pe-3">
-                            <img src="/storage/images/Seats-left.png" alt="" style="height:23px">
+                            <img src="/storage/images/Seats-left.png" alt="" class="h23">
                         </div>
                         <div>
                             @foreach($applications as $application)
                             @if($application->missionid == $mission->missionid)
                             {{$mission->total_seat - $application->count}}
-                            <h6 class="mb-2 text-secondary" style="font-size:12px ;">Seats Left</h6>
+                            <h6 class="mb-2 text-secondary" class="fs12">Seats Left</h6>
                             @endif
                             @endforeach
                         </div>
@@ -70,13 +70,13 @@
                 <div class="text-dark">
                     <div class="d-flex justify-content-around">
                         <div class="pe-3">
-                            <img src="/storage/images/Already-volunteered.png" alt="" style="height:20px">
+                            <img src="/storage/images/Already-volunteered.png" alt="" class="h20">
                         </div>
                         <div>
                             @foreach($applications as $application)
                             @if($application->missionid == $mission->missionid)
                             {{$application->count}}
-                            <h6 class="mb-2 text-secondary" style="font-size:12px;">Already volunteered</h6>
+                            <h6 class="mb-2 text-secondary" class="fs12">Already volunteered</h6>
                             @endif
                             @endforeach
                         </div>
@@ -87,29 +87,27 @@
                 <div class="text-dark">
                     <div class="d-flex justify-content-around">
                         <div class="pe-3">
-                            <img src="/storage/images/deadline.png" alt="" style="height:28px">
+                            <img src="/storage/images/deadline.png" alt="" class="h28">
                         </div>
                         <div>
-                            <h4 class="mb-2" style="font-size:calc(13px + 0.1vw);">
-                                {{date("d-m-Y", strtotime($mission->deadline))}}                                
-                            </h4>
-                            <h6 class="mb-2 text-secondary" style="font-size:12px ;">Deadline</h6>
+                                {{date("d-m-Y", strtotime($mission->deadline))}}
+                            <h6 class="mb-2 text-secondary" class="fs12">Deadline</h6>
                         </div>
                     </div>
                 </div>
                 @endif
                 @else
-                <div class="text-dark">
+                <div class="text-dark w40">
                     <div class="d-flex justify-content-around">
                         <div class="pe-3">
-                            <img src="/storage/images/achieved.png" alt="" style="height:22px">
+                            <img src="/storage/images/achieved.png" alt="" class="h22">
                         </div>
                         <div class="w-100">
-                            <div class="mt-1 mb-3 w-100" style="background-color:#EEEEEE; height:7px; border-radius: 10px;">
-                                <div style="background-color:#f88634; height:7px; border-radius: 10px; width:80%;">
+                            <div class="mt-1 mb-3 w-100 under">
+                                <div class="uper" style="width:{{$goal_count}}%;">
                                 </div>
                             </div>
-                            <h6 class="mb-2 text-secondary" style="font-size:12px ;">8000 achieved</h6>
+                            <h6 class="mb-2 text-secondary fs12">{{$goal_achieved}} achieved</h6>
                         </div>
                     </div>
                 </div>
@@ -118,7 +116,7 @@
             <hr class="div">
             <div class="row mt-3 mb-3">
                 <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                    <div class="col-example2 text-center" style="font-size:calc(13px + 0.1vw);">
+                    <div class="col-example2 text-center fs131">
                         @php
                         $key = 0;
                         @endphp
@@ -130,25 +128,25 @@
                         @endif
                         @endforeach
                         @if($key == 1)
-                        <a href="/unlike/{{ $mission->missionid }}" style="color: inherit; text-decoration: inherit;"><i class="fa fa-heart text-danger me-2" aria-hidden="true"></i>Remove From Favourite</a>
+                        <a href="/unlike/{{ $mission->missionid }}" class="inh tinh"><i class="fa fa-heart text-danger me-2" aria-hidden="true"></i>Remove From Favourite</a>
                         @else
-                        <a href="/like/{{ $mission->missionid }}" style="color: inherit; text-decoration: inherit;"><i class="fa fa-heart-o text-dark me-2 text-white" aria-hidden="true"></i>Add to Favourite</a>
+                        <a href="/like/{{ $mission->missionid }}" class="inh tinh"><i class="fa fa-heart-o text-dark me-2 text-white" aria-hidden="true"></i>Add to Favourite</a>
                         @endif
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                    <div class="col-example2 text-center" style="font-size:calc(13px + 0.1vw);">
-                        <a href="#" style="color: inherit; text-decoration: inherit;" data-bs-toggle="modal" data-bs-target="#popup{{ $mission->missionid }}">
-                        <img src="/storage/images/add1.png" alt="" class="mb-1" style="height:15px ;">
+                    <div class="col-example2 text-center fs131">
+                        <a href="#" class="inh tinh" data-bs-toggle="modal" data-bs-target="#popup{{ $mission->missionid }}">
+                        <img src="/storage/images/add1.png" alt="" class="mb-1 h15">
                         Recommend to a Co-Worker
                         </a>
                     </div>
                     <div id="popup{{ $mission->missionid }}" class="modal">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content p-2">
-                                <div class="modal-header pb-0" style="border-bottom:0 ;">
-                                    <p class="mb-0" style="font-size:20px ;">Invite</p>
-                                    <img class="text-end mt-2 mb-2" src="/storage/images/cancel1.png" data-bs-dismiss="modal" style="cursor: pointer;height:13px">
+                                <div class="modal-header pb-0 border-bottom-0">
+                                    <p class="mb-0 fs20">Invite</p>
+                                    <img class="text-end mt-2 mb-2 pe-auto h13" src="/storage/images/cancel1.png" data-bs-dismiss="modal">
                                 </div>
                                 <form action="{{ route('invite.user') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
@@ -157,7 +155,7 @@
                                         <p class="mb-1 mt-3">Email </p>
                                         <input type="email" class="popup" name="email" place-holder="enter user email to invite">
                                     </div>
-                                    <div class="modal-footer mt-4" style="border-top:0 ;">
+                                    <div class="modal-footer mt-4 border-top-0">
                                         <button type="reset" class="col-example8" data-bs-dismiss="modal">Cancle
                                         </button>
                                         <button type="submit" id="button1" name="inviteuser" class="col-example7" data-bs-dismiss="modal">Invite
@@ -186,14 +184,14 @@
                     @if($rateduser==1 && $rate == 1)
                     @for($x = 1; $x <= 5; $x++) 
                     @if ($x < ($rating->rating + 1)) 
-                    <a href='/edit_rating/{{$x}}/{{$mission->missionid}}'><img src='/storage/images/selected-star.png' style='height:20px; cursor: pointer;'></a>
+                    <a href='/edit_rating/{{$x}}/{{$mission->missionid}}'><img src='/storage/images/selected-star.png' class="pe-auto h20"></a>
                     @else
-                    <a href='/edit_rating/{{$x}}/{{$mission->missionid}}'><img src='/storage/images/star.png' style='height:22px; cursor: pointer;'></a>
+                    <a href='/edit_rating/{{$x}}/{{$mission->missionid}}'><img src='/storage/images/star.png' class="pe-auto h22"></a>
                     @endif
                     @endfor
                     @elseif($rateduser==0 && $rate == 1)
                     @for ($x = 1; $x <= 5; $x++) 
-                    <a href='/add_rating/{{$x}}/{{$mission->missionid}}'><img src='/storage/images/star.png' style='height:22px; cursor: pointer;'></a>
+                    <a href='/add_rating/{{$x}}/{{$mission->missionid}}'><img src='/storage/images/star.png' class="pe-auto h22"></a>
                     @endfor
                     @else
                     @for ($x = 0; $x < 5; $x++)
@@ -209,19 +207,19 @@
             </div>
             <div class="row mt-3 mb-3 ms-1 me-1">
                 <div class="col col-example3 pe-2 ps-2">
-                    <img src="/storage/images/pin1.png" style="height:18px;">
-                    <h6 class="mt-3 mb-1 text-secondary" style=" font-size:10px">City</h6>
-                    <h4 class="mb-0" style="font-size:calc(11px + 0.1vw);">{{$mission->name}}</h4>
+                    <img src="/storage/images/pin1.png" class="h18">
+                    <h6 class="mt-3 mb-1 text-secondary fs10">City</h6>
+                    <h4 class="mb-0 fs111">{{$mission->name}}</h4>
                 </div>
                 <div class="col col-example3 pe-2 ps-2">
-                    <img src="/storage/images/web.png" style="height:18px;">
-                    <h6 class="mt-3 mb-1 text-secondary" style=" font-size:10px">Theme</h6>
-                    <h4 class="mb-0" style="font-size:calc(11px + 0.1vw);">{{$mission->title}}</h4>
+                    <img src="/storage/images/web.png" class="h18">
+                    <h6 class="mt-3 mb-1 text-secondary fs10">Theme</h6>
+                    <h4 class="mb-0 fs111">{{$mission->title}}</h4>
                 </div>
                 <div class="col col-example3 pe-2 ps-2">
-                    <img src="/storage/images/calender.png" style="height:17px;">
-                    <h6 class="mt-3 mb-1 text-secondary" style=" font-size:10px">Date</h6>
-                    <h4 class="mb-0" style="font-size:calc(11px + 0.1vw);">
+                    <img src="/storage/images/calender.png" class="h17">
+                    <h6 class="mt-3 mb-1 text-secondary fs10">Date</h6>
+                    <h4 class="mb-0 fs111">
                         @if($mission->mission_type == 'TIME')
                         @if($mission->start_date == null && $mission->end_date == null)
                         Ongoing Opportunity
@@ -234,9 +232,9 @@
                     </h4>
                 </div>
                 <div class="col col-example3 pe-2 ps-2">
-                    <img src="/storage/images/organization.png" style="height:15px;">
-                    <h6 class="mt-3 mb-1 text-secondary" style=" font-size:10px">Organization</h6>
-                    <h4 class="mb-0" style="font-size:calc(11px + 0.1vw);">{{$mission->organization_name}}</h4>
+                    <img src="/storage/images/organization.png" class="h15">
+                    <h6 class="mt-3 mb-1 text-secondary fs10">Organization</h6>
+                    <h4 class="mb-0 fs111">{{$mission->organization_name}}</h4>
                 </div>
             </div>
             <div class="d-flex align-items-center justify-content-center">
@@ -259,8 +257,8 @@
                 @endif
                 @endif
                 @if($key == 0)
-                <a href="/apply/{{ $mission->missionid }}" style="color: inherit;">
-                    <div class="col-example" style="font-size:calc(15px + 0.1vw); font-weight: 400;">Apply Now
+                <a href="/apply/{{ $mission->missionid }}" class="inh">
+                    <div class="col-example" class="fw400">Apply Now
                         <i class="fa fa-arrow-right ps-2"></i>
                     </div>
                 </a>
@@ -286,21 +284,22 @@
                     @php
                     echo $mission->description
                     @endphp
-                    @if(!empty($documents))
-                    <h4 class="mt-4 mb-2" style="font-size:calc(11px + 0.8vw);">Documents</h4>
+                    @if($documents->isEmpty())
+                    @else
+                    <h4 class="mt-4 mb-2 fs118">Documents</h4>
                     <div class="d-flex flex-wrap">
                         @foreach($documents as $document)
-                        <button class="col-example5 mt-2" style="font-size:calc(13px + 0.1vw);">
+                        <button class="col-example5 mt-2 fs131">
                         @if($document->document_type == 'doc' || $document->document_type == 'docx')
-                        <img src="/storage/images/doc.png" alt="" style="height:18px ;">
+                        <img src="/storage/images/doc.png" alt="" class="h18">
                         @endif
                         @if($document->document_type == 'xls' || $document->document_type == 'xlsx')
-                        <img src="/storage/images/xlsx.png" alt="" style="height:18px ;">
+                        <img src="/storage/images/xlsx.png" alt="" class="h18">
                         @endif
                         @if($document->document_type == 'pdf')
-                        <img src="/storage/images/pdf.png" alt="" style="height:18px ;">
+                        <img src="/storage/images/pdf.png" alt="" class="h18">
                         @endif
-                        <a href="{{$document->document_path}}" target="_blank" style="color: inherit;">{{$document->document_name}}</a>
+                        <a href="{{$document->document_path}}" target="_blank" class="inh">{{$document->document_name}}</a>
                         </button>
                         @endforeach
                     </div>
@@ -320,21 +319,21 @@
                         <span class="text-danger">{{ $errors->first('comment_text') }}</span>
                         @endif
                         <br/>
-                        <button type="submit" name="add_comment" class="col-example mt-3" style="font-size:15px; width:fit-content">
+                        <button type="submit" name="add_comment" class="col-example mt-3 fitc">
                         Post Comment
                         </button>
                     </form>
                     @if($comment_count > 0)
-                    <div class="pt-1 pb-1 ps-3 pe-3" style="background-color:#f7f7f7; {{$comment_count > 3 ? 'height: 450px;overflow-y: auto':''}}">
+                    <div class="pt-1 pb-1 ps-3 pe-3 bgy {{$comment_count > 3 ? 'hof':''}}">
                         @foreach ($comments as $comment) 
-                        <div class="row mt-2 mb-2 p-3 ms-0 me-0 " style="background-color:white;">
+                        <div class="row mt-2 mb-2 p-3 ms-0 me-0 bgw">
                             <div class="col-lg-1 col-md-2 col-sm-2 col-12 p-0">
-                                <img src="{{$comment->avatar!=null ? '/storage/uplodes/'.$comment->avatar : '/storage/images/user1.png'}}" class="rounded-circle" height="45px">
+                                <img src="{{$comment->avatar!=null ? '/storage/uplodes/'.$comment->avatar : '/storage/images/user1.png'}}" class="rounded-circle h45">
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-10 col-12 p-0">
-                                <p class="mb-1" style="font-size:14px ;">{{$comment->first_name.' '.$comment->last_name}}</p>
-                                <p class="mb-2" style="font-size:10px ;">{{date("l, F d, Y, h:i A", strtotime($comment->comment_date))}}</p>
-                                <p class="mb-0" style="font-size:12px ;">{{$comment->comment_text}}</p>
+                                <p class="mb-1 fs14">{{$comment->first_name.' '.$comment->last_name}}</p>
+                                <p class="mb-2 fs10">{{date("l, F d, Y, h:i A", strtotime($comment->comment_date))}}</p>
+                                <p class="mb-0 fs12">{{$comment->comment_text}}</p>
                             </div>
                         </div>
                         @endforeach
@@ -378,9 +377,9 @@
                                     <td class="border-bottom-0">
                                         @for ($x = 0; $x < 5; $x++)
                                         @if ($x < $mission->rating) 
-                                        <img src="/storage/images/selected-star.png" height="15px">
+                                        <img src="/storage/images/selected-star.png" class="h15">
                                         @else
-                                        <img src='/storage/images/star.png' height="15px">
+                                        <img src='/storage/images/star.png' class="h15">
                                         @endif
                                         @endfor
                                         <span class="gray2">(by {{$rate_count > 0 ? $rate_count : '0'}} volunteers)</span>
@@ -406,8 +405,8 @@
                             @endphp
                             @foreach ($vols as $vol) 
                             <div class="col-4 text-center p-0">
-                                <img src="{{$vol->avatar!=null ? '/storage/uplodes/'.$vol->avatar : '/storage/images/user1.png'}}" class="rounded-circle" height="60px">
-                                <p style="font-size:11px ;">{{$vol->first_name.' '.$vol->last_name}}</p>
+                                <img src="{{$vol->avatar!=null ? '/storage/uplodes/'.$vol->avatar : '/storage/images/user1.png'}}" class="rounded-circle h60">
+                                <p class="fs11">{{$vol->first_name.' '.$vol->last_name}}</p>
                             </div>
                             @php $count++ @endphp
                             @endforeach
@@ -417,10 +416,10 @@
                 <table class="table table-bordered m-0 text-center">
                     <tbody>
                         <tr class="border-bottom-0 border-start-0">
-                            <td class="border-bottom-0 border-start-0"><img src="/storage/images/left.png" height="12px">
+                            <td class="border-bottom-0 border-start-0"><img src="/storage/images/left.png" class="h12">
                             </td>
                             <td class="border-bottom-0 border-start-0">{{$count}} Recent Volunteers</td>
-                            <td class="border-bottom-0 border-end-0"><img src="/storage/images/right-arrow1.png" height="12px">
+                            <td class="border-bottom-0 border-end-0"><img src="/storage/images/right-arrow1.png" class="h12">
                             </td>
                         </tr>
                     </tbody>
@@ -429,10 +428,11 @@
         </div>
     </div>
 </div>
+@if($m_count > 0)
 <hr class="div mt-5 mb-5">
 <div class="container-lg">
     <div class="row row-eq-height justify-content-center">
-        <p class="text-center" style="font-size:30px ;font-weight: 350;">
+        <p class="text-center fs30 fw350">
             Related Missions
         </p>
         @foreach($missions as $mission)
@@ -440,7 +440,7 @@
             <div class="card box border-0">
                 <div class="gfg">
                     <img src="{{$mission->media_path}}" alt="" class="img-fluid w-100">
-                    <div class="d-flex align-items-center first-txt"><img src="/storage/images/pin.png" alt="" class="img-fluid pe-1" style="height:12px;">
+                    <div class="d-flex align-items-center first-txt"><img src="/storage/images/pin.png" alt="" class="img-fluid pe-1 h12">
                         {{$mission->name}}
                     </div>
                     @php
@@ -492,18 +492,18 @@
                         @endif
                         @endforeach
                         @if($key == 1)
-                        <a href="unlike/{{ $mission->missionid }}"><i class="fa fa-heart text-danger" aria-hidden="true"></i></a>
+                        <a href="/unlike/{{ $mission->missionid }}"><i class="fa fa-heart text-danger" aria-hidden="true"></i></a>
                         @else
-                        <a href="like/{{ $mission->missionid }}"><i class="fa fa-heart-o text-white" aria-hidden="true"></i></a>
+                        <a href="/like/{{ $mission->missionid }}"><i class="fa fa-heart-o text-white" aria-hidden="true"></i></a>
                         @endif     
                     </div>
-                    <div class="d-flex align-items-center third-txt p-2"><a href="" class="text-dark" data-bs-toggle="modal" data-bs-target="#popup{{$mission->missionid}}"><img src="/storage/images/user.png" alt="" class="img-fluid" style="height:17px"></a></div>
+                    <div class="d-flex align-items-center third-txt p-2"><a href="" class="text-dark" data-bs-toggle="modal" data-bs-target="#popup{{$mission->missionid}}"><img src="/storage/images/user.png" alt="" class="img-fluid h17"></a></div>
                     <div id="popup{{$mission->missionid}}" class="modal">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content p-2">
                                 <div class="modal-header pb-0 border-bottom-0">
-                                    <p class="mb-0" style="font-size:20px ;">Invite</p>
-                                    <img class="text-end mt-2 mb-2" src="/storage/images/cancel1.png" data-bs-dismiss="modal" style="cursor: pointer;height:13px">
+                                    <p class="mb-0 fs20">Invite</p>
+                                    <img class="text-end mt-2 mb-2 pe-auto h13"  src="/storage/images/cancel1.png" data-bs-dismiss="modal">
                                 </div>
                                 <form action="{{ route('invite.user') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
@@ -529,15 +529,15 @@
                 <div class="row">
                     <div class="col-md-12 text-dark">
                         <div class="card-body pb-3 remove">
-                            <a href="volunteering_mission/{{ $mission->missionid }}" class="text-dark">
-                                <h2 class="card-title mb-2" style="font-size:calc(15px + 0.3vw);">{{$mission->mission_title}}</h2>
+                            <a href="/volunteering_mission/{{ $mission->missionid }}" class="text-dark">
+                                <h2 class="card-title mb-2 fs153">{{$mission->mission_title}}</h2>
                             </a>
-                            <p class="mb-2 text-secondary" style="font-size:calc(11px + 0.1vw);">
+                            <p class="mb-2 text-secondary fs111">
                                 {{$a == 1 ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit...' : $mission->short_description }}                  
                             </p>
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <h6 class="m-0" style="font-size:calc(11px + 0.1vw);">{{$mission->organization_name}}</h6>
+                                    <h6 class="m-0 fs111">{{$mission->organization_name}}</h6>
                                 </div>
                                 <div class="icon">
                                     @for ($x = 0; $x < 5; $x++)
@@ -573,12 +573,12 @@
                             @if($mission->total_seat != null)
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6" class="text-dark">
                                 <div class="row">
-                                    <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/Seats-left.png" alt="" style="height:23px"></div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/Seats-left.png" alt="" class="h23"></div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                         @foreach($applications as $application)
                                         @if($application->missionid == $mission->missionid)
                                         {{$mission->total_seat - $application->count}}
-                                        <h6 class="mb-2 text-secondary" style="font-size:12px ;">Seats Left</h6>
+                                        <h6 class="mb-2 text-secondary fs12">Seats Left</h6>
                                         @endif
                                         @endforeach
                                     </div>
@@ -587,12 +587,12 @@
                             @else
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6" class="text-dark">
                                 <div class="row">
-                                    <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/Already-volunteered.png" alt="" style="height:20px"></div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/Already-volunteered.png" alt="" class="h20"></div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                         @foreach($applications as $application)
                                         @if($application->missionid == $mission->missionid)
                                         {{$application->count}}
-                                        <h6 class="mb-2 text-secondary" style="font-size:12px ;">Already volunteered</h6>
+                                        <h6 class="mb-2 text-secondary fs12">Already volunteered</h6>
                                         @endif
                                         @endforeach
                                     </div>
@@ -602,12 +602,10 @@
                             @if($mission->deadline != null)
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6" class="text-dark">
                                 <div class="row">
-                                    <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/deadline.png" alt="" style="height:28px"></div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/deadline.png" alt="" class="h28"></div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-9">
-                                        <h4 class="mb-2" style="font-size:calc(13px + 0.1vw);">
-                                            {{date("d-m-Y", strtotime($mission->deadline))}}                                  
-                                        </h4>
-                                        <h6 class="mb-2 text-secondary" style="font-size:12px ;">Deadline</h6>
+                                            {{date("d-m-Y", strtotime($mission->deadline))}} 
+                                        <h6 class="mb-2 text-secondary fs12">Deadline</h6>
                                     </div>
                                 </div>
                             </div>
@@ -615,13 +613,27 @@
                             @else
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6" class="text-dark">
                                 <div class="row">
-                                    <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/achieved.png" alt="" style="height:22px"></div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0"><img src="/storage/images/achieved.png" alt="" class="h22"></div>
+                                    @php
+                                    $goal_value = $mission->goal_value;
+                                    $goal_achieved = 0;
+                                    @endphp
+                                    @foreach($times as $time)
+                                        @if($mission->missionid == $time->mission_id)
+                                            @php
+                                                $goal_achieved = $goal_achieved + $time->action;
+                                            @endphp
+                                        @endif
+                                    @endforeach
+                                    @php
+                                        $goal_count = ($goal_achieved)*(100)/($goal_value);
+                                    @endphp
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-9">
-                                        <div class="mt-1 mb-3" style="background-color:#EEEEEE; height:7px; width:100%; border-radius: 10px;">
-                                            <div style="background-color:#f88634; height:7px; border-radius: 10px; width:80%;">
+                                        <div class="mt-1 mb-3 under">
+                                            <div class='uper' style="width:{{$goal_count}}%;">
                                             </div>
                                         </div>
-                                        <h6 class="mb-2 text-secondary" style="font-size:12px ;">8000 achieved</h6>
+                                        <h6 class="mb-2 text-secondary fs12">{{$goal_achieved}} achieved</h6>
                                     </div>
                                 </div>
                             </div>
@@ -633,9 +645,9 @@
                 <hr class="div">
                 <div class="d-flex align-items-center justify-content-center">
                     @if($a == 0)
-                    <a href="apply/{{ $mission->missionid }}" style="color: inherit;"><button class=" col-example mt-3" style="font-size:calc(13px + 0.1vw);">Apply<i class="fa fa-arrow-right ps-2"></i></button></a>
+                    <a href="/apply/{{ $mission->missionid }}" class="inh"><button class=" col-example mt-3 fs131">Apply<i class="fa fa-arrow-right ps-2"></i></button></a>
                     @else
-                    <a href="volunteering_mission/{{ $mission->missionid }}" style="color: inherit;"><button class=" col-example mt-3" style="font-size:calc(13px + 0.1vw);">View Detail<i class="fa fa-arrow-right ps-2"></i></button></a>
+                    <a href="/volunteering_mission/{{ $mission->missionid }}" class="inh"><button class=" col-example mt-3 fs131">View Detail<i class="fa fa-arrow-right ps-2"></i></button></a>
                     @endif
                 </div>
             </div>
@@ -644,4 +656,23 @@
     </div>
     <br>
 </div>
+@else
+<br/><br/>
+@endif
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.carousel-item').on({
+            click: function() {
+                var imageURL = $(this).attr('src');
+                var duration = 0;
+                $('#mainImage').fadeOut(duration, function() {
+                    $(this).attr('src', imageURL);
+                }).fadeIn(duration);
+            }
+        }, 'img');
+        var mainImageElement = $('#mainImage');
+        var height = parseInt(mainImageElement.attr('height'));
+        var width = parseInt(mainImageElement.attr('width'))
+    });
+</script>
 @endsection

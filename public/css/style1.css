@@ -234,7 +234,7 @@ input[type="password"]:focus {
   font-size: calc(13px + 0.1vw);
   padding: 5px 20px 5px 20px;
   border-radius: 24px;
-  border: 2px solid white;
+  border: 2px solid #f88634;
   color: white;
   margin-bottom: 15px;
   background-color: #f88634;
@@ -510,6 +510,176 @@ body a {
   top:4px;
   bottom:4px;
   right:3px;
+}
+
+.h10{
+  height:10px;
+}
+
+.h12{
+  height:12px;
+}
+
+.h13{
+  height:13px;
+}
+
+.h15{
+  height:15px;
+}
+
+.h17{
+  height:17px;
+}
+
+.h18{
+  height:18px;
+}
+
+.h20{
+  height:20px;
+}
+
+.h21{
+  height:21px;
+}
+
+.h22{
+  height:22px;
+}
+
+.h23{
+  height:23px;
+}
+
+.h28{
+  height:28px;
+}
+
+.h45{
+  height:45px;
+}
+
+.h60{
+  height:60px;
+}
+
+.h100{
+  height:100px;
+}
+
+.fs10{
+  font-size: 10px;
+}
+
+.fs11{
+  font-size: 11px;
+}
+
+.fs12{
+  font-size: 12px;
+}
+
+.fs14{
+  font-size: 14px;
+}
+
+.fs20{
+  font-size: 20px;
+}
+
+.fs30{
+  font-size: 30px;
+}
+
+.fs111{
+  font-size:calc(11px + 0.1vw);
+}
+
+.fs1115{
+  font-size: calc(11px + 0.15vw)
+}
+
+.fs118{
+  font-size:calc(11px + 0.8vw);
+}
+
+.fs121{
+  font-size:calc(12px + 0.1vw);
+}
+
+.fs131{
+  font-size:calc(13px + 0.1vw);
+}
+
+.fs1501{
+  font-size:calc(15px + 1vw);
+}
+
+.fs151{
+  font-size:calc(15px + 0.1vw);
+}
+
+.fs153{
+  font-size:calc(15px + 0.3vw);
+}
+
+.under{
+  background-color:#EEEEEE; 
+  height:7px; 
+  width:100%; 
+  border-radius: 10px;
+}
+
+.uper{
+  background-color:#f88634; 
+  height:7px; 
+  border-radius: 10px;
+}
+
+.inh{
+  color: inherit;
+}
+
+.tinh{
+  text-decoration: inherit;
+}
+
+.fw400{
+  font-weight: 400;
+}
+
+.fw350{
+  font-weight: 350;
+}
+
+.fitc{
+  width:fit-content;
+}
+
+.hof{
+  height: 450px;
+  overflow-y: auto;
+}
+
+.bgy{
+  background-color:#f7f7f7;
+}
+
+.bgw{
+  background-color:white;
+}
+
+.dnone{
+  display: none;
+}
+
+.ofit{
+  object-fit: cover;
+}
+
+.w40{
+  width: 40%;
 }
 
 .textarea {

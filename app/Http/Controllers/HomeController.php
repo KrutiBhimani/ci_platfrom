@@ -10,7 +10,8 @@ use App\Models\Admin;
 use App\Models\Mission; 
 use App\Models\Mission_application; 
 use App\Models\Favourite_mission;  
-use App\Models\Mission_invite; 
+use App\Models\Mission_invite;   
+use App\Models\Timesheet; 
 use DB;  
 use Mail; 
 use Carbon\Carbon;
@@ -149,7 +150,9 @@ class HomeController extends Controller
 
             $mission_count = $missions->count();
 
-            return view('home',compact('missions','applications','favs','applies','themes','cities','countries','skills','mission_count','page','cnt'));
+            $times = Timesheet::get();
+
+            return view('home',compact('missions','applications','favs','applies','themes','cities','countries','skills','mission_count','page','cnt','times'));
         }
         return redirect('/login')->with('error', 'you are not allowed to access please try login!');
     }

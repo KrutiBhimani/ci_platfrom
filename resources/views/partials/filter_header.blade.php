@@ -236,7 +236,7 @@
             @endif
             @if(request()->skill || request()->theme || request()->city || (request()->country && request()->country!='none'))
             <button class="p-1 ps-2 pe-2 m-1" style="border:none; background-color:transparent;">
-            <a href="home" style="color:black; font-size:11px">Clear all</a>
+            <a href="/home" style="color:black; font-size:11px">Clear all</a>
             </button>
             @endif
         </div>
