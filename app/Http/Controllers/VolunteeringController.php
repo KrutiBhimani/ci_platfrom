@@ -96,7 +96,7 @@ class VolunteeringController extends Controller
         
         $times = Timesheet::get();
         
-        return view('volunteering_mission',compact('mission','applications','favs','documents','comments','comment_count','skills','rate_count','vols','medias','rateduser','rating','applies','missions','m_count','goal_achieved','goal_count','times'));
+        return view('volunteering_mission',compact('mission','applications','favs','documents','comments','comment_count','skills','rate_count','vols','medias','rating','rateduser','applies','missions','m_count','goal_achieved','goal_count','times'));
     }
 
     public function edit_rating($rating,$mission_id){

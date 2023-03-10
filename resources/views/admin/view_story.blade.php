@@ -13,7 +13,7 @@
 @endif
 <br/>
 <div class="m-3">
-    <table class="table table-borderless" style="border: 1px solid #dee2e6;">
+    <table class="table table-borderless aeb">
         <thead class="table-light border-bottom">
             <tr>
                 <td class="p-3 fs-6" scope="col">Story Detail</td>
@@ -22,20 +22,20 @@
         <tbody>
             <tr>
                 <td class="p-3 fs-6">
-                    <p class="mb-1 mt-4" style="font-size:20px;">Story Title</p>
+                    <p class="mb-1 mt-4 fs20">Story Title</p>
                     =&gt; {{ $story->story_title }}<br>
-                    <p class="mb-1 mt-4" style="font-size:20px;">Mission Title</p>
+                    <p class="mb-1 mt-4 fs20">Mission Title</p>
                     =&gt; {{ $story->title }} <br>
-                    <p class="mb-1 mt-4" style="font-size:20px;">Story Description</p>
+                    <p class="mb-1 mt-4 fs20">Story Description</p>
                     =&gt; {{ strip_tags($story->story_desc) }}<br>
-                    <p class="mb-1 mt-4" style="font-size:20px;">Story Photo</p>
+                    <p class="mb-1 mt-4 fs20">Story Photo</p>
                     @foreach ($medias as $media)
                         @if($media->type != 'video')
                             <img class="m-3" src="{{$media->path}}" height="140px" width="180px">
                         @endif
                     @endforeach
                     <br>
-                    <p class="mb-1 mt-4" style="font-size:20px;">Story Video</p>
+                    <p class="mb-1 mt-4 fs20">Story Video</p>
                     @foreach ($medias as $media)
                         @if($media->type =='video')
                             <iframe height='150px' width='300px' class='m-3' src='{{$media->path}}'></iframe>
@@ -52,14 +52,14 @@
         <div id="popup{{ $story->story_id }}" class="modal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content p-2">
-                    <div class="modal-header pb-0" style="border-bottom:0 ;">
-                        <p class="mb-0" style="font-size:20px ;">Confirm Delete </p>
-                        <img class="text-end mt-2 mb-2" src="/storage/images/cancel1.png" data-bs-dismiss="modal" style="cursor: pointer;height:13px">
+                    <div class="modal-header pb-0 border-bottom-0">
+                        <p class="mb-0 fs20">Confirm Delete </p>
+                        <img class="text-end mt-2 mb-2 pe-auto h13" src="/storage/images/cancel1.png" data-bs-dismiss="modal">
                     </div>
                     <div class="modal-body pb-0">
                         Are you sure you want to delete this item?
                     </div>
-                    <div class="modal-footer mt-3 justify-content-center" style="border-top:0 ;">
+                    <div class="modal-footer mt-3 justify-content-center border-top-0">
                         <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
                         </button>
                         <a href="/admin/delete_story/{{ $story->story_id }}" class="col-example7">Delete</a>

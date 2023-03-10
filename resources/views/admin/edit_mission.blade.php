@@ -14,7 +14,7 @@
 <br/>
 <form action="{{ route('mission.edit') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <table class="table table-borderless" style="border: 1px solid #dee2e6;">
+    <table class="table table-borderless aeb">
         <thead class="table-light border-bottom">
             <tr>
                 <td class="p-3 fs-6" scope="col">Edit</td>
@@ -24,19 +24,19 @@
             <tr>
                 <td class="p-3 fs-6">
                     <input type="hidden" class="popup" name="mission_id" value="{{$mission->mission_id}}" >
-                    <p class="mb-1" style="font-size:14px;">Title</p>
+                    <p class="mb-1 fs14">Title</p>
                     <input type="text" class="popup" name="title" value="{{$mission->title}}" >
                     @if ($errors->has('title'))
                         <span class="text-danger">{{ $errors->first('title') }}</span>
                     @endif
-                    <p class="mb-1 mt-4" style="font-size:14px;">Short Description</p>
+                    <p class="mb-1 mt-4 fs14">Short Description</p>
                     <input type="text" class="popup" name="short_description" value="{{$mission->short_description}}">
                     @if ($errors->has('short_description'))
                         <span class="text-danger">{{ $errors->first('short_description') }}</span>
                     @endif
-                    <p class="mb-1 mt-4" style="font-size:14px;">Description</p>
+                    <p class="mb-1 mt-4 fs14">Description</p>
                     <textarea rows="5" name="description" class="popup1">{{$mission->description}}</textarea>
-                    <p class="mb-1 mt-4" style="font-size:14px;">City</p>
+                    <p class="mb-1 mt-4 fs14">City</p>
                     <select class="popup pt-0 pb-0" name="city_id">
                         @foreach ($cities as $city)
                             <option value="{{ $city->city_id }}" {{$city->city_id==$mission->city_id? 'selected' : ''}}>{{ $city->name }}</option>
@@ -45,7 +45,7 @@
                     @if ($errors->has('city_id'))
                         <span class="text-danger">{{ $errors->first('city_id') }}</span>
                     @endif
-                    <p class="mb-1 mt-4" style="font-size:14px;">Country</p>
+                    <p class="mb-1 mt-4 fs14">Country</p>
                     <select class="popup pt-0 pb-0" id="selectCountries" name="country_id">
                         @foreach ($countries as $country)
                             <option value="{{ $country->country_id }}" {{$country->country_id==$mission->country_id? 'selected' : ''}}>{{ $country->name }}</option>
@@ -54,15 +54,15 @@
                     @if ($errors->has('country_id'))
                         <span class="text-danger">{{ $errors->first('country_id') }}</span>
                     @endif
-                    <p class="mb-1 mt-4" style="font-size:14px;">Organisation Name</p>
+                    <p class="mb-1 mt-4 fs14">Organisation Name</p>
                     <input type="text" class="popup" name="organization_name" value="{{$mission->organization_name}}">
-                    <p class="mb-1 mt-4" style="font-size:14px;">Organisation Detail</p>
+                    <p class="mb-1 mt-4 fs14">Organisation Detail</p>
                     <input type="text" class="popup" name="organization_detail" value="{{$mission->organization_detail}}">
-                    <p class="mb-1 mt-4" style="font-size:14px;">Start Date</p>
+                    <p class="mb-1 mt-4 fs14">Start Date</p>
                     <input type="datetime-local" step="1" class="popup" name="start_date" value="{{$mission->start_date}}">
-                    <p class="mb-1 mt-4" style="font-size:14px;">End Date</p>
+                    <p class="mb-1 mt-4 fs14">End Date</p>
                     <input type="datetime-local" step="1" class="popup" name="end_date" value="{{$mission->end_date}}">
-                    <p class="mb-1 mt-4" style="font-size:14px;">type</p>
+                    <p class="mb-1 mt-4 fs14">type</p>
                     <select class="popup pt-0 pb-0" id="selecttype" name="mission_type">
                         <option value="TIME" {{$mission->mission_type=='TIME' ? 'selected' : ''}}>TIME</option>
                         <option value="GOAL" {{$mission->mission_type=='GOAL' ? 'selected' : ''}}>GOAL</option>
@@ -82,7 +82,7 @@
                     </div>
                     
                     <div id="divResult"></div>
-                    <p class="mb-1 mt-4" style="font-size:14px;">theme</p>
+                    <p class="mb-1 mt-4 fs14">theme</p>
                     <select class="popup pt-0 pb-0" name="theme_id">
                     <option value="none" selected="" disabled="" hidden=""></option>
                         @foreach ($themes as $theme)
@@ -92,20 +92,20 @@
                     @if ($errors->has('theme_id'))
                         <span class="text-danger">{{ $errors->first('theme_id') }}</span>
                     @endif
-                    <p class="mb-1 mt-4" style="font-size:14px;">skill</p>
+                    <p class="mb-1 mt-4 fs14">skill</p>
                     <select class="popup pt-0 pb-0 h-50" name="skill_id[]" multiple="multiple" size="6">
                         @foreach ($skills as $skill)
                             <option value="{{ $skill->skill_id }}" @foreach ($selected_skills as $selected_skill) {{$selected_skill->skill_id==$skill->skill_id ? 'selected':''}}@endforeach>{{ $skill->skill_name }}</option>
                         @endforeach
                     </select>
-                    <p class="mb-1 mt-4" style="font-size:14px;">Image</p>
+                    <p class="mb-1 mt-4 fs14">Image</p>
                     <input type="file" name="media_name[]" multiple="" >
                     @if ($errors->has('media_name'))
                         <span class="text-danger">{{ $errors->first('media_name') }}</span>
                     @endif
-                    <p class="mb-1 mt-4" style="font-size:14px;">Document</p>
+                    <p class="mb-1 mt-4 fs14">Document</p>
                     <input type="file" name="document_name[]" multiple="">
-                    <p class="mb-1 mt-4" style="font-size:14px;">Availability</p>
+                    <p class="mb-1 mt-4 fs14">Availability</p>
                     <select class="popup pt-0 pb-0" name="availability">
                         <option value="none" selected="" disabled="" hidden=""></option>
                         <option value="daily" {{$mission->availability=='daily' ? 'selected' : ''}}>Daily</option>
@@ -118,10 +118,10 @@
         </tbody>
     </table>
     <div class="d-flex align-content-end justify-content-end">
-        <a class="col-example8 mt-4 mb-4 me-2" href="#" style="font-size:calc(13px + 0.1vw);">
+        <a class="col-example8 mt-4 mb-4 me-2 fs131" href="#">
         cancel
         </a>
-        <button class="col-example mt-4 mb-4" name="edit_mission" type="submit" style="font-size:calc(13px + 0.1vw);">
+        <button class="col-example mt-4 mb-4" name="edit_mission" type="submit">
         save
         </button>
     </div>

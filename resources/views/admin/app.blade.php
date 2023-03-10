@@ -21,12 +21,12 @@
     <div class="d-flex justify-content-between mt-4 mb-4">
         <form class="m-0" action="{{ route('app') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div style="border: 2px solid #dee2e6; border-radius:5px;">
+            <div class="rb">
                 <div class="input-group">
-                    <span class="input-group-text" style="background-color:transparent; border:none;">
+                    <span class="input-group-text rbc">
                     <img src="/storage/images/search.png" height="15px">
                     </span>
-                    <input type="text" name="search" value="{{ request()->input('search') }}" placeholder="search" class="form-control" style="border:none;border-radius:5px;background-color:transparent;">
+                    <input type="text" name="search" value="{{ request()->input('search') }}" placeholder="search" class="form-control rbc">
                 </div>
             </div>
         </form>
@@ -34,7 +34,7 @@
     <div class="tab-content">
         <div class="table-responsive">
             <div class="tab-pane show active" id="userc">
-                <table class="table" style="border: 1px solid #dee2e6;">
+                <table class="table aeb">
                     <thead class="table-light border-bottom">
                         <tr>
                             <td class="p-3 pe-0 fs-6" scope="col">Mission Title</td>
@@ -48,13 +48,13 @@
                     <tbody>
                         @foreach ($apps as $app)
                         <tr>
-                            <td class="p-3 pe-0" style="font-size:13px;">{{$app->title}}</td>
-                            <td class="p-3 pe-0" style="font-size:13px;">{{$app->mission_id}}</td>
-                            <td class="p-3 pe-0" style="font-size:13px;">{{$app->user_id}}</td>
-                            <td class="p-3 pe-0" style="font-size:13px;">{{ $app->first_name.' '.$app->last_name }}</td>
-                            <td class="p-3 pe-0" style="font-size:13px;">{{$app->applied_at}}</td>
-                            <td class="p-3 pe-0 p-0" style="font-size:20px;">
-                                <a href="approve_app/{{ $app->mission_application_id }}"><i class="fa fa-check-circle-o pe-2" style="color: #14c506;" aria-hidden="true"></i></a>
+                            <td class="p-3 pe-0  fs13">{{$app->title}}</td>
+                            <td class="p-3 pe-0  fs13">{{$app->mission_id}}</td>
+                            <td class="p-3 pe-0  fs13">{{$app->user_id}}</td>
+                            <td class="p-3 pe-0  fs13">{{ $app->first_name.' '.$app->last_name }}</td>
+                            <td class="p-3 pe-0  fs13">{{$app->applied_at}}</td>
+                            <td class="p-3 pe-0 p-0 fs20">
+                                <a href="approve_app/{{ $app->mission_application_id }}"><i class="fa fa-check-circle-o pe-2 gc" aria-hidden="true"></i></a>
                                 <a href="decline_app/{{ $app->mission_application_id }}"><i class="fa fa-times-circle-o text-danger" aria-hidden="true"></i></a>
                             </td>
                         </tr>

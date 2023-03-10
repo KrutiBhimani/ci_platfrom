@@ -1,5 +1,5 @@
 <div class="row h-100 p-0 m-0">
-<div class="col-md-2 d-md-none col-sm-2 col-2 ps-2 pe-2 position-relative" style="background-color: #f88634;">
+<div class="col-md-2 d-md-none col-sm-2 col-2 ps-2 pe-2 position-relative bco">
     <div class="position-sticky top-0 pt-5">
         <div class="nav flex-column nav-pills m-0">
             <a href="/admin/user" class="nav-link text-center  {{Request::is('admin/user')||Request::is('admin/add_user')||Request::is('admin/edit_user/*') ? 'active' : ''}}">
@@ -29,10 +29,10 @@
         </div>
     </div>
 </div>
-<div class="d-none col-lg-2 col-md-2 d-md-block m-0 p-0 position-relative" style="background-color: #f88634;">
+<div class="d-none col-lg-2 col-md-2 d-md-block m-0 p-0 position-relative bco">
     <div class="position-sticky top-0 pt-4">
-        <p class="p-3 mb-0" style="color:white ;">NEVIGATION</p>
-        <div class="nav flex-column nav-pills ms-4 me-4" style="font-size:14px ;">
+        <p class="p-3 mb-0 wc">NEVIGATION</p>
+        <div class="nav flex-column nav-pills ms-4 me-4 fs14">
             <a href="/admin/user" class="nav-link text-start {{Request::is('admin/user')||Request::is('admin/add_user')||Request::is('admin/edit_user/*') ? 'active' : ''}}">
             <i class="fa fa-user me-2 p-1" aria-hidden="true"></i>
             User
@@ -69,12 +69,12 @@
     </div>
 </div>
 <div class="col-lg-10 col-md-10 col-sm-10 col-10 m-0 p-0 position-relative">
-<div class="position-sticky top-0" style="z-index: 2">
+<div class="position-sticky top-0 zi2">
     <div class="d-flex justify-content-between hd ">
         <div class="p-3"> 
             {{ date('l, F d, Y, h:i A') }}
         </div>
-        <nav class="navbar navbar-expand" style="background-color:white ;">
+        <nav class="navbar navbar-expand bgw">
             <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                 <ul class="navbar-nav me-auto mb-lg-0">
                     <li class="nav-item dropdown">

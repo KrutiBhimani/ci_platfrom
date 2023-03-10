@@ -14,7 +14,7 @@
 <br/>
 <form action="{{ route('theme.edit') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <table class="table table-borderless" style="border: 1px solid #dee2e6;">
+    <table class="table table-borderless aeb">
         <thead class="table-light border-bottom">
             <tr>
                 <td class="p-3 fs-6" scope="col">Edit</td>
@@ -24,9 +24,9 @@
             <tr>
                 <td class="p-3 fs-6">
                     <input type="hidden" name="mission_theme_id" class="popup" value="{{$theme->mission_theme_id}}">
-                    <p class="mb-1" style="font-size:14px;">Title</p>
+                    <p class="mb-1 fs14">Title</p>
                     <input type="text" name="title" class="popup" value="{{$theme->title}}">
-                    <p class="mb-1 mt-4" style="font-size:14px;">Status</p>
+                    <p class="mb-1 mt-4 fs14">Status</p>
                     <select class="popup pt-0 pb-0" name="status">
                         <option value="1" {{ $theme->status==1 ? 'selected' : '' }}>Active</option>
                         <option value="0" {{ $theme->status==0 ? 'selected' : '' }}>Inactive</option>
@@ -36,10 +36,10 @@
         </tbody>
     </table>
     <div class="d-flex align-content-end justify-content-end">
-        <a class="col-example8 mt-4 mb-4 me-2" href="#" style="font-size:calc(13px + 0.1vw);">
+        <a class="col-example8 mt-4 mb-4 me-2 fs131" href="#">
             cancel
         </a>
-        <button class="col-example mt-4 mb-4" name="edit_theme" type="submit" style="font-size:calc(13px + 0.1vw);">
+        <button class="col-example mt-4 mb-4" name="edit_theme" type="submit">
             save
         </button>
     </div>
