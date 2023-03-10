@@ -16,23 +16,16 @@ class PageController extends Controller
 {
     public function page(Request $request)
     {
-        if(Auth::check()){
-            $pages = Cms_page::where('deleted_at', null)->get();
-            if ($request->get('search')) { 
-                $pages = Cms_page::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
-            }
-            return view('admin.page', compact('pages'));
+        $pages = Cms_page::where('deleted_at', null)->get();
+        if ($request->get('search')) { 
+            $pages = Cms_page::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return redirect("login")->with('error', 'are not allowed to access');
+        return view('admin.page', compact('pages'));
     }
 
     public function add_page()
     {
-        if(Auth::check()){
-            return view('admin.add_page');
-        }
-   
-        return redirect("login")->with('error', 'are not allowed to access');
+        return view('admin.add_page');
     }
 
     public function page_add(Request $request)
@@ -54,12 +47,8 @@ class PageController extends Controller
 
     public function edit_page($cms_page_id)
     {
-        if(Auth::check()){
-            $page = Cms_page::where(['cms_page_id' => $cms_page_id])->first();
-            return view('admin.edit_page',compact('page'));
-        }
-   
-        return redirect("login")->with('error', 'are not allowed to access');
+        $page = Cms_page::where(['cms_page_id' => $cms_page_id])->first();
+        return view('admin.edit_page',compact('page'));
     }
   
     public function page_edit(Request $request)
@@ -81,10 +70,7 @@ class PageController extends Controller
 
     public function delete_page($cms_page_id)
     {
-        if(Auth::check()){
-            Cms_page::where('cms_page_id', $cms_page_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
-        }
-        return redirect("admin/page")->with('message', 'Page deleted sucessfully');
+        Cms_page::where('cms_page_id', $cms_page_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
     }
     
 }

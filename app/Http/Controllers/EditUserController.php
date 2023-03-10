@@ -13,11 +13,7 @@ class EditUserController extends Controller
 {
     public function edit_user()
     {
-        if(Auth::check()){
-            return view('edit_user');
-        }
-        
-        return redirect('/login')->with('error', 'you are not allowed to access please try login!');
+        return view('edit_user');
     }
 
 }

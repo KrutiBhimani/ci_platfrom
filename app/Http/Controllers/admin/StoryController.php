@@ -18,50 +18,35 @@ class StoryController extends Controller
 {
     public function story(Request $request)
     {
-        if(Auth::check()){
-            $stories = Story::join('user', 'story.user_id', '=', 'user.user_id')->join('mission', 'story.mission_id', '=', 'mission.mission_id')->where('story.deleted_at', null)->where('story.status', 'PENDING')->get((['*','story.title AS story_title']));
-            if ($request->get('search')) { 
-                $stories = Story::join('user', 'story.user_id', '=', 'user.user_id')->join('mission', 'story.mission_id', '=', 'mission.mission_id')->where('story.title', 'LIKE', '%' . $request->get('search') . '%')->orwhere('user.first_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('user.last_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('mission.title', 'LIKE', '%' . $request->get('search') . '%')->where('story.deleted_at', null)->where('story.status', 'PENDING')->get((['*','story.title AS story_title']));
-            }
-            return view('admin.story', compact('stories'));
+        $stories = Story::join('user', 'story.user_id', '=', 'user.user_id')->join('mission', 'story.mission_id', '=', 'mission.mission_id')->where('story.deleted_at', null)->where('story.status', 'PENDING')->get((['*','story.title AS story_title']));
+        if ($request->get('search')) { 
+            $stories = Story::join('user', 'story.user_id', '=', 'user.user_id')->join('mission', 'story.mission_id', '=', 'mission.mission_id')->where('story.title', 'LIKE', '%' . $request->get('search') . '%')->orwhere('user.first_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('user.last_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('mission.title', 'LIKE', '%' . $request->get('search') . '%')->where('story.deleted_at', null)->where('story.status', 'PENDING')->get((['*','story.title AS story_title']));
         }
-   
-        return redirect("login")->with('error', 'are not allowed to access');
+        return view('admin.story', compact('stories'));
     }
 
     public function delete_story($story_id)
     {
-        if(Auth::check()){
-            Story::where('story_id', $story_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
-            return redirect("admin/story")->with('message', 'Story deleted sucessfully');
-        }
-        return redirect("login")->with('message', 'login again');
+        Story::where('story_id', $story_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
+        return redirect("admin/story")->with('message', 'Story deleted sucessfully');
     }
     
     public function approve_story($story_id)
     {
-        if(Auth::check()){
-            Story::where('story_id', $story_id)->update(['status' => 'PUBLISHED']);
-            return redirect("admin/story")->with('message', 'Story Approved');
-        }
-        return redirect("login")->with('message', 'login again');
+        Story::where('story_id', $story_id)->update(['status' => 'PUBLISHED']);
+        return redirect("admin/story")->with('message', 'Story Approved');
     }
 
     public function decline_story($story_id)
     {
-        if(Auth::check()){
-            Story::where('story_id', $story_id)->update(['status' => 'DECLINE']);
-            return redirect("admin/story")->with('message', 'Story declined');
-        }
-        return redirect("login")->with('message', 'login again');
+        Story::where('story_id', $story_id)->update(['status' => 'DECLINE']);
+        return redirect("admin/story")->with('message', 'Story declined');
     }
 
     public function view_story($story_id)
     {
-        if(Auth::check()){
-            $story = Story::join('user', 'story.user_id', '=', 'user.user_id')->join('mission', 'story.mission_id', '=', 'mission.mission_id')->where(['story_id' => $story_id])->first((['*','story.title AS story_title','story.description AS story_desc']));
-            $medias = Story_media::where(['story_id' => $story_id])->get();
-            return view('admin.view_story', compact('story','medias'));
-        }
+        $story = Story::join('user', 'story.user_id', '=', 'user.user_id')->join('mission', 'story.mission_id', '=', 'mission.mission_id')->where(['story_id' => $story_id])->first((['*','story.title AS story_title','story.description AS story_desc']));
+        $medias = Story_media::where(['story_id' => $story_id])->get();
+        return view('admin.view_story', compact('story','medias'));
     }
 }

@@ -16,23 +16,16 @@ class BannerController extends Controller
 {
     public function banner(Request $request)
     {
-        if(Auth::check()){
-            $banners = Banner::where('deleted_at', null)->get();
-            if ($request->get('search')) { 
-                $banners = Banner::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
-            }
-            return view('admin.banner', compact('banners'));
+        $banners = Banner::where('deleted_at', null)->get();
+        if ($request->get('search')) { 
+            $banners = Banner::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-   
-        return redirect("login")->with('error', 'are not allowed to access');
+        return view('admin.banner', compact('banners'));
     }
+
     public function add_banner()
     {
-        if(Auth::check()){
-            return view('admin.add_banner');
-        }
-   
-        return redirect("login")->with('error', 'are not allowed to access');
+        return view('admin.add_banner');
     }
     
     public function banner_add(Request $request)
@@ -56,12 +49,8 @@ class BannerController extends Controller
 
     public function edit_banner($banner_id)
     {
-        if(Auth::check()){
-            $banner = Banner::where(['banner_id' => $banner_id])->first();
-            return view('admin.edit_banner',compact('banner'));
-        }
-   
-        return redirect("login")->with('error', 'are not allowed to access');
+        $banner = Banner::where(['banner_id' => $banner_id])->first();
+        return view('admin.edit_banner',compact('banner'));
     }
     
     public function banner_edit(Request $request)
@@ -90,10 +79,6 @@ class BannerController extends Controller
 
     public function delete_banner($banner_id)
     {
-        if(Auth::check()){
-            Banner::where('banner_id', $banner_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
-        }
-        return redirect("admin/banner")->with('message', 'Banner deleted sucessfully');
+        Banner::where('banner_id', $banner_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
     }
-    
 }

@@ -25,27 +25,20 @@ class MissionController extends Controller
 {
     public function mission(Request $request)
     {
-        if(Auth::check()){
-            $missions = Mission::where('deleted_at', null)->get();
-            if ($request->get('search')) { 
-                $missions = Mission::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
-            }
-            return view('admin.mission', compact('missions'));
+        $missions = Mission::where('deleted_at', null)->get();
+        if ($request->get('search')) { 
+            $missions = Mission::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return redirect("login")->with('error', 'are not allowed to access');
+        return view('admin.mission', compact('missions'));
     }
     
     public function add_mission()
     {
-        if(Auth::check()){
-            $countries = Country::get();
-            $cities = City::get();
-            $themes = Mission_theme::where('deleted_at', null)->get();
-            $skills = Skill::where('deleted_at', null)->get();
-            return view('admin.add_mission',compact('countries','cities','themes','skills'));
-        }
-   
-        return redirect("login")->with('error', 'are not allowed to access');
+        $countries = Country::get();
+        $cities = City::get();
+        $themes = Mission_theme::where('deleted_at', null)->get();
+        $skills = Skill::where('deleted_at', null)->get();
+        return view('admin.add_mission',compact('countries','cities','themes','skills'));
     }
 
     public function mission_add(Request $request)
@@ -141,19 +134,15 @@ class MissionController extends Controller
 
     public function edit_mission($mission_id)
     {
-        if(Auth::check()){
-            $mission = Mission::where(['mission_id' => $mission_id])->first();
-            $countries = Country::get();
-            $cities = City::get();
-            $themes = Mission_theme::where('deleted_at', null)->get();
-            $skills = Skill::where('deleted_at', null)->get();
-            $selected_skills = Mission_skill::where(['mission_id' => $mission_id])->get();
-            $goal = Goal_mission::where(['mission_id' => $mission_id])->first();
-            $time = Time_mission::where(['mission_id' => $mission_id])->first();
-            return view('admin.edit_mission',compact('mission','countries','cities','themes','skills','goal','time','selected_skills'));
-        }
-   
-        return redirect("login")->with('error', 'are not allowed to access');
+        $mission = Mission::where(['mission_id' => $mission_id])->first();
+        $countries = Country::get();
+        $cities = City::get();
+        $themes = Mission_theme::where('deleted_at', null)->get();
+        $skills = Skill::where('deleted_at', null)->get();
+        $selected_skills = Mission_skill::where(['mission_id' => $mission_id])->get();
+        $goal = Goal_mission::where(['mission_id' => $mission_id])->first();
+        $time = Time_mission::where(['mission_id' => $mission_id])->first();
+        return view('admin.edit_mission',compact('mission','countries','cities','themes','skills','goal','time','selected_skills'));
     }
 
     public function mission_edit(Request $request)
@@ -269,9 +258,6 @@ class MissionController extends Controller
 
     public function delete_mission($mission_id)
     {
-        if(Auth::check()){
-            Mission::where('mission_id', $mission_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
-        }
-        return redirect("admin/mission")->with('message', 'Mission deleted sucessfully');
+        Mission::where('mission_id', $mission_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
     }
 }

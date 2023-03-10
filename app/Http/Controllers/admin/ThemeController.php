@@ -16,23 +16,15 @@ class ThemeController extends Controller
 {
     public function theme(Request $request)
     {
-        if(Auth::check()){
-            $themes = Mission_theme::where('deleted_at', null)->get();
-            if ($request->get('search')) { 
-                $themes = Mission_theme::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
-            }
-            return view('admin.theme', compact('themes'));
+        $themes = Mission_theme::where('deleted_at', null)->get();
+        if ($request->get('search')) { 
+            $themes = Mission_theme::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-   
-        return redirect("login")->with('error', 'are not allowed to access');
+        return view('admin.theme', compact('themes'));
     }
     public function add_theme()
     {
-        if(Auth::check()){
-            return view('admin.add_theme');
-        }
-   
-        return redirect("login")->with('error', 'are not allowed to access');
+        return view('admin.add_theme');
     }
     
     public function theme_add(Request $request)
@@ -50,12 +42,8 @@ class ThemeController extends Controller
 
     public function edit_theme($mission_theme_id)
     {
-        if(Auth::check()){
-            $theme = Mission_theme::where(['mission_theme_id' => $mission_theme_id])->first();
-            return view('admin.edit_theme',compact('theme'));
-        }
-   
-        return redirect("login")->with('error', 'are not allowed to access');
+        $theme = Mission_theme::where(['mission_theme_id' => $mission_theme_id])->first();
+        return view('admin.edit_theme',compact('theme'));
     } 
  
     public function theme_edit(Request $request)
@@ -73,10 +61,7 @@ class ThemeController extends Controller
 
     public function delete_theme($mission_theme_id)
     {
-        if(Auth::check()){
-            Mission_theme::where('mission_theme_id', $mission_theme_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
-        }
-        return redirect("admin/theme")->with('message', 'Theme deleted sucessfully');
+        Mission_theme::where('mission_theme_id', $mission_theme_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
     }
     
 }

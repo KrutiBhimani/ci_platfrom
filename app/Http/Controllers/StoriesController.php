@@ -13,11 +13,7 @@ class StoriesController extends Controller
 {
     public function story()
     {
-        if(Auth::check()){
-            return view('story');
-        }
-        
-        return redirect('/login')->with('error', 'you are not allowed to access please try login!');
+        return view('story');
     }
 
 }

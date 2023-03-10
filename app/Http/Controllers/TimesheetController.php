@@ -13,11 +13,7 @@ class TimesheetController extends Controller
 {
     public function timesheet()
     {
-        if(Auth::check()){
-            return view('timesheet');
-        }
-        
-        return redirect('/login')->with('error', 'you are not allowed to access please try login!');
+        return view('timesheet');
     }
 
 }

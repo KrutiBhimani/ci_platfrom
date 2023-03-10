@@ -13,11 +13,7 @@ class PolicyController extends Controller
 {
     public function policy()
     {
-        if(Auth::check()){
-            return view('policy');
-        }
-        
-        return redirect('/login')->with('error', 'you are not allowed to access please try login!');
+        return view('policy');
     }
 
 }

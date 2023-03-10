@@ -18,24 +18,18 @@ class UserController extends Controller
 {
     public function user(Request $request)
     {
-        if(Auth::check()){
-            $users = User::where('deleted_at', null)->orderBy('user_id','desc')->get();
-            if ($request->get('search')) { 
-                $users = User::where('first_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('last_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('email', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
-            }
-            return view('admin.user', compact('users'));
+        $users = User::where('deleted_at', null)->orderBy('user_id','desc')->get();
+        if ($request->get('search')) { 
+            $users = User::where('first_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('last_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('email', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return redirect("login")->with('error', 'are not allowed to access');
+        return view('admin.user', compact('users'));
     }
 
     public function add_user()
     {
-        if(Auth::check()){
-            $countries = Country::get();
-            $cities = City::get();
-            return view('admin.add_user',compact('countries','cities'));
-        }
-        return redirect("login")->with('error', 'are not allowed to access');
+        $countries = Country::get();
+        $cities = City::get();
+        return view('admin.add_user',compact('countries','cities'));
     }
 
     public function user_add(Request $request)
@@ -73,13 +67,10 @@ class UserController extends Controller
 
     public function edit_user($user_id)
     {
-        if(Auth::check()){
-            $user = User::where(['user_id' => $user_id])->first();
-            $countries = Country::get();
-            $cities = City::get();
-            return view('admin.edit_user',compact('countries','cities','user'));
-        }
-        return redirect("login")->with('error', 'are not allowed to access');
+        $user = User::where(['user_id' => $user_id])->first();
+        $countries = Country::get();
+        $cities = City::get();
+        return view('admin.edit_user',compact('countries','cities','user'));
     }
 
     public function user_edit(Request $request)
@@ -118,11 +109,7 @@ class UserController extends Controller
 
     public function delete_user($user_id)
     {
-        if(Auth::check()){
-
-            User::where('user_id', $user_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
-        }
-        return redirect("admin/user")->with('message', 'User deleted sucessfully');
+        User::where('user_id', $user_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
     }
     
 }

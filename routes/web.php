@@ -35,27 +35,30 @@ Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPassw
 Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ResetPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
-Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
-
-Route::post('home', [HomeController::class, 'home'])->name('home'); 
-Route::get('home', [HomeController::class, 'home']); 
-Route::get('like/{mission_id}',[HomeController::class, 'like']); 
-Route::get('unlike/{mission_id}',[HomeController::class, 'unlike']); 
-Route::get('apply/{mission_id}',[HomeController::class, 'apply']); 
-Route::post('invite-user', [HomeController::class, 'invite'])->name('invite.user'); 
-
-Route::get('volunteering_mission/{mission_id}', [VolunteeringController::class, 'volunteering_mission'])->name('volunteering_mission');
-Route::get('edit_rating/{rating}/{mission_id}',[VolunteeringController::class, 'edit_rating']); 
-Route::get('add_rating/{rating}/{mission_id}',[VolunteeringController::class, 'add_rating']);
-Route::post('add-comment', [VolunteeringController::class, 'add_comment'])->name('add.comment'); 
-
-Route::get('stories', [StoriesController::class, 'story']); 
+Route::get('logout', [LogoutController::class, 'logout'])->name('logout'); 
 Route::get('policy', [PolicyController::class, 'policy']); 
-Route::get('edit_user', [EditUserController::class, 'edit_user']); 
-Route::get('timesheet', [TimesheetController::class, 'timesheet']); 
+
+Route::middleware(['authenticate'])->group(function () {
+    Route::post('home', [HomeController::class, 'home'])->name('home'); 
+    Route::get('home', [HomeController::class, 'home']); 
+    Route::get('like/{mission_id}',[HomeController::class, 'like']); 
+    Route::get('unlike/{mission_id}',[HomeController::class, 'unlike']); 
+    Route::get('apply/{mission_id}',[HomeController::class, 'apply']); 
+    Route::post('invite-user', [HomeController::class, 'invite'])->name('invite.user'); 
+
+    Route::get('volunteering_mission/{mission_id}', [VolunteeringController::class, 'volunteering_mission'])->name('volunteering_mission');
+    Route::get('edit_rating/{rating}/{mission_id}',[VolunteeringController::class, 'edit_rating']); 
+    Route::get('add_rating/{rating}/{mission_id}',[VolunteeringController::class, 'add_rating']);
+    Route::post('add-comment', [VolunteeringController::class, 'add_comment'])->name('add.comment'); 
+
+    Route::get('stories', [StoriesController::class, 'story']);
+    Route::get('edit_user', [EditUserController::class, 'edit_user']); 
+    Route::get('timesheet', [TimesheetController::class, 'timesheet']);
+});
 
 
 // admin side
+Route::middleware(['authenticate'])->group(function () {
 Route::get('admin/user',[UserController::class, 'user'])->name('user');
 Route::get('admin/add_user',[UserController::class, 'add_user']);
 Route::get('admin/edit_user/{user_id}',[UserController::class, 'edit_user']);
@@ -115,3 +118,4 @@ Route::get('admin/app',[AppController::class, 'app'])->name('app');
 Route::post('admin/app',[AppController::class, 'app'])->name('app');
 Route::get('admin/approve_app/{mission_application_id}',[AppController::class, 'approve_app']); 
 Route::get('admin/decline_app/{mission_application_id}',[AppController::class, 'decline_app']); 
+});
