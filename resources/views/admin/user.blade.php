@@ -57,20 +57,20 @@
                             <td class="p-3 pe-0 fs13">{{ $user->email }}</td>
                             <td class="p-3 pe-0 fs13">{{ $user->employee_id }}</td>
                             <td class="p-3 pe-0 fs13">{{ $user->department }}</td>
-                            <td class="p-3 pe-0" style="font-size:13px;color: #7ed470;">{{ $user->status=='1' ? 'Active' : 'Inactive' }}</td>
+                            <td class="p-3 pe-0 fs13 text-success">{{ $user->status=='1' ? 'Active' : 'Inactive' }}</td>
                             <td class="p-3 pe-0 p-0 fs20">
-                                <a href="edit_user/{{ $user->user_id }}"><i class="fa fa-pencil-square-o" style="color: #f88634;" aria-hidden="true"></i></a>
+                                <a href="edit_user/{{ $user->user_id }}"><i class="fa fa-pencil-square-o co fs20" aria-hidden="true"></i></a>
                                 <div id="popup{{ $user->user_id }}" class="modal">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content p-2">
-                                            <div class="modal-header pb-0" style="border-bottom:0 ;">
+                                            <div class="modal-header pb-0 border-bottom-0">
                                                 <p class="mb-0 fs20">Confirm Delete </p>
                                                 <img class="text-end mt-2 mb-2 pe-auto h13" src="/storage/images/cancel1.png" data-bs-dismiss="modal">
                                             </div>
                                             <div class="modal-body pb-0">
                                                 Are you sure you want to delete this item?
                                             </div>
-                                            <div class="modal-footer mt-3 justify-content-center" style="border-top:0 ;">
+                                            <div class="modal-footer mt-3 justify-content-center border-top-0">
                                                 <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
                                                 </button>
                                                 <a href="delete_user/{{ $user->user_id }}" class="col-example7">Delete</a>
@@ -78,12 +78,43 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#popup{{ $user->user_id }}"><i class="fa fa-trash-o text-dark" aria-hidden="true"></i></a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#popup{{ $user->user_id }}"><i class="fa fa-trash-o text-dark fs20" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+                @if(request()->input('search') == '')
+                <nav aria-label="Page navigation example">
+                <ul class="pagination pager justify-content-end">
+                    @php
+                    $next = $page + 1;
+                    $previous = $page - 1;
+                    @endphp
+                    @if ($page == 1) 
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/previous.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/left.png' alt=''></a></li>
+                    @else
+                    <li class='page-item'><a class='page-link peginate' href='/admin/user?page=1'><img src='/storage/images/previous.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate' href='/admin/user?page={{$previous}}'><img src='/storage/images/left.png' alt=''></a></li>
+                    @endif
+                    @for ($i = 1; $i <= $cnt; $i++) 
+                    @if ($i == $page)
+                    <li class='page-item'><a class='page-link active text-center peginate p-0 pt-1' href='/admin/user?page={{$i}}'><b>{{$i}}</b></a></li>
+                    @else
+                    <li class='page-item'><a class='page-link text-center text-dark peginate p-0 pt-1' href='/admin/user?page={{$i}}'>{{$i}}</a></li>
+                    @endif
+                    @endfor
+                    @if ($page == $cnt) 
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/arrow.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/next.png' alt=''></a></li>
+                    @else 
+                    <li class='page-item'><a class='page-link peginate' href='/admin/user?page={{$next}}'><img src='/storage/images/arrow.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate' href='/admin/user?page={{$cnt}}'><img src='/storage/images/next.png' alt=''></a></li>
+                    @endif
+                </ul>
+            </nav>
+            @endif
             </div>
         </div>
     </div>

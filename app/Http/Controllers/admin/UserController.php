@@ -18,11 +18,19 @@ class UserController extends Controller
 {
     public function user(Request $request)
     {
-        $users = User::where('deleted_at', null)->orderBy('user_id','desc')->get();
+        $pagecount = 5;
+        if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+        } else
+          $page = 1;
+        $cnts = User::where('deleted_at', null)->orderBy('user_id','desc')->get()->count();
+        $cnt = ceil($cnts / $pagecount);
+        $users = User::where('deleted_at', null)->orderBy('user_id','desc')->paginate($pagecount);
+  
         if ($request->get('search')) { 
             $users = User::where('first_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('last_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('email', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return view('admin.user', compact('users'));
+        return view('admin.user', compact('users', 'page','cnt'));
     }
 
     public function add_user()

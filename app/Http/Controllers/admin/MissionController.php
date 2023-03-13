@@ -25,11 +25,19 @@ class MissionController extends Controller
 {
     public function mission(Request $request)
     {
-        $missions = Mission::where('deleted_at', null)->get();
+        $pagecount = 5;
+        if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+        } else
+          $page = 1;
+        $cnts = Mission::where('deleted_at', null)->get()->count();
+        $cnt = ceil($cnts / $pagecount);
+        $missions = Mission::where('deleted_at', null)->paginate($pagecount);
+  
         if ($request->get('search')) { 
             $missions = Mission::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return view('admin.mission', compact('missions'));
+        return view('admin.mission', compact('missions', 'page','cnt'));
     }
     
     public function add_mission()

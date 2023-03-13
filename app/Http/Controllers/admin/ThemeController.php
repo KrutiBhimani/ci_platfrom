@@ -16,11 +16,19 @@ class ThemeController extends Controller
 {
     public function theme(Request $request)
     {
-        $themes = Mission_theme::where('deleted_at', null)->get();
+        $pagecount = 5;
+        if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+        } else
+          $page = 1;
+        $cnts = Mission_theme::where('deleted_at', null)->get()->count();
+        $cnt = ceil($cnts / $pagecount);
+        $themes = Mission_theme::where('deleted_at', null)->paginate($pagecount);
+
         if ($request->get('search')) { 
             $themes = Mission_theme::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return view('admin.theme', compact('themes'));
+        return view('admin.theme', compact('themes', 'page','cnt'));
     }
     public function add_theme()
     {

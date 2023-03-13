@@ -54,13 +54,44 @@
                             <td class="p-3 pe-0  fs13">{{ $app->first_name.' '.$app->last_name }}</td>
                             <td class="p-3 pe-0  fs13">{{$app->applied_at}}</td>
                             <td class="p-3 pe-0 p-0 fs20">
-                                <a href="approve_app/{{ $app->mission_application_id }}"><i class="fa fa-check-circle-o pe-2 gc" aria-hidden="true"></i></a>
-                                <a href="decline_app/{{ $app->mission_application_id }}"><i class="fa fa-times-circle-o text-danger" aria-hidden="true"></i></a>
+                                <a href="approve_app/{{ $app->mission_application_id }}"><i class="fa fa-check-circle-o pe-2 gc fs20" aria-hidden="true"></i></a>
+                                <a href="decline_app/{{ $app->mission_application_id }}"><i class="fa fa-times-circle-o text-danger fs20" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+                @if(request()->input('search') == '')
+                <nav aria-label="Page navigation example">
+                <ul class="pagination pager justify-content-end">
+                    @php
+                    $next = $page + 1;
+                    $previous = $page - 1;
+                    @endphp
+                    @if ($page == 1) 
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/previous.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/left.png' alt=''></a></li>
+                    @else
+                    <li class='page-item'><a class='page-link peginate' href='/admin/app?page=1'><img src='/storage/images/previous.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate' href='/admin/app?page={{$previous}}'><img src='/storage/images/left.png' alt=''></a></li>
+                    @endif
+                    @for ($i = 1; $i <= $cnt; $i++) 
+                    @if ($i == $page)
+                    <li class='page-item'><a class='page-link active text-center peginate p-0 pt-1' href='/admin/app?page={{$i}}'><b>{{$i}}</b></a></li>
+                    @else
+                    <li class='page-item'><a class='page-link text-center text-dark peginate p-0 pt-1' href='/admin/app?page={{$i}}'>{{$i}}</a></li>
+                    @endif
+                    @endfor
+                    @if ($page == $cnt) 
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/arrow.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/next.png' alt=''></a></li>
+                    @else 
+                    <li class='page-item'><a class='page-link peginate' href='/admin/app?page={{$next}}'><img src='/storage/images/arrow.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate' href='/admin/app?page={{$cnt}}'><img src='/storage/images/next.png' alt=''></a></li>
+                    @endif
+                </ul>
+            </nav>
+            @endif
             </div>
         </div>
     </div>

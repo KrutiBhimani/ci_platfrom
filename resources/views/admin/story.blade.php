@@ -50,9 +50,9 @@
                             <td class="p-3 pe-0 fs13">{{ $story->title }}</td>
                             <td class="p-3 pe-0 p-0 fs20">
                                 <a href="view_story/{{ $story->story_id }}" class="col-example13 bgw">View</a>
-                                <a href="approve_story/{{ $story->story_id }}"><i class="fa fa-check-circle-o pe-2 gc" aria-hidden="true"></i></a>
-                                <a href="decline_story/{{ $story->story_id }}"><i class="fa fa-times-circle-o text-danger pe-2" aria-hidden="true"></i></a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#popup{{ $story->story_id }}"><i class="fa fa-trash-o text-dark" aria-hidden="true"></i></a>
+                                <a href="approve_story/{{ $story->story_id }}"><i class="fa fa-check-circle-o pe-2 gc fs20" aria-hidden="true"></i></a>
+                                <a href="decline_story/{{ $story->story_id }}"><i class="fa fa-times-circle-o text-danger pe-2 fs20" aria-hidden="true"></i></a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#popup{{ $story->story_id }}"><i class="fa fa-trash-o text-dark fs20" aria-hidden="true"></i></a>
                                 <div id="popup{{ $story->story_id }}" class="modal">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content p-2">
@@ -76,6 +76,37 @@
                         @endforeach
                     </tbody>
                 </table>
+                @if(request()->input('search') == '')
+                <nav aria-label="Page navigation example">
+                <ul class="pagination pager justify-content-end">
+                    @php
+                    $next = $page + 1;
+                    $previous = $page - 1;
+                    @endphp
+                    @if ($page == 1) 
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/previous.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/left.png' alt=''></a></li>
+                    @else
+                    <li class='page-item'><a class='page-link peginate' href='/admin/story?page=1'><img src='/storage/images/previous.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate' href='/admin/story?page={{$previous}}'><img src='/storage/images/left.png' alt=''></a></li>
+                    @endif
+                    @for ($i = 1; $i <= $cnt; $i++) 
+                    @if ($i == $page)
+                    <li class='page-item'><a class='page-link active text-center peginate p-0 pt-1' href='/admin/story?page={{$i}}'><b>{{$i}}</b></a></li>
+                    @else
+                    <li class='page-item'><a class='page-link text-center text-dark peginate p-0 pt-1' href='/admin/story?page={{$i}}'>{{$i}}</a></li>
+                    @endif
+                    @endfor
+                    @if ($page == $cnt) 
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/arrow.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/next.png' alt=''></a></li>
+                    @else 
+                    <li class='page-item'><a class='page-link peginate' href='/admin/story?page={{$next}}'><img src='/storage/images/arrow.png' alt=''></a></li>
+                    <li class='page-item'><a class='page-link peginate' href='/admin/story?page={{$cnt}}'><img src='/storage/images/next.png' alt=''></a></li>
+                    @endif
+                </ul>
+            </nav>
+            @endif
             </div>
         </div>
     </div>

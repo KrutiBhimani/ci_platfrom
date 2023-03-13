@@ -45,7 +45,7 @@
                     @endif
                     <p class="mb-1 mt-4 fs14">Avatar</p>
                     @if($user->avatar != null)
-                        <img class="m-2" style="height:50px" src="/storage/uplodes/{{$user->avatar}}">
+                        <img class="m-2 h50" src="/storage/uplodes/{{$user->avatar}}">
                     @endif
                     @if ($errors->has('avatar'))
                         <span class="text-danger">{{ $errors->first('avatar') }}</span>

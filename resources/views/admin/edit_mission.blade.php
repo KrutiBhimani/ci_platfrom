@@ -69,14 +69,14 @@
                     </select>
                     <div id='divresult1'>
                         @if($mission->mission_type=='TIME')
-                            <p class='mb-1 mt-4' style='font-size:14px;'>Total Seats</p>
+                            <p class='mb-1 mt-4 fs14'>Total Seats</p>
                             <input type='number' class='popup' name='total_seat' value="{{$time->total_seat}}">
-                            <p class='mb-1 mt-4' style='font-size:14px;'>Registration Deadline</p>
+                            <p class='mb-1 mt-4 fs14'>Registration Deadline</p>
                             <input type="datetime-local" step="1" class='popup' name='deadline' value="{{$time->deadline}}">
                         @else
-                            <p class='mb-1 mt-4' style='font-size:14px;'>Goal</p>
+                            <p class='mb-1 mt-4 fs14'>Goal</p>
                             <input type='text' class='popup' name='goal_objective_text' value="{{$goal->goal_objective_text}}">
-                            <p class='mb-1 mt-4' style='font-size:14px;'>Goal Value</p>
+                            <p class='mb-1 mt-4 fs14'>Goal Value</p>
                             <input type="number" step="1" class='popup' name='goal_value' value="{{$goal->goal_value}}">
                         @endif
                     </div>
@@ -135,10 +135,10 @@
                 selectedOptions.each(function() {
                     var val = $(this).val();
                     if (val == "TIME") {
-                        resultString += "<p class='mb-1 mt-4' style='font-size:14px;'>Total Seats</p><input type='number' class='popup' name='total_seat'><p class='mb-1 mt-4' style='font-size:14px;' >Registration Deadline</p><input type='date' class='popup' name='deadline'>";
+                        resultString += "<p class='mb-1 mt-4 fs14'>Total Seats</p><input type='number' class='popup' name='total_seat'><p class='mb-1 mt-4 fs14'>Registration Deadline</p><input type='date' class='popup' name='deadline'>";
 
                     } else
-                        resultString += "<p class='mb-1 mt-4' style='font-size:14px;'>Goal</p><input type='text' class='popup' name='goal_objective_text'><p class='mb-1 mt-4' style='font-size:14px;' >Goal Value*</p><input type='number' class='popup' name='goal_value'>";
+                        resultString += "<p class='mb-1 mt-4 fs14'>Goal</p><input type='text' class='popup' name='goal_objective_text'><p class='mb-1 mt-4 fs14'>Goal Value*</p><input type='number' class='popup' name='goal_value'>";
                     $("#divresult1").remove();
                 });
                 $('#divResult').html(resultString);

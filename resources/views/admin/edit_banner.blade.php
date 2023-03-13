@@ -31,7 +31,7 @@
                     <p class="mb-1 mt-4 fs14">Sort Order</p>
                     <input type="number" name="sort_order" class="popup" value="{{$banner->sort_order}}">
                     <p class="mb-1 mt-4 fs14">Image</p>
-                    <img class="m-2" style="height:50px" src="/storage/uplodes/{{$banner->image}}">
+                    <img class="m-2 h50" src="/storage/uplodes/{{$banner->image}}">
                     <input type="file" name="image" value="">
                 </td>
             </tr>

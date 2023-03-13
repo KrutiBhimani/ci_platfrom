@@ -16,11 +16,19 @@ class PageController extends Controller
 {
     public function page(Request $request)
     {
-        $pages = Cms_page::where('deleted_at', null)->get();
+        $pagecount = 5;
+        if (isset($_REQUEST['page'])) {
+          $pag = $_REQUEST['page'];
+        } else
+          $pag = 1;
+        $cnts = Cms_page::where('deleted_at', null)->get()->count();
+        $cnt = ceil($cnts / $pagecount);
+        $pages = Cms_page::where('deleted_at', null)->paginate($pagecount);
+
         if ($request->get('search')) { 
             $pages = Cms_page::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return view('admin.page', compact('pages'));
+        return view('admin.page', compact('pages', 'pag','cnt'));
     }
 
     public function add_page()

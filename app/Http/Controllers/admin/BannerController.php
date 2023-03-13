@@ -16,11 +16,19 @@ class BannerController extends Controller
 {
     public function banner(Request $request)
     {
-        $banners = Banner::where('deleted_at', null)->get();
+        $pagecount = 5;
+        if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+        } else
+          $page = 1;
+        $cnts = Banner::where('deleted_at', null)->get()->count();
+        $cnt = ceil($cnts / $pagecount);
+        $banners = Banner::where('deleted_at', null)->paginate($pagecount);
+  
         if ($request->get('search')) { 
             $banners = Banner::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return view('admin.banner', compact('banners'));
+        return view('admin.banner', compact('banners', 'page','cnt'));
     }
 
     public function add_banner()

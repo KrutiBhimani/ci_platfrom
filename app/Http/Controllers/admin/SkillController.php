@@ -16,11 +16,19 @@ class SkillController extends Controller
 {
     public function skill(Request $request)
     {
-        $skills = Skill::where('deleted_at', null)->get();
+        $pagecount = 5;
+        if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+        } else
+          $page = 1;
+        $cnts = Skill::where('deleted_at', null)->get()->count();
+        $cnt = ceil($cnts / $pagecount);
+        $skills = Skill::where('deleted_at', null)->paginate($pagecount);
+
         if ($request->get('search')) { 
             $skills = Skill::where('skill_name', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return view('admin.skill', compact('skills'));
+        return view('admin.skill', compact('skills', 'page','cnt'));
     }
     public function add_skill()
     {
