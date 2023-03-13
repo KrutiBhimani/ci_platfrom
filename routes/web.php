@@ -38,7 +38,7 @@ Route::post('reset-password', [ResetPasswordController::class, 'submitResetPassw
 Route::get('logout', [LogoutController::class, 'logout'])->name('logout'); 
 Route::get('policy', [PolicyController::class, 'policy']); 
 
-Route::middleware(['authenticate'])->group(function () {
+Route::middleware(['authenticate-user'])->group(function () {
     Route::post('home', [HomeController::class, 'home'])->name('home'); 
     Route::get('home', [HomeController::class, 'home']); 
     Route::get('like/{mission_id}',[HomeController::class, 'like']); 
@@ -58,7 +58,7 @@ Route::middleware(['authenticate'])->group(function () {
 
 
 // admin side
-Route::middleware(['authenticate'])->group(function () {
+Route::middleware(['authenticate-admin'])->group(function () {
 Route::get('admin/user',[UserController::class, 'user'])->name('user');
 Route::get('admin/add_user',[UserController::class, 'add_user']);
 Route::get('admin/edit_user/{user_id}',[UserController::class, 'edit_user']);
