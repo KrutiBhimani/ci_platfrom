@@ -16,6 +16,16 @@
     </div>
 </div>
 <div class="container-lg">
+@if (Session::has('message'))
+    <div class="alert alert-success mb-0 mt-3" role="alert">
+        {{ Session::get('message') }}
+    </div>
+@endif
+@if (Session::has('error'))
+    <div class="alert alert-danger mb-0 mt-3" role="alert">
+        {{ Session::get('error') }}
+    </div>
+@endif
     <div class="row row-eq-height justify-content-center mt-5">
         <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5 d-flex align-items-stretch">
             <div class="card box border-0">

@@ -17,14 +17,14 @@
             @csrf
             <div class="form-group mb-3">
                 <span class="Email">Email Address</span>
-                <input type="email" placeholder="Enter your email address..." id='email' name="email" value="{{ old('email') }}" class="Rounded-Rectangle-2 form-control" style="font-size:14px; height:40px;">
+                <input type="email" placeholder="Enter your email address..." id='email' name="email" value="{{ old('email') }}" class="Rounded-Rectangle-2 form-control fs14 h40">
                 @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
                 @endif
             </div>
             <div class="form-group mb-3">
                 <span class="Email">Password</span>
-                <input type="password" placeholder="Enter your password..." id="password" name="password" value="{{ old('password') }}" class="Rounded-Rectangle-2 form-control" style="font-size:14px; height:40px;">
+                <input type="password" placeholder="Enter your password..." id="password" name="password" value="{{ old('password') }}" class="Rounded-Rectangle-2 form-control fs14 h40">
                 @if ($errors->has('password'))
                 <span class="text-danger">{{ $errors->first('password') }}</span>
                 @endif
@@ -36,7 +36,7 @@
         </p>
         <p class="text-center lost mb-0">
             Don't have an account?
-            <a href="/registration" style="color:blue;">Create an account</a>
+            <a href="/registration" class="text-primary">Create an account</a>
         </p>
         <br><br>
     </div>

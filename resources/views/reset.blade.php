@@ -20,19 +20,18 @@
             <p class="text-center text-2">please enter new password in the fields below.</p>
             <div class="form-group mb-3">
                 <span class="Email">New password</span>
-                <input type="password" placeholder="Enter your new password..." name="password" value="{{ old('password') }}" class="Rounded-Rectangle-2 form-control" style="font-size:14px; height:40px;">
+                <input type="password" placeholder="Enter your new password..." name="password" value="{{ old('password') }}" class="Rounded-Rectangle-2 form-control fs14 h40">
                 @if ($errors->has('password'))
                 <span class="text-danger">{{ $errors->first('password') }}</span>
                 @endif
             </div>
             <div class="form-group mb-3">
                 <span class="Email">Confirm new password</span>
-                <input type="password" placeholder="Enter your new password again..." name="password_confirmation" value="{{ old('password_confirmation') }}" class="Rounded-Rectangle-2 form-control" style="font-size:14px; height:40px;">
+                <input type="password" placeholder="Enter your new password again..." name="password_confirmation" value="{{ old('password_confirmation') }}" class="Rounded-Rectangle-2 form-control fs14 h40">
                 @if ($errors->has('password_confirmation'))
                 <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                 @endif
             </div>
-            <span id="error" style="color: red;"></span>
             <button class="login" type="submit">Change Password</button>
         </form>
         <p class="text-center">

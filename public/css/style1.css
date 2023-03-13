@@ -560,6 +560,14 @@ body a {
   height:30px;
 }
 
+.h37{
+  height:37px;
+}
+
+.h40{
+  height:40px;
+}
+
 .h45{
   height:45px;
 }
@@ -574,6 +582,10 @@ body a {
 
 .h100{
   height:100px;
+}
+
+.h202{
+  height:calc(20px + 2vw);
 }
 
 .fs10{
@@ -858,6 +870,12 @@ body a {
 input[type="text"]:disabled,
 input[type="email"]:disabled {
   background-color: #ebe7e7;
+}
+
+#button2:disabled{
+ background-color: #f1f1f1;
+ border-color: #cecece;
+ color: #cecece;
 }
 
 .custom-file-upload {

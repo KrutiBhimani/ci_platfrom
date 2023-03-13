@@ -13,6 +13,7 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\EditUserController;
 use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\VolunteeringController;
+use App\Http\Controllers\ShareStoryController;
  
  
 use App\Http\Controllers\admin\UserController;
@@ -50,6 +51,9 @@ Route::middleware(['authenticate-user'])->group(function () {
     Route::get('edit_rating/{rating}/{mission_id}',[VolunteeringController::class, 'edit_rating']); 
     Route::get('add_rating/{rating}/{mission_id}',[VolunteeringController::class, 'add_rating']);
     Route::post('add-comment', [VolunteeringController::class, 'add_comment'])->name('add.comment'); 
+
+    Route::get('share_story', [ShareStoryController::class, 'share_story']);
+    Route::post('share-story', [ShareStoryController::class, 'story_share'])->name('share.story'); 
 
     Route::get('stories', [StoriesController::class, 'story']);
     Route::get('edit_user', [EditUserController::class, 'edit_user']); 
