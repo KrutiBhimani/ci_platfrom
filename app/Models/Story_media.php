@@ -15,6 +15,9 @@ class Story_media extends Authenticatable
     protected $table='story_media';
     protected $primaryKey = 'story_media_id';
     protected $fillable = [
+        'story_id',
+        'type',
+        'path',
     ];
 
 }

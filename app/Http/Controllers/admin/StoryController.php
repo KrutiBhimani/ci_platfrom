@@ -25,7 +25,7 @@ class StoryController extends Controller
           $page = 1;
         $cnts = Story::join('user', 'story.user_id', '=', 'user.user_id')->join('mission', 'story.mission_id', '=', 'mission.mission_id')->where('story.deleted_at', null)->where('story.status', 'PENDING')->get()->count();
         $cnt = ceil($cnts / $pagecount);
-        $stories = Story::select('*','story.title AS story_title')->join('user', 'story.user_id', '=', 'user.user_id')->join('mission', 'story.mission_id', '=', 'mission.mission_id')->where('story.deleted_at', null)->where('story.status', 'PENDING')->paginate($pagecount);
+        $stories = Story::select('*','story.title AS story_title')->join('user', 'story.user_id', '=', 'user.user_id')->join('mission', 'story.mission_id', '=', 'mission.mission_id')->where('story.deleted_at', null)->where('story.status', 'PENDING')->orderBy('story.story_id', 'desc')->paginate($pagecount);
   
         if ($request->get('search')) { 
             $stories = Story::join('user', 'story.user_id', '=', 'user.user_id')->join('mission', 'story.mission_id', '=', 'mission.mission_id')->where('story.title', 'LIKE', '%' . $request->get('search') . '%')->orwhere('user.first_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('user.last_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('mission.title', 'LIKE', '%' . $request->get('search') . '%')->where('story.deleted_at', null)->where('story.status', 'PENDING')->get((['*','story.title AS story_title']));

@@ -35,7 +35,7 @@
         <span class="text-danger">{{ $errors->first('description') }}</span>
         @endif
         <p class="mb-1 mt-4">Enter Video URL</p>
-        <textarea rows="2" placeholder="Enter your url" name="url" class="popup1"></textarea>
+        <textarea rows="2" placeholder="Enter your url" name="url" class="popup1">@if($story_url) @foreach($story_url as $url) {{$url->path}} @endforeach @endif</textarea>
         <script>
             $(function() {
                 // Multiple images preview in browser
@@ -63,7 +63,15 @@
         <img src="storage/images/drag-and-drop.png" class="h202"><br>
         </label>
         <input type="file" name="media_name[]" id="gallery-photo-add" onchange="readURL(this);" multiple="" class="dnone">
+        @if ($errors->has('media_name'))
+        <span class="text-danger">{{ $errors->first('media_name') }}</span>
+        @endif
         <div class="hide">
+            @if($story_media)
+                @foreach($story_media as $media)
+                    <img src="{{$media->path}}" class="hj" height = "80px" width = "80px">
+                @endforeach
+            @endif
         </div>
         <div class="gallery"></div>
         <div class="d-flex justify-content-between mt-3 mb-5">

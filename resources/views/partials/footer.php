@@ -1,11 +1,10 @@
-<footer id="footer2" class="d-flex position-relative bt">
-    <div class="position-absolute top-100 w-100">
-        <div class="container-lg pt-4 pb-3 mb-1">
-            <a href="/policy" class="Forma-1-copy-13">Privacy policy</a><br>
-            <!-- <a href="#" class="text-dark" data-bs-toggle="modal" data-bs-target="#popup22">contact us</a> -->
-        </div>
+<br/><br/><br/>
+<div class="position-absolute bottom-0 w-100 bt">
+    <div class="container-lg pt-4 pb-3 mb-1">
+        <a href="/policy" class="Forma-1-copy-13">Privacy policy</a><br>
+        <!-- <a href="#" class="text-dark" data-bs-toggle="modal" data-bs-target="#popup22">contact us</a> -->
     </div>
-</footer>
+</div>
 <div id="popup22" class="modal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-2">
