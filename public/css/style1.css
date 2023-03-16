@@ -98,7 +98,6 @@
 }
 
 .six-txt:hover {
-  font-size: 11px;
   padding: 4px 10px 4px 10px;
   border-radius: 18px;
   border: 1px solid #d9d9d9;
@@ -160,7 +159,6 @@ input[type="password"]:focus {
 }
 
 .login:hover {
-  font-size: calc(10px + 0.7vw);
   color: white;
   text-align: center;
   padding: 3px;
@@ -231,7 +229,6 @@ input[type="password"]:focus {
 }
 
 .col-example:hover {
-  font-size: calc(13px + 0.1vw);
   padding: 5px 20px 5px 20px;
   border-radius: 24px;
   border: 2px solid #f88634;
@@ -268,7 +265,6 @@ input[type="password"]:focus {
 }
 
 .col-example1:hover {
-  font-size: calc(13px + 0.1vw);
   padding: 5px 20px 5px 20px;
   border-radius: 24px;
   border: 2px solid #f88634;
@@ -285,7 +281,6 @@ input[type="password"]:focus {
 }
 
 .col-example2:hover {
-  font-size: calc(13px + 0.1vw);
   padding: 6px;
   border-radius: 24px;
   border: 2px solid gray;
@@ -312,7 +307,6 @@ input[type="password"]:focus {
 }
 
 .col-example5:hover {
-  font-size: calc(13px + 0.1vw);
   padding: 5px 15px;
   border-radius: 24px;
   border: 2px solid #e8e8e8;
@@ -373,7 +367,6 @@ input[type="password"]:focus {
 }
 
 .col-example12:hover {
-  font-size: calc(13px + 0.1vw);
   padding: 5px 20px 5px 20px;
   border-radius: 24px;
   border: 2px solid #f88634;
@@ -393,7 +386,6 @@ input[type="password"]:focus {
 }
 
 .col-example13:hover {
-  font-size: 10px;
   padding: 2px 5px;
   border-radius: 24px;
   border: 1px solid #f88634;
@@ -581,8 +573,8 @@ body a {
   height:100px;
 }
 
-.h170{
-  height:170px;
+.h190{
+  height:190px;
 }
 
 .h153{
@@ -591,6 +583,10 @@ body a {
 
 .h202{
   height:calc(20px + 2vw);
+}
+
+.h22020{
+  height: calc(200px + 15vw);
 }
 
 .fs10{
@@ -621,12 +617,28 @@ body a {
   font-size: 20px;
 }
 
+.fs25{
+  font-size: 25px;
+}
+
 .fs30{
   font-size: 30px;
 }
 
+.fs37{
+  font-size: 37px;
+}
+
+.fs1015{
+  font-size:calc(10px + 0.15vw);
+}
+
 .fs111{
   font-size:calc(11px + 0.1vw);
+}
+
+.fs112{
+  font-size:calc(11px + 0.2vw);
 }
 
 .fs1115{
@@ -647,6 +659,10 @@ body a {
 
 .fs131{
   font-size:calc(13px + 0.1vw);
+}
+
+.fs132{
+  font-size:calc(13px + 0.2vw);
 }
 
 .fs143{
@@ -1078,7 +1094,7 @@ li ol>li:before {
   .container-sm,
   .container-xl,
   .container-xxl {
-    max-width: 1120px;
+    max-width: 1220px;
   }
 }
 

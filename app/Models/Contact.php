@@ -15,6 +15,9 @@ class Contact extends Authenticatable
     protected $table='contact';
     protected $primaryKey = 'contact_id';
     protected $fillable = [
+        'subject',
+        'message',
+        'user_id',
     ];
 
 }

@@ -477,9 +477,9 @@
                     @endif
                     @for ($i = 1; $i <= $cnt; $i++) 
                     @if ($i == $page)
-                    <li class='page-item'><a class='page-link active text-center peginate' href='home?page={{$i}}'><b>{{$i}}</b></a></li>
+                    <li class='page-item'><a class='page-link active text-center peginate p-0 pt-1' href='home?page={{$i}}'><b>{{$i}}</b></a></li>
                     @else
-                    <li class='page-item'><a class='page-link text-center text-dark peginate' href='home?page={{$i}}'>{{$i}}</a></li>
+                    <li class='page-item'><a class='page-link text-center text-dark peginate p-0 pt-1' href='home?page={{$i}}'>{{$i}}</a></li>
                     @endif
                     @endfor
                     @if ($page == $cnt) 

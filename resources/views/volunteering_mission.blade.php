@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-5 pt-4">
             <p class="mb-3 fs1501">{{$mission->mission_title}}</p>
             <p class="mb-3 text-secondary fs1115">{{$mission->short_description}}</p>
             <div class="d-flex align-items-center">

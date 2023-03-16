@@ -27,187 +27,64 @@
     </div>
 @endif
     <div class="row row-eq-height justify-content-center mt-5">
+        @foreach($stories as $story)
         <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5 d-flex align-items-stretch">
             <div class="card box border-0">
                 <div class="gfg1">
-                    <img src="/storage/uplodes/Grow-Trees-On-the-path-to-environment-sustainability.png" alt="" class="img-fluid image2 w-100 h170">
+                    <img src="{{$story->path}}" alt="no image " class="img-fluid image2 w-100 h190">
                     <div class="middle1">
-                        <a href="/story_detail?key=MTdTRUNSRVRfU1RVRkY=">
+                        <a href="/story_detail/{{$story->story_id}}">
                             <div class="text1 text-center">View Detail
                                 <i class="fa fa-arrow-right pl-2"></i>
                             </div>
                         </a>
                     </div>
                     <div class="d-flex four-txt justify-content-center">
-                        <div class="bdg1">Environment</div>
+                        <div class="bdg1">{{$story->theme_title}}</div>
                     </div>
                 </div>
                 <div class="card-body remove">
-                    <h2 class="card-title mb-2 fs153">10 Users and Customer Engagement Strategies for 2019</h2>
-                    <p class="mb-3 text-secondary fs111">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+                    <h2 class="card-title mb-2 fs153">{{$story->story_title}}</h2>
+                    <p class="mb-3 text-secondary fs111">{{substr($story->story_description, 0, 99);}}...</p>
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-2 col-2">
-                            <img src="/storage/images/user1.png" class="rounded-circle" height="34px" width="34px">
+                            <img src="{{$story->avatar ? '/storage/images/'.$story->avatar : '/storage/images/user1.png'}}" class="rounded-circle" height="34px" width="34px">
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 col-8 pt-2 pb-2">
-                            <p class="mb-0 fs12">kruti patel</p>
+                            <p class="mb-0 fs12">{{$story->first_name.' '.$story->last_name}}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5 d-flex align-items-stretch">
-            <div class="card box border-0">
-                <div class="gfg1">
-                    <img src="/storage/uplodes/doctor-laptop.jpg" alt="" class="img-fluid image2 w-100 h170">
-                    <div class="middle1">
-                        <a href="story_detail?key=MThTRUNSRVRfU1RVRkY=">
-                            <div class="text1 text-center">View Detail
-                                <i class="fa fa-arrow-right pl-2"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="d-flex four-txt justify-content-center">
-                        <div class="bdg1">Children</div>
-                    </div>
-                </div>
-                <div class="card-body remove">
-                    <h2 class="card-title mb-2 fs153">Overheard in Product:Good Products, the End of Failure.</h2>
-                    <p class="mb-3 text-secondary fs111">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
-                    <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-2">
-                            <img src="/storage/uplodes/avatar-9.jpg" class="rounded-circle" height="34px" width="34px">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-8 pt-2 pb-2">
-                            <p class="mb-0 fs12">hardi bhimani</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5 d-flex align-items-stretch">
-            <div class="card box border-0">
-                <div class="gfg1">
-                    <img src="/storage/uplodes/wolgawron-169hero-service-istock.jpg" alt="" class="img-fluid image2 w-100 h170">
-                    <div class="middle1">
-                        <a href="story_detail?key=MTlTRUNSRVRfU1RVRkY=">
-                            <div class="text1 text-center">View Detail
-                                <i class="fa fa-arrow-right pl-2"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="d-flex four-txt justify-content-center">
-                        <div class="bdg1">Nutrition</div>
-                    </div>
-                </div>
-                <div class="card-body remove">
-                    <h2 class="card-title mb-2 fs153">10 Users and Customer Engagement Strategies for 2019</h2>
-                    <p class="mb-3 text-secondary fs111">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
-                    <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-2">
-                            <img src="/storage/uplodes/volunteer9.png" class="rounded-circle" height="34px" width="34px">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-8 pt-2 pb-2">
-                            <p class="mb-0 fs12">bansi patel</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5 d-flex align-items-stretch">
-            <div class="card box border-0">
-                <div class="gfg1">
-                    <img src="/storage/uplodes/javascript.jpg" alt="" class="img-fluid image2 w-100 h170">
-                    <div class="middle1">
-                        <a href="story_detail?key=MjlTRUNSRVRfU1RVRkY=">
-                            <div class="text1 text-center">View Detail
-                                <i class="fa fa-arrow-right pl-2"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="d-flex four-txt justify-content-center">
-                        <div class="bdg1">Education</div>
-                    </div>
-                </div>
-                <div class="card-body remove">
-                    <h2 class="card-title mb-2 fs153">hi</h2>
-                    <p class="mb-3 text-secondary fs111">hello I am kruti...</p>
-                    <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-2">
-                            <img src="/storage/uplodes/avatar-9.jpg" class="rounded-circle" height="34px" width="34px">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-8 pt-2 pb-2">
-                            <p class="mb-0 fs12">hardi bhimani</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5 d-flex align-items-stretch">
-            <div class="card box border-0">
-                <div class="gfg1">
-                    <img src="/storage/uplodes/cms.jpg" alt="" class="img-fluid image2 w-100 h170">
-                    <div class="middle1">
-                        <a href="story_detail?key=MzFTRUNSRVRfU1RVRkY=">
-                            <div class="text1 text-center">View Detail
-                                <i class="fa fa-arrow-right pl-2"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="d-flex four-txt justify-content-center">
-                        <div class="bdg1">Environment</div>
-                    </div>
-                </div>
-                <div class="card-body remove">
-                    <h2 class="card-title mb-2 fs153">hello</h2>
-                    <p class="mb-3 text-secondary fs111">hii...</p>
-                    <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-2">
-                            <img src="/storage/uplodes/avatar-9.jpg" class="rounded-circle" height="34px" width="34px">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-8 pt-2 pb-2">
-                            <p class="mb-0 fs12">hardi bhimani</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5 d-flex align-items-stretch">
-            <div class="card box border-0">
-                <div class="gfg1">
-                    <img src="/storage/uplodes/Angular.jpg" alt="" class="img-fluid image2 w-100 h170">
-                    <div class="middle1">
-                        <a href="story_detail?key=NDFTRUNSRVRfU1RVRkY=">
-                            <div class="text1 text-center">View Detail
-                                <i class="fa fa-arrow-right pl-2"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="d-flex four-txt justify-content-center">
-                        <div class="bdg1">Environment</div>
-                    </div>
-                </div>
-                <div class="card-body remove">
-                    <h2 class="card-title mb-2 fs153"></h2>
-                    <p class="mb-3 text-secondary fs111">bcbc...</p>
-                    <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-2">
-                            <img src="/storage/uplodes/avatar-9.jpg" class="rounded-circle" height="34px" width="34px">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-8 pt-2 pb-2">
-                            <p class="mb-0 fs12">hardi bhimani</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
         <nav aria-label="Page navigation example">
             <ul class="pagination pager justify-content-center">
-                <li class="page-item"><a class="page-link" style="border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;"><img src="/storage/images/previous.png" alt=""></a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;"><img src="/storage/images/left.png" alt=""></a></li>
-                <li class="page-item"><a class="page-link active text-center" href="stories?page=1" style="border-radius:5px; padding:5px; height:30px; width:30px; margin:4px; font-size:15px;"><b>1</b></a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;"><img src="/storage/images/arrow.png" alt=""></a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:5px; padding:9px; height:30px; width:30px; margin:4px;"><img src="/storage/images/next.png" alt=""></a></li>
+                @php
+                $next = $page + 1;
+                $previous = $page - 1;
+                @endphp
+                @if ($page == 1) 
+                <li class='page-item'><a class='page-link peginate'><img src='/storage/images/previous.png' alt=''></a></li>
+                <li class='page-item'><a class='page-link peginate'><img src='/storage/images/left.png' alt=''></a></li>
+                @else
+                <li class='page-item'><a class='page-link peginate' href='stories?page=1'><img src='/storage/images/previous.png' alt=''></a></li>
+                <li class='page-item'><a class='page-link peginate' href='stories?page={{$previous}}'><img src='/storage/images/left.png' alt=''></a></li>
+                @endif
+                @for ($i = 1; $i <= $cnt; $i++) 
+                @if ($i == $page)
+                <li class='page-item'><a class='page-link active text-center peginate p-0 pt-1' href='stories?page={{$i}}'><b>{{$i}}</b></a></li>
+                @else
+                <li class='page-item'><a class='page-link text-center text-dark peginate p-0 pt-1' href='stories?page={{$i}}'>{{$i}}</a></li>
+                @endif
+                @endfor
+                @if ($page == $cnt) 
+                <li class='page-item'><a class='page-link peginate'><img src='/storage/images/arrow.png' alt=''></a></li>
+                <li class='page-item'><a class='page-link peginate'><img src='/storage/images/next.png' alt=''></a></li>
+                @else 
+                <li class='page-item'><a class='page-link peginate' href='stories?page={{$next}}'><img src='/storage/images/arrow.png' alt=''></a></li>
+                <li class='page-item'><a class='page-link peginate' href='stories?page={{$cnt}}'><img src='/storage/images/next.png' alt=''></a></li>
+                @endif
             </ul>
         </nav>
     </div>

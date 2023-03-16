@@ -89,7 +89,7 @@ class ShareStoryController extends Controller
                 $links_array = explode("\n", $request->url);
                 foreach ($links_array as $url) {
                     Story_media::insert([
-                        'story_id' => $story->story_id,
+                        'story_id' => $story_id,
                         'type' => $url->extension(),
                         'path' => $url,
                     ]);
@@ -107,6 +107,6 @@ class ShareStoryController extends Controller
                 }
             }
             return redirect('/stories')->with('message', 'Story saved as draft');
-            }
+        }
     }
 }
