@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
  
 class PolicyController extends Controller
 {
-    public function policy()
+    public function index()
     {
         return view('policy');
     }

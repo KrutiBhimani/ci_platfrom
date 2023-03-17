@@ -96,7 +96,7 @@
         </div>
     </div>
 </form>
-<form id="selectSort1" action="{{ route('home') }}" method="POST" class="mb-0" enctype="multipart/form-data">
+<form class="m-0" id="selectSort1" action="{{ route('home.index') }}" method="PUT" enctype="multipart/form-data">
     @csrf
     <div class="border-sm-block" style="border-bottom:2px solid rgb(225, 225, 225)">
         <div class="container-lg">

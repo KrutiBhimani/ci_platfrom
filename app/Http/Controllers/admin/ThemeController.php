@@ -5,16 +5,15 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Hash;
-use Session;
 use App\Models\User;
 use App\Models\Admin;
 use Carbon\Carbon;
 use App\Models\Mission_theme;
-use Illuminate\Support\Facades\Auth;
+use Auth;
  
 class ThemeController extends Controller
 {
-    public function theme(Request $request)
+    public function index(Request $request)
     {
         $pagecount = 5;
         if (isset($_REQUEST['page'])) {
@@ -30,12 +29,12 @@ class ThemeController extends Controller
         }
         return view('admin.theme', compact('themes', 'page','cnt'));
     }
-    public function add_theme()
+    public function create()
     {
         return view('admin.add_theme');
     }
     
-    public function theme_add(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'title' => 'required'
@@ -48,13 +47,13 @@ class ThemeController extends Controller
         return redirect("admin/theme")->with('message', 'New theme added sucessfully');
     }
 
-    public function edit_theme($mission_theme_id)
+    public function edit($mission_theme_id)
     {
         $theme = Mission_theme::where(['mission_theme_id' => $mission_theme_id])->first();
         return view('admin.edit_theme',compact('theme'));
     } 
  
-    public function theme_edit(Request $request)
+    public function update(Request $request, $mission_theme_id)
     {
         $request->validate([
             'title' => 'required'
@@ -63,13 +62,14 @@ class ThemeController extends Controller
             "title" => $request->get('title'),
             "status" => $request->get('status')
         ];
-        Mission_theme::where('mission_theme_id', $request->get('mission_theme_id'))->update($theme);
+        Mission_theme::where('mission_theme_id', $mission_theme_id)->update($theme);
         return redirect("admin/theme")->with('message', 'theme updated sucessfully');
     }
 
-    public function delete_theme($mission_theme_id)
+    public function destroy($mission_theme_id)
     {
         Mission_theme::where('mission_theme_id', $mission_theme_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
+        return redirect("admin/theme")->with('message', 'Theme deleted sucessfully');
     }
     
 }

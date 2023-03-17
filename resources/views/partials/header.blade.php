@@ -63,8 +63,8 @@
                 <p class="mb-0 fs20">contact Us</p>
                 <img class="text-end mt-2 mb-2 pe-auto h13" src="/storage/images/cancel1.png" data-bs-dismiss="modal">
             </div>
-            <form action="" method="POST" enctype="multipart/form-data">
-            @csrf
+            <form action="{{ route('contact.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="modal-body pb-0">
                     <p class="mb-1">Name*</p>
                     <input type="text" class="popup" name="" value="{{Auth::user()->first_name.' '.Auth::user()->last_name}}" disabled>
@@ -72,8 +72,14 @@
                     <input type="email" class="popup" name="" value="{{Auth::user()->email}}" disabled>
                     <p class="mb-1 mt-3">Subject*</p>
                     <input type="text" class="popup" name="subject" placeholder="Enter your subject">
+                    @if ($errors->has('subject'))
+                        <span class="text-danger">{{ $errors->first('subject') }}</span>
+                    @endif
                     <p class="mb-1 mt-3">Message*</p>
                     <textarea class="popup1" rows="4" name="message" placeholder="Enter your message"></textarea>
+                    @if ($errors->has('message'))
+                        <span class="text-danger">{{ $errors->first('message') }}</span>
+                    @endif
                 </div>
                 <div class="modal-footer border-top-0">
                     <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle

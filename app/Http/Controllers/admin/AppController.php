@@ -5,16 +5,15 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Hash;
-use Session;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Mission;
 use App\Models\Mission_application;
-use Illuminate\Support\Facades\Auth;
+use Auth;
  
 class AppController extends Controller
 {
-    public function app(Request $request)
+    public function index(Request $request)
     {
         $pagecount = 5;
         if (isset($_REQUEST['page'])) {

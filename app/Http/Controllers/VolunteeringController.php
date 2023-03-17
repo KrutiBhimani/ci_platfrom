@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
  
 class VolunteeringController extends Controller
 {
-    public function volunteering_mission($mission_id)
+    public function show($mission_id)
     {
         $mission = Mission::select('*','mission.title AS mission_title','mission.mission_id as missionid','country.name as country_name', DB::raw('ROUND(AVG(mission_rating.rating)) as rating'))
         ->leftJoin('mission_theme', 'mission.theme_id', '=', 'mission_theme.mission_theme_id')
@@ -99,12 +99,14 @@ class VolunteeringController extends Controller
         return view('volunteering_mission',compact('mission','applications','favs','documents','comments','comment_count','skills','rate_count','vols','medias','rating','rateduser','applies','missions','m_count','goal_achieved','goal_count','times'));
     }
 
-    public function edit_rating($rating,$mission_id){
+    public function edit_rating($rating,$mission_id)
+    {
         Mission_rating::where('mission_id', $mission_id)->where('user_id', Auth::user()->user_id)->update(['rating' => $rating]);
         return back()->with('message', 'Rating updated');
     }
 
-    public function add_rating($rating,$mission_id){
+    public function add_rating($rating,$mission_id)
+    {
         Mission_rating::insert([
             'mission_id' => $mission_id, 
             'user_id' => Auth::user()->user_id, 
@@ -113,7 +115,8 @@ class VolunteeringController extends Controller
         return back()->with('message', 'Rating inserted');
     }
 
-    public function add_comment(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'comment_text' => 'required'
         ]);

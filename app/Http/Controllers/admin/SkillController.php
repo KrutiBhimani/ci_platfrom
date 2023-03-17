@@ -5,16 +5,15 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Hash;
-use Session;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Skill;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Auth;
  
 class SkillController extends Controller
 {
-    public function skill(Request $request)
+    public function index(Request $request)
     {
         $pagecount = 5;
         if (isset($_REQUEST['page'])) {
@@ -30,12 +29,12 @@ class SkillController extends Controller
         }
         return view('admin.skill', compact('skills', 'page','cnt'));
     }
-    public function add_skill()
+    public function create()
     {
         return view('admin.add_skill');
     } 
     
-    public function skill_add(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'skill_name' => 'required'
@@ -48,13 +47,13 @@ class SkillController extends Controller
         return redirect("admin/skill")->with('message', 'New skill added sucessfully');
     }
 
-    public function edit_skill($skill_id)
+    public function edit($skill_id)
     {
         $skill = Skill::where(['skill_id' => $skill_id])->first();
         return view('admin.edit_skill',compact('skill'));
     } 
  
-    public function skill_edit(Request $request)
+    public function update(Request $request, $skill_id)
     {
         $request->validate([
             'skill_name' => 'required'
@@ -63,13 +62,14 @@ class SkillController extends Controller
             "skill_name" => $request->get('skill_name'),
             "status" => $request->get('status')
         ];
-        Skill::where('skill_id', $request->get('skill_id'))->update($skill);
+        Skill::where('skill_id', $skill_id)->update($skill);
         return redirect("admin/skill")->with('message', 'skill updated sucessfully');
     }
 
-    public function delete_skill($skill_id)
+    public function destroy($skill_id)
     {
         Skill::where('skill_id', $skill_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
+        return redirect("admin/skill")->with('message', 'Skill deleted sucessfully');
     }
     
 }

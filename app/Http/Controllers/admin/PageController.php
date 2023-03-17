@@ -5,16 +5,15 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Hash;
-use Session;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Cms_page;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Auth;
  
 class PageController extends Controller
 {
-    public function page(Request $request)
+    public function index(Request $request)
     {
         $pagecount = 5;
         if (isset($_REQUEST['page'])) {
@@ -31,12 +30,12 @@ class PageController extends Controller
         return view('admin.page', compact('pages', 'pag','cnt'));
     }
 
-    public function add_page()
+    public function create()
     {
         return view('admin.add_page');
     }
 
-    public function page_add(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
@@ -53,13 +52,13 @@ class PageController extends Controller
         return redirect("admin/page")->with('message', 'New page added sucessfully');
     }
 
-    public function edit_page($cms_page_id)
+    public function edit($cms_page_id)
     {
         $page = Cms_page::where(['cms_page_id' => $cms_page_id])->first();
         return view('admin.edit_page',compact('page'));
     }
   
-    public function page_edit(Request $request)
+    public function update(Request $request, $cms_page_id)
     {
         $request->validate([
             'title' => 'required',
@@ -72,13 +71,14 @@ class PageController extends Controller
             "slug" => $request->get('slug'),
             "status" => $request->get('status')
         ];
-        Cms_page::where('cms_page_id', $request->get('cms_page_id'))->update($page);
+        Cms_page::where('cms_page_id', $cms_page_id)->update($page);
         return redirect("admin/page")->with('message', 'page updated sucessfully');
     }
 
-    public function delete_page($cms_page_id)
+    public function destroy($cms_page_id)
     {
         Cms_page::where('cms_page_id', $cms_page_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
+        return redirect("admin/page")->with('message', 'Page deleted sucessfully');
     }
     
 }

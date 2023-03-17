@@ -11,7 +11,7 @@ use App\Models\Admin;
 class LogoutController extends Controller
 {
 
-    public function logout()
+    public function index()
     {
         Session::flush();
 

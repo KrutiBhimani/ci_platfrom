@@ -5,16 +5,15 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Hash;
-use Session;
 use App\Models\User;
 use App\Models\Admin;
 use Carbon\Carbon;
 use App\Models\Banner;
-use Illuminate\Support\Facades\Auth;
+use Auth;
  
 class BannerController extends Controller
 {
-    public function banner(Request $request)
+    public function index(Request $request)
     {
         $pagecount = 5;
         if (isset($_REQUEST['page'])) {
@@ -31,12 +30,12 @@ class BannerController extends Controller
         return view('admin.banner', compact('banners', 'page','cnt'));
     }
 
-    public function add_banner()
+    public function create()
     {
         return view('admin.add_banner');
     }
     
-    public function banner_add(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
@@ -55,13 +54,13 @@ class BannerController extends Controller
         return redirect("admin/banner")->with('message', 'New banner added sucessfully');
     }
 
-    public function edit_banner($banner_id)
+    public function edit($banner_id)
     {
         $banner = Banner::where(['banner_id' => $banner_id])->first();
         return view('admin.edit_banner',compact('banner'));
     }
     
-    public function banner_edit(Request $request)
+    public function update(Request $request, $banner_id)
     {
         $request->validate([
             'title' => 'required',
@@ -69,7 +68,7 @@ class BannerController extends Controller
             'sort_order' => 'required',
             'image' => 'mimes:jpeg,bmp,png'
         ]);
-        $banner = Banner::where(['banner_id' => $request->get('banner_id')])->first();
+        $banner = Banner::where('banner_id', $banner_id)->first();
         $image = $banner->image;
         if($request->hasFile('image')){ 
             $image = $request->image->hashName();
@@ -81,12 +80,13 @@ class BannerController extends Controller
             "sort_order" => $request->get('sort_order'),
             "image" => $image,
         ];
-        Banner::where('banner_id', $request->get('banner_id'))->update($banner);
+        Banner::where('banner_id', $banner_id)->update($banner);
         return redirect("admin/banner")->with('message', 'Banner updated sucessfully');
     }
 
-    public function delete_banner($banner_id)
+    public function destroy($banner_id)
     {
         Banner::where('banner_id', $banner_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
+        return redirect("admin/banner")->with('message', 'Banner deleted sucessfully');
     }
 }

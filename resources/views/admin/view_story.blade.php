@@ -60,9 +60,13 @@
                         Are you sure you want to delete this item?
                     </div>
                     <div class="modal-footer mt-3 justify-content-center border-top-0">
-                        <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
-                        </button>
-                        <a href="/admin/delete_story/{{ $story->story_id }}" class="col-example7">Delete</a>
+                        <form action="{{route('story.destroy',$story->story_id)}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
+                            </button>
+                            <input type="submit" class="col-example7" Value="Delete">
+                        </form>
                     </div>
                 </div>
             </div>

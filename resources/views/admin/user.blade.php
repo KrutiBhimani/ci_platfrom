@@ -18,7 +18,7 @@
         </li>
     </ul>
     <div class="d-flex justify-content-between mt-4 mb-4">
-        <form class="m-0" action="{{ route('user') }}" method="POST" enctype="multipart/form-data">
+        <form class="m-0" action="{{ route('user.index') }}" method="PUT" enctype="multipart/form-data">
         @csrf
             <div class="rb">
                 <div class="input-group">
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </form>
-        <a class="col-example1 pt7 fs1215" href="add_user">
+        <a class="col-example1 pt7 fs1215" href="/admin/user/create">
         <i class="fa fa-plus me-2" aria-hidden="true"></i>
         Add
         </a>
@@ -59,7 +59,7 @@
                             <td class="p-3 pe-0 fs13">{{ $user->department }}</td>
                             <td class="p-3 pe-0 fs13 text-success">{{ $user->status=='1' ? 'Active' : 'Inactive' }}</td>
                             <td class="p-3 pe-0 p-0 fs20">
-                                <a href="edit_user/{{ $user->user_id }}"><i class="fa fa-pencil-square-o co fs20" aria-hidden="true"></i></a>
+                                <a href="/admin/user/{{ $user->user_id }}/edit"><i class="fa fa-pencil-square-o co fs20" aria-hidden="true"></i></a>
                                 <div id="popup{{ $user->user_id }}" class="modal">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content p-2">
@@ -71,9 +71,13 @@
                                                 Are you sure you want to delete this item?
                                             </div>
                                             <div class="modal-footer mt-3 justify-content-center border-top-0">
+                                            <form action="{{route('user.destroy',$user->user_id)}}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('DELETE')
                                                 <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
                                                 </button>
-                                                <a href="delete_user/{{ $user->user_id }}" class="col-example7">Delete</a>
+                                                <input type="submit" class="col-example7" Value="Delete">
+                                            </form>
                                             </div>
                                         </div>
                                     </div>

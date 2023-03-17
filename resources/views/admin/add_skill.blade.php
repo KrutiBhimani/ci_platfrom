@@ -12,7 +12,7 @@
     </div>
 @endif
 <br/>
-<form action="{{ route('skill.add') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('skill.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <table class="table table-borderless aeb">
         <thead class="table-light border-bottom">

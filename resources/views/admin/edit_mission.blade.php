@@ -12,8 +12,9 @@
     </div>
 @endif
 <br/>
-<form action="{{ route('mission.edit') }}" method="POST" enctype="multipart/form-data">
+<form action="{{route('mission.update',$mission->mission_id)}}" method="POST" enctype="multipart/form-data">
     @csrf
+    @method('PUT')
     <table class="table table-borderless aeb">
         <thead class="table-light border-bottom">
             <tr>
@@ -23,7 +24,6 @@
         <tbody>
             <tr>
                 <td class="p-3 fs-6">
-                    <input type="hidden" class="popup" name="mission_id" value="{{$mission->mission_id}}" >
                     <p class="mb-1 fs14">Title</p>
                     <input type="text" class="popup" name="title" value="{{$mission->title}}" >
                     @if ($errors->has('title'))

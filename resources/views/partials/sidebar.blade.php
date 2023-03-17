@@ -2,28 +2,28 @@
 <div class="col-md-2 d-md-none col-sm-2 col-2 ps-2 pe-2 position-relative bco">
     <div class="position-sticky top-0 pt-5">
         <div class="nav flex-column nav-pills m-0">
-            <a href="/admin/user" class="nav-link text-center  {{Request::is('admin/user')||Request::is('admin/add_user')||Request::is('admin/edit_user/*') ? 'active' : ''}}">
+            <a href="/admin/user" class="nav-link text-center  {{Request::is('admin/user')||Request::is('admin/user/create')||Request::is('admin/user/*/edit') ? 'active' : ''}}">
             <i class="fa fa-user me-2 p-1" aria-hidden="true"></i>
             </a>
-            <a href="/admin/page" class="nav-link text-center {{Request::is('admin/page')||Request::is('admin/add_page')||Request::is('admin/edit_page/*') ? 'active' : ''}}">
+            <a href="/admin/page" class="nav-link text-center {{Request::is('admin/page')||Request::is('admin/page/create')||Request::is('admin/page/*/edit') ? 'active' : ''}}">
             <i class="fa fa-file-text me-2 p-1" aria-hidden="true"></i>
             </a>
-            <a href="/admin/mission" class="nav-link text-center {{Request::is('admin/mission')||Request::is('admin/add_mission')||Request::is('admin/edit_mission/*') ? 'active' : ''}}">
+            <a href="/admin/mission" class="nav-link text-center {{Request::is('admin/mission')||Request::is('admin/mission/create')||Request::is('admin/mission/*/edit') ? 'active' : ''}}">
             <i class="fa fa-bullseye me-2 p-1" aria-hidden="true"></i>
             </a>
-            <a href="/admin/theme" class="nav-link text-center {{Request::is('admin/theme')||Request::is('admin/add_theme')||Request::is('admin/edit_theme/*') ? 'active' : ''}}">
+            <a href="/admin/theme" class="nav-link text-center {{Request::is('admin/theme')||Request::is('admin/theme/create')||Request::is('admin/theme/*/edit') ? 'active' : ''}}">
             <i class="fa fa-object-ungroup me-2 p-1" aria-hidden="true"></i>
             </a>
-            <a href="/admin/skill" class="nav-link text-center {{Request::is('admin/skill')||Request::is('admin/add_skill')||Request::is('admin/edit_skill/*') ? 'active' : ''}}">
+            <a href="/admin/skill" class="nav-link text-center {{Request::is('admin/skill')||Request::is('admin/skill/create')||Request::is('admin/skill/*/edit') ? 'active' : ''}}">
             <i class="fa fa-pencil-square-o me-2 p-1" aria-hidden="true"></i>
             </a>
             <a href="/admin/app" class="nav-link text-center {{Request::is('admin/app') ? 'active' : ''}}">
             <i class="fa fa-folder me-2 p-1" aria-hidden="true"></i>
             </a>
-            <a href="/admin/story" class="nav-link text-center {{Request::is('admin/story')||Request::is('admin/view_story/*') ? 'active' : ''}}">
+            <a href="/admin/story" class="nav-link text-center {{Request::is('admin/story')||Request::is('admin/story/*') ? 'active' : ''}}">
             <i class="fa fa-book  me-2 p-1" aria-hidden="true"></i>
             </a>
-            <a href="/admin/banner" class="nav-link text-center {{Request::is('admin/banner')||Request::is('admin/add_banner')||Request::is('admin/edit_banner/*') ? 'active' : ''}}">
+            <a href="/admin/banner" class="nav-link text-center {{Request::is('admin/banner')||Request::is('admin/banner/create')||Request::is('admin/banner/*/edit') ? 'active' : ''}}">
             <i class="fa fa-map-signs me-2 p-1" aria-hidden="true"></i>
             </a>
         </div>
@@ -33,23 +33,23 @@
     <div class="position-sticky top-0 pt-4">
         <p class="p-3 mb-0 wc">NEVIGATION</p>
         <div class="nav flex-column nav-pills ms-4 me-4 fs14">
-            <a href="/admin/user" class="nav-link text-start {{Request::is('admin/user')||Request::is('admin/add_user')||Request::is('admin/edit_user/*') ? 'active' : ''}}">
+            <a href="/admin/user" class="nav-link text-start {{Request::is('admin/user')||Request::is('admin/user/create')||Request::is('admin/user/*/edit') ? 'active' : ''}}">
             <i class="fa fa-user me-2 p-1" aria-hidden="true"></i>
             User
             </a>
-            <a href="/admin/page" class="nav-link text-start {{Request::is('admin/page')||Request::is('admin/add_page')||Request::is('admin/edit_page/*') ? 'active' : ''}}">
+            <a href="/admin/page" class="nav-link text-start {{Request::is('admin/page')||Request::is('admin/page/create')||Request::is('admin/page/*/edit') ? 'active' : ''}}">
             <i class="fa fa-file-text me-2 p-1" aria-hidden="true"></i>
             CMS Page
             </a>
-            <a href="/admin/mission" class="nav-link text-start {{Request::is('admin/mission')||Request::is('admin/add_mission')||Request::is('admin/edit_mission/*') ? 'active' : ''}}">
+            <a href="/admin/mission" class="nav-link text-start {{Request::is('admin/mission')||Request::is('admin/mission/create')||Request::is('admin/mission/*/edit') ? 'active' : ''}}">
             <i class="fa fa-bullseye me-2 p-1" aria-hidden="true"></i>
             Mission
             </a>
-            <a href="/admin/theme" class="nav-link text-start {{Request::is('admin/theme')||Request::is('admin/add_theme')||Request::is('admin/edit_theme/*') ? 'active' : ''}}">
+            <a href="/admin/theme" class="nav-link text-start {{Request::is('admin/theme')||Request::is('admin/theme/create')||Request::is('admin/theme/*/edit') ? 'active' : ''}}">
             <i class="fa fa-object-ungroup me-2 p-1" aria-hidden="true"></i>
             Mission Theme
             </a>
-            <a href="/admin/skill" class="nav-link text-start {{Request::is('admin/skill')||Request::is('admin/add_skill')||Request::is('admin/edit_skill/*') ? 'active' : ''}}">
+            <a href="/admin/skill" class="nav-link text-start {{Request::is('admin/skill')||Request::is('admin/skill/create')||Request::is('admin/skill/*/edit') ? 'active' : ''}}">
             <i class="fa fa-pencil-square-o me-2 p-1" aria-hidden="true"></i>
             Mission Skill
             </a>
@@ -57,11 +57,11 @@
             <i class="fa fa-folder me-2 p-1" aria-hidden="true"></i>
             Mission Application
             </a>
-            <a href="/admin/story" class="nav-link text-start {{Request::is('admin/story')||Request::is('admin/view_story/*') ? 'active' : ''}}">
+            <a href="/admin/story" class="nav-link text-start {{Request::is('admin/story')||Request::is('admin/story/*') ? 'active' : ''}}">
             <i class="fa fa-book  me-2 p-1" aria-hidden="true"></i>
             Story
             </a>
-            <a href="/admin/banner" class="nav-link text-start {{Request::is('admin/banner')||Request::is('admin/add_banner')||Request::is('admin/edit_banner/*') ? 'active' : ''}}">
+            <a href="/admin/banner" class="nav-link text-start {{Request::is('admin/banner')||Request::is('admin/banner/create')||Request::is('admin/banner/*/edit') ? 'active' : ''}}">
             <i class="fa fa-map-signs me-2 p-1" aria-hidden="true"></i>
             Banner Management
             </a>

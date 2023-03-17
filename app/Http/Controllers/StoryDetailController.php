@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class StoryDetailController extends Controller
 {
-    public function story_detail($story_id)
+    public function show($story_id)
     {
         return view('story_detail');
     }

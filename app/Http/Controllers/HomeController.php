@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
  
 class HomeController extends Controller
 {
-    public function home(Request $request)
+    public function index(Request $request)
     {
         $applications = Mission::select('*','mission.mission_id as missionid', DB::raw('COUNT(mission_application.mission_id) as count'))
         ->leftJoin('mission_application', 'mission.mission_id', '=', 'mission_application.mission_id')
@@ -150,7 +150,8 @@ class HomeController extends Controller
         
     }
 
-    public function like($mission_id){
+    public function like($mission_id)
+    {
         Favourite_mission::insert([
             "mission_id" => $mission_id,
             "user_id" => Auth::user()->user_id,
@@ -158,12 +159,13 @@ class HomeController extends Controller
         return back()->with('message', 'Mission Liked');
     }
 
-    public function unlike($mission_id){
+    public function unlike($mission_id)
+    {
         Favourite_mission::where(['mission_id' => $mission_id , 'user_id'=> Auth::user()->user_id])->delete();
         return back()->with('message', 'Mission Disliked');
     }
 
-    public function invite(Request $request)
+    public function store(Request $request) //invite
     {
         $user_id = User::where('email',$request->email)->first()->user_id;
         $title = Mission::where('mission_id', $request->mission_id)->first()->title;
@@ -179,7 +181,8 @@ class HomeController extends Controller
         return back()->with('message', 'We have sended invite request!');
     }
 
-    public function apply($mission_id){
+    public function edit($mission_id) //apply
+    {
         Mission_application::insert([
             "mission_id" => $mission_id,
             "user_id" => Auth::user()->user_id,

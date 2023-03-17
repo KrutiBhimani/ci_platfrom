@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
  
 class TimesheetController extends Controller
 {
-    public function timesheet()
+    public function index()
     {
         return view('timesheet');
     }

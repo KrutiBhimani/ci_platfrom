@@ -19,7 +19,7 @@
         </li>
     </ul>
     <div class="d-flex justify-content-between mt-4 mb-4">
-        <form class="m-0" action="{{ route('app') }}" method="POST" enctype="multipart/form-data">
+        <form class="m-0" action="{{ route('app.index') }}" method="PUT" enctype="multipart/form-data">
             @csrf
             <div class="rb">
                 <div class="input-group">

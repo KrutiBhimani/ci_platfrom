@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class ShareStoryController extends Controller
 {
-    public function share_story()
+    public function index()
     {
         $missions = Mission_application::leftJoin('mission', 'mission.mission_id', '=', 'mission_application.mission_id')
         ->where('user_id', Auth::user()->user_id)->where('approval_status', 'APPROVE')->get();
@@ -26,7 +26,8 @@ class ShareStoryController extends Controller
         return view('share_story',compact('missions','story','story_media','story_url'));
     }
 
-    public function story_share(Request $request){
+    public function store(Request $request)
+    {
         $story = Story::where('user_id',Auth::user()->user_id)->where('status', 'DRAFT')->first();
         $request->validate([
             'mission_id' => 'required',

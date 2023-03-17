@@ -14,14 +14,14 @@ use Illuminate\Support\Str;
 class ForgotPasswordController extends Controller
 {
 
-    public function showForgetPasswordForm()
+    public function index()
     {
         $banners = Banner::where('deleted_at', null)->orderBy('sort_order','asc')->get();
         return view('forgot', compact('banners'));
     }
   
 
-    public function submitForgetPasswordForm(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'email' => 'required|email|exists:user',

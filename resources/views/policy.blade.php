@@ -69,7 +69,7 @@
                     <ol class="mb-3 gray">
                         <li>
                             <p class="mb-2">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain.</p>
-                            <ol class="under">
+                            <ol>
                                 <li>
                                     <p class="mb-2">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled.</p>
                                 </li>

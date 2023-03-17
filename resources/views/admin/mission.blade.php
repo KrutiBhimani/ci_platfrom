@@ -18,7 +18,7 @@
         </li>
     </ul>
     <div class="d-flex justify-content-between mt-4 mb-4">
-    <form class="m-0" action="{{ route('mission') }}" method="POST" enctype="multipart/form-data">
+    <form class="m-0" action="{{ route('mission.index') }}" method="PUT" enctype="multipart/form-data">
         @csrf
             <div class="rb">
                 <div class="input-group">
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </form>
-        <a class="col-example1 pt7 fs1215" href="add_mission">
+        <a class="col-example1 pt7 fs1215" href="/admin/mission/create">
         <i class="fa fa-plus me-2" aria-hidden="true"></i>
         Add
         </a>
@@ -55,7 +55,7 @@
                             <td class="p-3 pe-0 fs13">{{ $mission->start_date }}</td>
                             <td class="p-3 pe-0 fs13">{{ $mission->end_date }}</td>
                             <td class="p-3 pe-0 p-0 fs20">
-                                <a href="edit_mission/{{ $mission->mission_id }}"><i class="fa fa-pencil-square-o co fs20" aria-hidden="true"></i></a>
+                                <a href="/admin/mission/{{ $mission->mission_id }}/edit"><i class="fa fa-pencil-square-o co fs20" aria-hidden="true"></i></a>
                                 <div id="popup{{ $mission->mission_id }}" class="modal">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content p-2">
@@ -63,17 +63,19 @@
                                                 <p class="mb-0 fs20">Confirm Delete</p>
                                                 <img class="text-end mt-2 mb-2 pe-auto h13" src="/storage/images/cancel1.png" data-bs-dismiss="modal">
                                             </div>
-                                            <form method="post" enctype="multipart/form-data">
-                                                <input type="text" value="91" name="timesheet_id" hidden="">
-                                                <div class="modal-body pb-0">
-                                                    <p class="mb-1">Are you sure you want to delete this item?</p>
-                                                </div>
-                                                <div class="modal-footer border-top-0">
+                                            <input type="text" value="91" name="timesheet_id" hidden="">
+                                            <div class="modal-body pb-0">
+                                                <p class="mb-1">Are you sure you want to delete this item?</p>
+                                            </div>
+                                            <div class="modal-footer mt-3 justify-content-center border-top-0">
+                                                <form action="{{route('mission.destroy',$mission->mission_id)}}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('DELETE')
                                                     <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
                                                     </button>
-                                                    <a href="delete_mission/{{ $mission->mission_id }}" class="col-example7">Delete</a>
-                                                </div>
-                                            </form>
+                                                    <input type="submit" class="col-example7" Value="Delete">
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

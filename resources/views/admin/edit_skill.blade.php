@@ -12,8 +12,9 @@
     </div>
 @endif
 <br/>
-<form action="{{ route('skill.edit') }}" method="POST" enctype="multipart/form-data">
+<form action="{{route('skill.update',$skill->skill_id)}}" method="POST" enctype="multipart/form-data">
     @csrf
+    @method('PUT')
     <table class="table table-borderless aeb">
         <thead class="table-light border-bottom">
             <tr>
@@ -23,7 +24,6 @@
         <tbody>
             <tr>
                 <td class="p-3 fs-6">
-                    <input type="hidden" name="skill_id" class="popup" value="{{$skill->skill_id}}">
                     <p class="mb-1 fs14">Title</p>
                     <input type="text" name="skill_name" class="popup" value="{{$skill->skill_name}}">
                     <p class="mb-1 mt-4 fs14">Status</p>

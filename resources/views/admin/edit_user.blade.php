@@ -12,8 +12,9 @@
     </div>
 @endif
 <br/>
-<form action="{{ route('user.edit') }}" method="POST" enctype="multipart/form-data">
+<form action="{{route('user.update',$user->user_id)}}" method="POST" enctype="multipart/form-data">
     @csrf
+    @method('PUT')
     <table class="table table-borderless aeb">
         <thead class="table-light border-bottom">
             <tr>
@@ -23,7 +24,6 @@
         <tbody>
             <tr>
                 <td class="p-3 fs-6">
-                    <input type="hidden" name="user_id" class="popup" value="{{$user->user_id}}">
                     <p class="mb-1 fs14">First Name</p>
                     <input type="text" name="first_name" class="popup" value="{{$user->first_name}}">
                     <p class="mb-1 mt-4 fs14">Last Name</p>

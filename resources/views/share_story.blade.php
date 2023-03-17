@@ -2,7 +2,7 @@
 @section('content')<br/>
 <div class="container-lg">
     <p class="fs-2 fw-light pt-5">Share your story</p>
-    <form action="{{ route('share.story') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('share_story.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col">

@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class ResetPasswordController extends Controller
 {
 
-    public function showResetPasswordForm($token) {
+    public function show($token) {
         $updatePassword = DB::table('password_resets')->where(['token' => $token])->first();
         $diff =  now()->diffInMinutes(Carbon::parse($updatePassword->created_at));
         if($diff >= 240){
@@ -26,7 +26,7 @@ class ResetPasswordController extends Controller
         }
     }
 
-    public function submitResetPasswordForm(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'password' => 'required|string|min:6|confirmed',
@@ -44,5 +44,6 @@ class ResetPasswordController extends Controller
         DB::table('password_resets')->where(['email'=> $request->email])->delete();
   
         return redirect('/login')->with('message', 'Your password has been changed!');
-      }
+    }
+
 }

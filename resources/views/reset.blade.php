@@ -13,7 +13,7 @@
             {{ Session::get('error') }}
         </div>
         @endif
-        <form action="{{ route('reset.password.post') }}" method="POST">
+        <form action="{{ route('reset-password.store') }}" method="POST">
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">
             <p class="text-center text-1 mb-2">New Password</p>

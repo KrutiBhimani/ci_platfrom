@@ -12,8 +12,9 @@
     </div>
 @endif
 <br/>
-<form action="{{ route('theme.edit') }}" method="POST" enctype="multipart/form-data">
+<form action="{{route('theme.update',$theme->mission_theme_id)}}" method="POST" enctype="multipart/form-data">
     @csrf
+    @method('PUT')
     <table class="table table-borderless aeb">
         <thead class="table-light border-bottom">
             <tr>
@@ -23,7 +24,6 @@
         <tbody>
             <tr>
                 <td class="p-3 fs-6">
-                    <input type="hidden" name="mission_theme_id" class="popup" value="{{$theme->mission_theme_id}}">
                     <p class="mb-1 fs14">Title</p>
                     <input type="text" name="title" class="popup" value="{{$theme->title}}">
                     <p class="mb-1 mt-4 fs14">Status</p>

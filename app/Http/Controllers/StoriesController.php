@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
  
 class StoriesController extends Controller
 {
-    public function story()
+    public function index()
     {
         $stories = Story::select('*','story.title as story_title','story.description as story_description','mission_theme.title as theme_title')
         ->where('story.status', 'PUBLISHED')
@@ -33,10 +33,9 @@ class StoriesController extends Controller
           $postno = ($page * $pagecount) - $pagecount;
         $cnts = $stories->get()->count();
         $cnt = ceil($cnts / $pagecount);
+
         $stories = $stories->skip($postno)->take($pagecount)->get();
 
         return view('story',compact('stories','cnt','page'));
-
     }
-
 }

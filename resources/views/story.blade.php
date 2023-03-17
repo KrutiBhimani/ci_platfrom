@@ -45,7 +45,7 @@
                 </div>
                 <div class="card-body remove">
                     <h2 class="card-title mb-2 fs153">{{$story->story_title}}</h2>
-                    <p class="mb-3 text-secondary fs111">{{substr($story->story_description, 0, 99);}}...</p>
+                    <p class="mb-3 text-secondary fs111">{{$story->story_description ? substr($story->story_description, 0, 99).'...' : ''}}</p>
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-2 col-2">
                             <img src="{{$story->avatar ? '/storage/images/'.$story->avatar : '/storage/images/user1.png'}}" class="rounded-circle" height="34px" width="34px">

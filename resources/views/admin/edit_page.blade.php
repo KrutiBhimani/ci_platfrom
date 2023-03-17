@@ -12,8 +12,9 @@
     </div>
 @endif
 <br/>
-<form action="{{ route('page.edit') }}" method="POST" enctype="multipart/form-data">
+<form action="{{route('page.update',$page->cms_page_id)}}" method="POST" enctype="multipart/form-data">
     @csrf
+    @method('PUT')
     <table class="table table-borderless aeb">
         <thead class="table-light border-bottom">
             <tr>
@@ -23,7 +24,6 @@
         <tbody>
             <tr>
                 <td class="p-3 fs-6">
-                    <input type="hidden" name="cms_page_id" class="popup" value="{{$page->cms_page_id}}">
                     <p class="mb-1 fs14">Title</p>
                     <input type="text" name="title" class="popup" value="{{$page->title}}">
                     <p class="mb-1 mt-4 fs14">Description</p>

@@ -13,7 +13,7 @@
             {{ Session::get('error') }}
         </div>
         @endif
-        <form action="{{ route('register.custom') }}" method="POST">
+        <form action="{{ route('registration.store') }}" method="POST">
             @csrf
             <div class="form-group mb-3">
                 <span class="Email">First Name</span>

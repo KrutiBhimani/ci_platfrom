@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
  
 class EditUserController extends Controller
 {
-    public function edit_user()
+    public function index()
     {
         return view('edit_user');
     }

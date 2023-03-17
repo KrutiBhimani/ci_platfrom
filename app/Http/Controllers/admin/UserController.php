@@ -3,20 +3,18 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Hash;
-use Session;
+use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Country;
 use App\Models\City;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Carbon\Carbon;
-use App\Http\Requests;
 
 class UserController extends Controller
 {
-    public function user(Request $request)
+    public function index(Request $request)
     {
         $pagecount = 5;
         if (isset($_REQUEST['page'])) {
@@ -26,21 +24,20 @@ class UserController extends Controller
         $cnts = User::where('deleted_at', null)->orderBy('user_id','desc')->get()->count();
         $cnt = ceil($cnts / $pagecount);
         $users = User::where('deleted_at', null)->orderBy('user_id','desc')->paginate($pagecount);
-  
         if ($request->get('search')) { 
             $users = User::where('first_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('last_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('email', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
         return view('admin.user', compact('users', 'page','cnt'));
     }
 
-    public function add_user()
+    public function create()
     {
         $countries = Country::get();
         $cities = City::get();
         return view('admin.add_user',compact('countries','cities'));
     }
 
-    public function user_add(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'email' => 'required|email|unique:user',
@@ -73,7 +70,7 @@ class UserController extends Controller
         return redirect("admin/user")->with('message', 'New user added sucessfully');
     }
 
-    public function edit_user($user_id)
+    public function edit($user_id)
     {
         $user = User::where(['user_id' => $user_id])->first();
         $countries = Country::get();
@@ -81,7 +78,7 @@ class UserController extends Controller
         return view('admin.edit_user',compact('countries','cities','user'));
     }
 
-    public function user_edit(Request $request)
+    public function update(Request $request, $user_id)
     {
         $request->validate([
             'email' => 'required|email',
@@ -91,7 +88,7 @@ class UserController extends Controller
             'country_id' => 'required',
             'avatar' => 'mimes:jpeg,bmp,png'
         ]);
-        $user = User::where(['user_id' => $request->get('user_id')])->first();
+        $user = User::where('user_id', $user_id)->first();
         $avatar = $user->avatar;
         if($request->hasFile('avatar')){ 
             $avatar = $request->avatar->hashName();
@@ -111,13 +108,13 @@ class UserController extends Controller
             "profile_text" => $request->get('profile_text'),
             "status" => $request->get('status'),
         ];
-        User::where('user_id', $request->get('user_id'))->update($user);
+        User::where('user_id', $user_id)->update($user);
         return redirect("admin/user")->with('message', 'User updated sucessfully');
     }
 
-    public function delete_user($user_id)
+    public function destroy($user_id)
     {
         User::where('user_id', $user_id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
+        return redirect("admin/user")->with('message', 'User deleted sucessfully');
     }
-    
 }

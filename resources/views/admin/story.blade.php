@@ -18,7 +18,7 @@
         </li>
     </ul>
     <div class="d-flex justify-content-between mt-4 mb-4">
-        <form class="m-0" action="{{ route('story') }}" method="POST" enctype="multipart/form-data">
+        <form class="m-0" action="{{ route('story.index') }}" method="PUT" enctype="multipart/form-data">
             @csrf
             <div class="rb">
                 <div class="input-group">
@@ -49,9 +49,9 @@
                             <td class="p-3 pe-0 fs13">{{ $story->first_name.' '.$story->last_name }}</td>
                             <td class="p-3 pe-0 fs13">{{ $story->title }}</td>
                             <td class="p-3 pe-0 p-0 fs20">
-                                <a href="view_story/{{ $story->story_id }}" class="col-example13 bgw">View</a>
-                                <a href="approve_story/{{ $story->story_id }}"><i class="fa fa-check-circle-o pe-2 gc fs20" aria-hidden="true"></i></a>
-                                <a href="decline_story/{{ $story->story_id }}"><i class="fa fa-times-circle-o text-danger pe-2 fs20" aria-hidden="true"></i></a>
+                                <a href="/admin/story/{{ $story->story_id }}" class="col-example13 bgw">View</a>
+                                <a href="/admin/approve_story/{{ $story->story_id }}"><i class="fa fa-check-circle-o pe-2 gc fs20" aria-hidden="true"></i></a>
+                                <a href="/admin/decline_story/{{ $story->story_id }}"><i class="fa fa-times-circle-o text-danger pe-2 fs20" aria-hidden="true"></i></a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#popup{{ $story->story_id }}"><i class="fa fa-trash-o text-dark fs20" aria-hidden="true"></i></a>
                                 <div id="popup{{ $story->story_id }}" class="modal">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -64,9 +64,13 @@
                                                 Are you sure you want to delete this item?
                                             </div>
                                             <div class="modal-footer mt-3 justify-content-center border-top-0">
-                                                <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
-                                                </button>
-                                                <a href="delete_story/{{ $story->story_id }}" class="col-example7">Delete</a>
+                                                <form action="{{route('story.destroy',$story->story_id)}}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
+                                                    </button>
+                                                    <input type="submit" class="col-example7" Value="Delete">
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

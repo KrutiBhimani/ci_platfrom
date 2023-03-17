@@ -19,7 +19,7 @@
         </li>
     </ul>
     <div class="d-flex justify-content-between mt-4 mb-4">
-        <form class="m-0" action="{{ route('page') }}" method="POST" enctype="multipart/form-data">
+        <form class="m-0" action="{{ route('page.index') }}" method="PUT" enctype="multipart/form-data">
             @csrf
             <div class="rb">
                 <div class="input-group">
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </form>
-        <a class="col-example1 pt7 fs1215" href="add_page">
+        <a class="col-example1 pt7 fs1215" href="/admin/page/create">
         <i class="fa fa-plus me-2" aria-hidden="true"></i>
         Add
         </a>
@@ -52,7 +52,7 @@
                             <td class="p-3 pe-0 fs13">{{ $page->title }}</td>
                             <td class="p-3 pe-0 fs13 gc">{{ $page->status=='1' ? 'Active' : 'Inactive' }}</td>
                             <td class="p-3 pe-0 p-0 fs20">
-                                <a href="edit_page/{{ $page->cms_page_id }}"><i class="fa fa-pencil-square-o co fs20" aria-hidden="true"></i></a>
+                                <a href="/admin/page/{{ $page->cms_page_id }}/edit"><i class="fa fa-pencil-square-o co fs20" aria-hidden="true"></i></a>
                                 <div id="popup{{ $page->cms_page_id }}" class="modal">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content p-2">
@@ -64,9 +64,13 @@
                                                 Are you sure you want to delete this item?
                                             </div>
                                             <div class="modal-footer mt-3 justify-content-center border-top-0">
-                                                <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
-                                                </button>
-                                                <a href="delete_page/{{ $page->cms_page_id }}" class="col-example7">Delete</a>
+                                                <form action="{{route('page.destroy',$page->cms_page_id)}}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
+                                                    </button>
+                                                    <input type="submit" class="col-example7" Value="Delete">
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

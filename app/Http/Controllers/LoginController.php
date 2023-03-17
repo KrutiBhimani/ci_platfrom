@@ -17,8 +17,9 @@ class LoginController extends Controller
     {
         $banners = Banner::where('deleted_at', null)->orderBy('sort_order','asc')->get();
         return view('login', compact('banners'));
-    }  
-    public function customLogin(Request $request){
+    }
+
+    public function store(Request $request){
         $request->validate([
             'email' => 'required',
             'password' => 'required',
@@ -34,6 +35,5 @@ class LoginController extends Controller
         else{
             return redirect('/login')->with('error', 'Login details are not valid');
         }
-        
     }
 }

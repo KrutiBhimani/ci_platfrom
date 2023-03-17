@@ -89,7 +89,7 @@
                                                 <p class="mb-0 fs20">Invite</p>
                                                 <img class="text-end mt-2 mb-2 h13 pe-auto" src="/storage/images/cancel1.png" data-bs-dismiss="modal">
                                             </div>
-                                            <form action="{{ route('invite.user') }}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{ route('home.store') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="text" name="mission_id" value="{{$mission->missionid}}" hidden="">
                                                 <div class="modal-body pb-0">
@@ -231,7 +231,7 @@
                             <hr class="div">
                             <div class="d-flex align-items-center justify-content-center">
                                 @if($a == 0)
-                                <a href="/apply/{{ $mission->missionid }}" class="inh"><button class=" col-example mt-3 fs131">Apply<i class="fa fa-arrow-right ps-2"></i></button></a>
+                                <a href="/home/{{ $mission->missionid }}/edit" class="inh"><button class=" col-example mt-3 fs131">Apply<i class="fa fa-arrow-right ps-2"></i></button></a>
                                 @else
                                 <a href="/volunteering_mission/{{ $mission->missionid }}" class="inh"><button class=" col-example mt-3 fs131">View Detail<i class="fa fa-arrow-right ps-2"></i></button></a>
                                 @endif

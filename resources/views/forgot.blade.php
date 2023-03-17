@@ -13,7 +13,7 @@
             {{ Session::get('error') }}
         </div>
         @endif
-        <form method="POST" action="{{ route('forget.password.post') }}">
+        <form method="POST" action="{{ route('forget-password.store') }}">
             @csrf
             <p class="text-center text-1 mb-2">Forgot Password</p>
             <p class="text-center text-2">Enter your email address you've using for your account<br> below and we will
