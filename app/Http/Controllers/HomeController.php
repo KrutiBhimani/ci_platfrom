@@ -167,9 +167,12 @@ class HomeController extends Controller
 
     public function store(Request $request) //invite
     {
+        $request->validate([
+            'email' => 'required',
+        ]);
         $user_id = User::where('email',$request->email)->first()->user_id;
         $title = Mission::where('mission_id', $request->mission_id)->first()->title;
-        Mail::send('email.invite', ['title' => $title], function($message) use($request){
+        Mail::send('email.invite', ['mission_id' => $request->mission_id,'title' => $title], function($message) use($request){
             $message->to($request->email);
             $message->subject('Invited');
         });

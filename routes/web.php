@@ -52,8 +52,8 @@ Route::middleware(['authenticate-user'])->group(function () {
 
     Route::resource('stories', StoriesController::class);
     Route::resource('contact', ContactController::class);
-
     Route::resource('story_detail', StoryDetailController::class);
+    
     Route::resource('edit_user', EditUserController::class);
     Route::resource('timesheet', TimesheetController::class);
 });

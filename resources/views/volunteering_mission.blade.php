@@ -31,6 +31,16 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-5 pt-4">
+            @if (Session::has('message'))
+                <div class="alert alert-success" role="alert">
+                    {{ Session::get('message') }}
+                </div>
+            @endif
+            @if (Session::has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
             <p class="mb-3 fs1501">{{$mission->mission_title}}</p>
             <p class="mb-3 text-secondary fs1115">{{$mission->short_description}}</p>
             <div class="d-flex align-items-center">
@@ -154,6 +164,9 @@
                                     <div class="modal-body pb-0">
                                         <p class="mb-1 mt-3">Email </p>
                                         <input type="email" class="popup" name="email" place-holder="enter user email to invite">
+                                        @if ($errors->has('email'))
+                                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                                        @endif
                                     </div>
                                     <div class="modal-footer mt-4 border-top-0">
                                         <button type="reset" class="col-example8" data-bs-dismiss="modal">Cancle
@@ -281,9 +294,7 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane show active" id="mission">
-                    @php
-                    echo $mission->description
-                    @endphp
+                    {!!$mission->description!!}
                     @if($documents->isEmpty())
                     @else
                     <h4 class="mt-4 mb-2 fs118">Documents</h4>
@@ -511,6 +522,9 @@
                                     <div class="modal-body pb-0">
                                         <p class="mb-1 mt-3">Email </p>
                                         <input type="email" class="popup" name="email" place-holder="enter user email to invite">
+                                        @if ($errors->has('email'))
+                                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                                        @endif
                                     </div>
                                     <div class="modal-footer mt-4 border-top-0">
                                         <button type="reset" class="col-example8" data-bs-dismiss="modal">Cancle

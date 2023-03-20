@@ -15,6 +15,9 @@ class Story_invite extends Authenticatable
     protected $table='story_invite';
     protected $primaryKey = 'story_invite_id';
     protected $fillable = [
+        'from_user_id',
+        'to_user_id',
+        'story_id',
     ];
 
 }

@@ -705,6 +705,10 @@ body a {
   padding:5px 0;
 }
 
+.pe-auto{
+  cursor: pointer;
+}
+
 .df{
   display:flex; 
   justify-content:flex-end

@@ -95,6 +95,9 @@
                                                 <div class="modal-body pb-0">
                                                     <p class="mb-1 mt-3">Email </p>
                                                     <input type="email" class="popup" name="email" place-holder="enter user email to invite">
+                                                    @if ($errors->has('email'))
+                                                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                    @endif
                                                 </div>
                                                 <div class="modal-footer mt-4 border-top-0">
                                                     <button type="reset" class="col-example8" data-bs-dismiss="modal">Cancle

@@ -104,7 +104,7 @@
                 <table class="table mb-0">
                     <thead>
                         <tr>
-                            <td class="border-end pb-1 wd2">
+                            <td class="border-end wd2">
                                 <div class="input-group d-flex align-items-center">
                                     <div class="input-group-prepend p50">
                                         <img src="/storage/images/search.png" alt="" class="input-group-text p-0 m-0 border-0 bgw" id="basic-addon1">
@@ -112,7 +112,7 @@
                                     <input type="text" value="" id="clickedButton" name="search" value="{{ request()->search }}" placeholder="Search mission..." class="form-control shadow-none m-2 fs18 border-0" onchange="showHide()">
                                 </div>
                             </td>
-                            <td class="border-end pb-1 wd8">
+                            <td class="border-end wd8">
                                 <nav class="navbar navbar-expand ps-0 pe-0 bgw">
                                     <ul class="w-100 navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="w-100 nav-item dropdown fs-6">
@@ -130,7 +130,7 @@
                                     </ul>
                                 </nav>
                             </td>
-                            <td class="border-end pe-4 pb-1 wd8">
+                            <td class="border-end pe-4 wd8">
                                 <nav class="navbar navbar-expand ps-0 pe-0 bgw">
                                     <ul class="w-100 navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="w-100 nav-item dropdown fs-6">
@@ -152,7 +152,7 @@
                                     </ul>
                                 </nav>
                             </td>
-                            <td class="border-end pe-4 pb-1 wd8">
+                            <td class="border-end pe-4 wd8">
                                 <nav class="navbar navbar-expand ps-0 pe-0 bgw">
                                     <ul class="w-100 navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="w-100 nav-item dropdown fs-6">
@@ -174,7 +174,7 @@
                                     </ul>
                                 </nav>
                             </td>
-                            <td class="border-end pe-4 pb-1 wd8">
+                            <td class="border-end pe-4 wd8">
                                 <nav class="navbar navbar-expand ps-0 pe-0 bgw">
                                     <ul class="w-100 navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="w-100 nav-item dropdown fs-6">

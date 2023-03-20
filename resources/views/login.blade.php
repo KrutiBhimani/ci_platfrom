@@ -17,7 +17,7 @@
             @csrf
             <div class="form-group mb-3">
                 <span class="Email">Email Address</span>
-                <input type="email" placeholder="Enter your email address..." id='email' name="email" value="{{ old('email') }}" class="Rounded-Rectangle-2 form-control fs10 h40">
+                <input type="email" placeholder="Enter your email address..." id='email' name="email" value="{{ old('email') }}" class="Rounded-Rectangle-2 form-control fs14 h40">
                 @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
                 @endif
