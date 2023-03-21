@@ -411,9 +411,7 @@
                 <div class="tab-content ps-3 pe-3 pt-4 pb-1">
                     <div class="tab-pane show active ps-3 pe-3" id="Volunteer">
                         <div class="row">
-                            @php
-                            $count = 0;
-                            @endphp
+                            @php $count = 0; @endphp
                             @foreach ($vols as $vol) 
                             <div class="col-4 text-center p-0">
                                 <img src="{{$vol->avatar!=null ? '/storage/uplodes/'.$vol->avatar : '/storage/images/user1.png'}}" class="rounded-circle h60">
@@ -421,17 +419,35 @@
                             </div>
                             @php $count++ @endphp
                             @endforeach
+                            
                         </div>
                     </div>
                 </div>
+
+
+
+                
+
+
+
                 <table class="table table-bordered m-0 text-center">
                     <tbody>
                         <tr class="border-bottom-0 border-start-0">
-                            <td class="border-bottom-0 border-start-0"><img src="/storage/images/left.png" class="h12">
-                            </td>
-                            <td class="border-bottom-0 border-start-0">{{$count}} Recent Volunteers</td>
-                            <td class="border-bottom-0 border-end-0"><img src="/storage/images/right-arrow1.png" class="h12">
-                            </td>
+                            @php
+                            $next = $page + 1;
+                            $previous = $page - 1;
+                            @endphp
+                            @if ($page == 1) 
+                            <td class="border-bottom-0 border-start-0"><img src="/storage/images/left.png" class="h12"></td>
+                            @else
+                            <td class="border-bottom-0 border-start-0"><a href='/volunteering_mission/{{$mission->missionid}}?page={{$previous}}'><img src="/storage/images/left.png" class="h12"></a></td>
+                            @endif
+                            <td class="border-bottom-0 border-start-0">{{$postno+1}}-{{$postno+$count}} of {{$cnts}} Recent Volunteers</td>
+                            @if ($page == $cnt) 
+                            <td class="border-bottom-0 border-end-0"><img src="/storage/images/right-arrow1.png" class="h12"></td>
+                            @else 
+                            <td class="border-bottom-0 border-end-0"><a href='/volunteering_mission/{{$mission->missionid}}?page={{$next}}'><img src="/storage/images/right-arrow1.png" class="h12"></a></td>
+                            @endif
                         </tr>
                     </tbody>
                 </table>

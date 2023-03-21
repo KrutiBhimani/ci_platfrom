@@ -18,7 +18,7 @@
             <br>
             <div id="divgrid">
                 <div class="row row-eq-height justify-content-center">
-                    @if($mission_count != 0)
+                    @if($mission_count > 0)
                     @foreach($missions as $mission)
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5 d-flex align-items-stretch">
                         <div class="card box border-0">
@@ -115,12 +115,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 text-dark">
-                                    <div class="card-body pb-3 remove">
+                                    <div class="card-body pb-2 remove">
                                         <a href="/volunteering_mission/{{ $mission->missionid }}" class="text-dark">
-                                            <h2 class="card-title mb-2 fs153">{{$mission->mission_title}}</h2>
+                                            <h2 class="card-title mb-2 fs163">{{$mission->mission_title}}</h2>
                                         </a>
                                         <p class="mb-2 text-secondary fs111">
-                                            {{$a == 1 ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit...' : $mission->short_description }}                  
+                                            {{$a == 1 ? substr(strip_tags($mission->description), 0, 320).'...' : $mission->short_description }}                  
                                         </p>
                                         <div class="d-flex justify-content-between">
                                             <div>
@@ -154,7 +154,7 @@
                                     </div>
                                     <hr class="flex-grow-1 div m-0">
                                 </div>
-                                <div class="card-body pt-2 pb-2 padremove">
+                                <div class="card-body pt-1 pb-1 padremove">
                                     <div class="row">
                                         @if($mission->mission_type == 'TIME')
                                         @if($mission->total_seat != null)
@@ -243,7 +243,7 @@
                     </div>
                     @endforeach
                     @else
-                    <div class="m-5 p-5 text-center">no mission found</div>
+                    <h3 class="m-5 p-5 text-center">No mission found</h3>
                     @endif
                 </div>
             </div>
@@ -343,7 +343,7 @@
                                             <a href="/volunteering_mission/{{ $mission->missionid }}" class="text-dark">{{$mission->mission_title}}</a>
                                         </h2>
                                         <p class="mb-3 text-secondary fs111">
-                                            {{$a == 1 ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor...' : $mission->short_description }}                 
+                                            {{$a == 1 ? substr(strip_tags($mission->description), 0, 280).'...' : $mission->short_description }}
                                         </p>
                                         <div class="d-flex justify-content-between">
                                             <div>
@@ -353,7 +353,7 @@
                                                     @if($mission->total_seat != null)
                                                     <div class="col text-dark">
                                                         <div class="row">
-                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1"><img src="/storage/images/Seats-left.png" alt="" class='h21'></div>
+                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 me-1"><img src="/storage/images/Seats-left.png" alt="" class='h21'></div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                 @foreach($applications as $application)
                                                                 @if($application->missionid == $mission->missionid)
@@ -367,7 +367,7 @@
                                                     @else
                                                     <div class="col text-dark">
                                                         <div class="row">
-                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1"><img src="/storage/images/Seats-left.png" alt="" class='h21'></div>
+                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 me-1"><img src="/storage/images/Seats-left.png" alt="" class='h21'></div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                 @foreach($applications as $application)
                                                                 @if($application->missionid == $mission->missionid)
@@ -382,7 +382,7 @@
                                                     @if($mission->deadline != null)
                                                     <div class="col text-dark">
                                                         <div class="row">
-                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1"><img src="/storage/images/deadline.png" alt=""  class='h28'></div>
+                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 me-1"><img src="/storage/images/deadline.png" alt=""  class='h28'></div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                 <h4 class="mb-1 fs121">
                                                                     {{date("d-m-Y", strtotime($mission->deadline))}}                                       
@@ -395,7 +395,7 @@
                                                     @else
                                                     <div class="col text-dark">
                                                         <div class="row">
-                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1"><img src="/storage/images/achieved.png" alt="" class="h22"></div>
+                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 me-1"><img src="/storage/images/achieved.png" alt="" class="h22"></div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                 <div class="mt-2 mb-2 under" id="forwidth">
                                                                 @php
@@ -421,7 +421,7 @@
                                                     @endif
                                                     <div class="col text-dark">
                                                         <div class="row">
-                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1"><img src="/storage/images/calender.png" alt="" class="h20"></div>
+                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 me-1"><img src="/storage/images/calender.png" alt="" class="h20"></div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                 <h4 class="mb-1 fs11">
                                                                     @if($mission->mission_type == 'TIME')
@@ -439,7 +439,7 @@
                                                     </div>
                                                     <div class="col text-dark">
                                                         <div class="row">
-                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1"><i class="fa fa-cogs text-secondary" aria-hidden="true"></i></div>
+                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 me-1"><i class="fa fa-cogs text-secondary" aria-hidden="true"></i></div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                 <h4 class="mb-1 fs121">Skills</h4>
                                                                 <h6 class="mb-0 text-secondary fs12">{{$mission->skill_name}}</h6>
@@ -465,6 +465,7 @@
                     </div>
                 </div>
             </div>
+            @if($mission_count > 0)
             <nav aria-label="Page navigation example">
                 <ul class="pagination pager justify-content-center">
                     @php
@@ -494,6 +495,7 @@
                     @endif
                 </ul>
             </nav>
+            @endif
             <br>
         </div>
     </section>

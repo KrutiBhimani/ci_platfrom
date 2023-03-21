@@ -681,6 +681,16 @@ body a {
   font-size:calc(15px + 0.3vw);
 }
 
+.fs163{
+  font-size:calc(16px + 0.3vw);
+}
+
+.ppt{
+  padding-top:60px;
+  position: sticky;
+  top: 50px;
+}
+
 .pt7{
   padding-top: 7px;
 }

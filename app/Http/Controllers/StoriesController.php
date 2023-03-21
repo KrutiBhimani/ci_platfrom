@@ -24,13 +24,13 @@ class StoriesController extends Controller
         
         $pagecount = 9;
         if (isset($_REQUEST['page'])) {
-          $page = $_REQUEST['page'];
+            $page = $_REQUEST['page'];
         } else
           $page = 1;
         if ($page == "" || $page == 1) {
-          $postno = 0;
+            $postno = 0;
         } else
-          $postno = ($page * $pagecount) - $pagecount;
+            $postno = ($page * $pagecount) - $pagecount;
         $cnts = $stories->get()->count();
         $cnt = ceil($cnts / $pagecount);
 

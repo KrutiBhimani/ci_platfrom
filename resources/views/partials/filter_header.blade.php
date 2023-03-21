@@ -1,4 +1,5 @@
-<form id="selectSort3" method="post" enctype="multipart/form-data" class="mb-0 border-sm-block mt13">
+<form class="mb-0 border-sm-block mt13" id="selectSort3" action="{{ route('home.index') }}" method="PUT" enctype="multipart/form-data">
+    @csrf
     <div>
         <div class="container-lg p-0">
             <div class="container-lg d-sm-none mt-2">
@@ -241,6 +242,7 @@
             @endif
         </div>
     </div>
+    @if($mission_count > 0)
     <div class="container-lg mt-3">
         <div class="row">
             <div class="col-lg-5 col-md-5 col-sm-5 col-12">
@@ -263,6 +265,7 @@
             </div>
         </div>
     </div>
+    @endif
 </form>
 <script>
     $(document).ready(function() {

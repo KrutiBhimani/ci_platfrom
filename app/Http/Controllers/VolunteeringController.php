@@ -62,7 +62,18 @@ class VolunteeringController extends Controller
 
         $skills = Mission_skill::join('skill', 'mission_skill.skill_id', '=', 'skill.skill_id')->where('mission_id', $mission_id)->get();
 
-        $vols = Mission_application::join('user', 'mission_application.user_id', '=', 'user.user_id')->where('mission_id', $mission_id)->get();
+        $pagecount = 9;
+        if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+        } else
+          $page = 1;
+        if ($page == "" || $page == 1) {
+          $postno = 0;
+        } else
+          $postno = ($page * $pagecount) - $pagecount;
+        $cnts = Mission_application::join('user', 'mission_application.user_id', '=', 'user.user_id')->where('mission_id', $mission_id)->get()->count();
+        $cnt = ceil($cnts / $pagecount);
+        $vols = Mission_application::join('user', 'mission_application.user_id', '=', 'user.user_id')->where('mission_id', $mission_id)->paginate($pagecount);
 
         $goal_count = 0;
         $goal_achieved = 0;
@@ -83,11 +94,11 @@ class VolunteeringController extends Controller
 
         $m_count = 1;
 
-        $missions = Mission::select('*','mission.title AS mission_title','mission.mission_id as missionid', DB::raw('ROUND(AVG(mission_rating.rating)) as rating'))->leftJoin('mission_theme', 'mission.theme_id', '=', 'mission_theme.mission_theme_id')->leftJoin('country', 'mission.country_id', '=', 'country.country_id')->leftJoin('city', 'mission.city_id', '=', 'city.city_id')->leftJoin('mission_media', 'mission.mission_id', '=', 'mission_media.mission_id')->leftJoin('mission_skill', 'mission.mission_id', '=', 'mission_skill.mission_id')->leftJoin('skill', 'mission_skill.skill_id', '=', 'skill.skill_id')->leftJoin('goal_mission', 'mission.mission_id', '=', 'goal_mission.mission_id')->leftJoin('time_mission', 'mission.mission_id', '=', 'time_mission.mission_id')->leftJoin('mission_rating', 'mission.mission_id', '=', 'mission_rating.mission_id')->where('mission.deleted_at', null)->where('mission.mission_id','!=' ,$mission->missionid)->where('city.name',$mission->name)->groupby('mission.mission_id')->get();
+        $missions = Mission::select('*','mission.title AS mission_title','mission.mission_id as missionid', DB::raw('ROUND(AVG(mission_rating.rating)) as rating'))->leftJoin('mission_theme', 'mission.theme_id', '=', 'mission_theme.mission_theme_id')->leftJoin('country', 'mission.country_id', '=', 'country.country_id')->leftJoin('city', 'mission.city_id', '=', 'city.city_id')->leftJoin('mission_media', 'mission.mission_id', '=', 'mission_media.mission_id')->leftJoin('mission_skill', 'mission.mission_id', '=', 'mission_skill.mission_id')->leftJoin('skill', 'mission_skill.skill_id', '=', 'skill.skill_id')->leftJoin('goal_mission', 'mission.mission_id', '=', 'goal_mission.mission_id')->leftJoin('time_mission', 'mission.mission_id', '=', 'time_mission.mission_id')->leftJoin('mission_rating', 'mission.mission_id', '=', 'mission_rating.mission_id')->where('mission.deleted_at', null)->where('mission.mission_id','!=' ,$mission->missionid)->where('city.name',$mission->name)->groupby('mission.mission_id')->limit(3)->get();
         if($missions->isEmpty()){
-            $missions = Mission::select('*','mission.title AS mission_title','mission.mission_id as missionid', DB::raw('ROUND(AVG(mission_rating.rating)) as rating'))->leftJoin('mission_theme', 'mission.theme_id', '=', 'mission_theme.mission_theme_id')->leftJoin('country', 'mission.country_id', '=', 'country.country_id')->leftJoin('city', 'mission.city_id', '=', 'city.city_id')->leftJoin('mission_media', 'mission.mission_id', '=', 'mission_media.mission_id')->leftJoin('mission_skill', 'mission.mission_id', '=', 'mission_skill.mission_id')->leftJoin('skill', 'mission_skill.skill_id', '=', 'skill.skill_id')->leftJoin('goal_mission', 'mission.mission_id', '=', 'goal_mission.mission_id')->leftJoin('time_mission', 'mission.mission_id', '=', 'time_mission.mission_id')->leftJoin('mission_rating', 'mission.mission_id', '=', 'mission_rating.mission_id')->where('mission.deleted_at', null)->where('mission.mission_id','!=' ,$mission->missionid)->where('country.name',$mission->country_name)->groupby('mission.mission_id')->get();
+            $missions = Mission::select('*','mission.title AS mission_title','mission.mission_id as missionid', DB::raw('ROUND(AVG(mission_rating.rating)) as rating'))->leftJoin('mission_theme', 'mission.theme_id', '=', 'mission_theme.mission_theme_id')->leftJoin('country', 'mission.country_id', '=', 'country.country_id')->leftJoin('city', 'mission.city_id', '=', 'city.city_id')->leftJoin('mission_media', 'mission.mission_id', '=', 'mission_media.mission_id')->leftJoin('mission_skill', 'mission.mission_id', '=', 'mission_skill.mission_id')->leftJoin('skill', 'mission_skill.skill_id', '=', 'skill.skill_id')->leftJoin('goal_mission', 'mission.mission_id', '=', 'goal_mission.mission_id')->leftJoin('time_mission', 'mission.mission_id', '=', 'time_mission.mission_id')->leftJoin('mission_rating', 'mission.mission_id', '=', 'mission_rating.mission_id')->where('mission.deleted_at', null)->where('mission.mission_id','!=' ,$mission->missionid)->where('country.name',$mission->country_name)->groupby('mission.mission_id')->limit(3)->get();
             if($missions->isEmpty()){
-                $missions = Mission::select('*','mission.title AS mission_title','mission.mission_id as missionid', DB::raw('ROUND(AVG(mission_rating.rating)) as rating'))->leftJoin('mission_theme', 'mission.theme_id', '=', 'mission_theme.mission_theme_id')->leftJoin('country', 'mission.country_id', '=', 'country.country_id')->leftJoin('city', 'mission.city_id', '=', 'city.city_id')->leftJoin('mission_media', 'mission.mission_id', '=', 'mission_media.mission_id')->leftJoin('mission_skill', 'mission.mission_id', '=', 'mission_skill.mission_id')->leftJoin('skill', 'mission_skill.skill_id', '=', 'skill.skill_id')->leftJoin('goal_mission', 'mission.mission_id', '=', 'goal_mission.mission_id')->leftJoin('time_mission', 'mission.mission_id', '=', 'time_mission.mission_id')->leftJoin('mission_rating', 'mission.mission_id', '=', 'mission_rating.mission_id')->where('mission.deleted_at', null)->where('mission.mission_id','!=' ,$mission->missionid)->where('mission_theme.title',$mission->title)->groupby('mission.mission_id')->get();
+                $missions = Mission::select('*','mission.title AS mission_title','mission.mission_id as missionid', DB::raw('ROUND(AVG(mission_rating.rating)) as rating'))->leftJoin('mission_theme', 'mission.theme_id', '=', 'mission_theme.mission_theme_id')->leftJoin('country', 'mission.country_id', '=', 'country.country_id')->leftJoin('city', 'mission.city_id', '=', 'city.city_id')->leftJoin('mission_media', 'mission.mission_id', '=', 'mission_media.mission_id')->leftJoin('mission_skill', 'mission.mission_id', '=', 'mission_skill.mission_id')->leftJoin('skill', 'mission_skill.skill_id', '=', 'skill.skill_id')->leftJoin('goal_mission', 'mission.mission_id', '=', 'goal_mission.mission_id')->leftJoin('time_mission', 'mission.mission_id', '=', 'time_mission.mission_id')->leftJoin('mission_rating', 'mission.mission_id', '=', 'mission_rating.mission_id')->where('mission.deleted_at', null)->where('mission.mission_id','!=' ,$mission->missionid)->where('mission_theme.title',$mission->title)->groupby('mission.mission_id')->limit(3)->get();
                 if($missions->isEmpty()){
                     $m_count = 0;
                 }
@@ -96,7 +107,7 @@ class VolunteeringController extends Controller
         
         $times = Timesheet::get();
         
-        return view('volunteering_mission',compact('mission','applications','favs','documents','comments','comment_count','skills','rate_count','vols','medias','rating','rateduser','applies','missions','m_count','goal_achieved','goal_count','times'));
+        return view('volunteering_mission',compact('mission','applications','favs','documents','comments','comment_count','skills','rate_count','vols','cnt','cnts','postno','page','medias','rating','rateduser','applies','missions','m_count','goal_achieved','goal_count','times'));
     }
 
     public function edit_rating($rating,$mission_id)
@@ -118,7 +129,7 @@ class VolunteeringController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'comment_text' => 'required'
+            'comment_text' => 'required|max:600'
         ]);
         Comment::insert([
             'mission_id' => $request->mission_id, 
