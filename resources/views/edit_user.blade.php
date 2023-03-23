@@ -1,7 +1,9 @@
 @extends('layouts.home_header2')
 @section('content')
 <br/><br/>
-<form name="myForm" onsubmit="return validateForm()" method="post" enctype="multipart/form-data">
+<form action="{{route('edit_user.update',Auth::user()->user_id)}}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
     <div id="popup3" class="modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -110,12 +112,12 @@
                             }
                         </script>
                         <label for="choose-file2">
-                        <img id="blah" src="/storage/images/user1.png" class="rounded-circle mt-4 mb-3" style="height:calc(30px + 8vw);width:calc(30px + 8vw);cursor:pointer;">
+                        <img id="blah" src="{{Auth::user()->avatar!=null ? '/storage/uplodes/'.Auth::user()->avatar : '/storage/images/user1.png'}}" class="rounded-circle mt-4 mb-3" style="height:calc(30px + 8vw);width:calc(30px + 8vw);cursor:pointer;">
                         </label>
                         <input type="file" name="avatar" id="choose-file2" onchange="readURL(this);" style="display: none;" accept="image/x-png,image/jpg,image/jpeg">
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-5 col-5" style="margin: auto;">
-                        <h4 class="" style="font-size:calc(15px + 0.1vw);">kruti patel</h4>
+                        <h4 class="" style="font-size:calc(15px + 0.1vw);">{{Auth::user()->first_name.' '.Auth::user()->last_name}}</h4>
                         <a href="#" style="font-size:calc(11px + 0.1vw); color: black;" data-bs-toggle="modal" data-bs-target="#popup1">change password</a><br>
                     </div>
                 </div>
@@ -133,42 +135,42 @@
                             <div class="row mt-4">
                                 <div class="col">
                                     <p class="mb-1" style="font-size:14px;">Name</p>
-                                    <input type="text" class="popup" name="first_name" value="kruti" placeholder="Enter your name">
+                                    <input type="text" class="popup" name="first_name" value="{{Auth::user()->first_name}}" placeholder="Enter your name">
                                     <span id="error1" style="color:#f88634"></span>
                                 </div>
                                 <div class="col">
                                     <p class="mb-1" style="font-size:14px;">Surname</p>
-                                    <input type="text" class="popup" name="last_name" value="patel" placeholder="Enter your surname">
+                                    <input type="text" class="popup" name="last_name" value="{{Auth::user()->last_name}}" placeholder="Enter your surname">
                                     <span id="error2" style="color:#f88634"></span>
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col">
                                     <p class="mb-1" style="font-size:14px;">Employee ID</p>
-                                    <input type="text" class="popup" name="employee_id" value="" placeholder="Enter your employee id">
+                                    <input type="text" class="popup" name="employee_id" value="{{Auth::user()->employee_id}}" placeholder="Enter your employee id">
                                     <span id="error3" style="color:#f88634"></span>
                                 </div>
                                 <div class="col">
                                     <p class="mb-1" style="font-size:14px;">Manager</p>
-                                    <input type="text" class="popup" name="manager" value="" placeholder="Enter your manager details">
+                                    <input type="text" class="popup" name="manager" value="{{Auth::user()->manager}}" placeholder="Enter your manager details">
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col">
                                     <p class="mb-1" style="font-size:14px;">Title</p>
-                                    <input type="text" class="popup" name="title" value="" placeholder="Enter your employee id">
+                                    <input type="text" class="popup" name="title" value="{{Auth::user()->title}}" placeholder="Enter your employee id">
                                     <span id="error4" style="color:#f88634"></span>
                                 </div>
                                 <div class="col">
                                     <p class="mb-1" style="font-size:14px;">Department</p>
-                                    <input type="text" class="popup" name="department" value="" placeholder="Enter your manager details">
+                                    <input type="text" class="popup" name="department" value="{{Auth::user()->department}}" placeholder="Enter your manager details">
                                     <span id="error5" style="color:#f88634"></span>
                                 </div>
                             </div>
                             <p class="mb-1 mt-4" style="font-size:14px;">My Profile</p>
-                            <textarea rows="4" placeholder="Enter your message" name="profile_text" value="" class="popup1"></textarea>
+                            <textarea rows="4" placeholder="Enter your message" name="profile_text" class="popup1">{{Auth::user()->profile_text}}</textarea>
                             <p class="mb-1 mt-4" style="font-size:14px;">Why I Volunteer?</p>
-                            <textarea rows="4" placeholder="Enter your message" name="why_i_volunteer" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br><br>Ut enim ad minim veniam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore." class="popup1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</textarea>
+                            <textarea rows="4" placeholder="Enter your message" name="why_i_volunteer" class="popup1">{{strip_tags(Auth::user()->why_i_volunteer)}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -185,30 +187,17 @@
                                 <div class="col">
                                     <p class="mb-1" style="font-size:14px;">City</p>
                                     <select class="popup pt-0 pb-0" name="city_id">
-                                        <option value="1" selected="">gujarat</option>
-                                        <option value="2">Toronto</option>
-                                        <option value="3">Melbourne</option>
-                                        <option value="4">Barcelona</option>
-                                        <option value="5">London</option>
-                                        <option value="6">Cape Town</option>
-                                        <option value="7">Paris</option>
-                                        <option value="8">New York</option>
-                                        <option value="9">Sydney</option>
-                                        <option value="10">Berlin</option>
+                                        @foreach($cities as $city)
+                                            <option value="{{$city->city_id}}" {{$city->city_id == Auth::user()->city_id ? 'selected' : ''}}>{{$city->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col">
                                     <p class="mb-1" style="font-size:14px;">Country</p>
                                     <select class="popup pt-0 pb-0" name="country_id">
-                                        <option value="1" selected="">india</option>
-                                        <option value="2">canada</option>
-                                        <option value="3">australia</option>
-                                        <option value="4">spain</option>
-                                        <option value="5">the united kingdom</option>
-                                        <option value="6">south africa</option>
-                                        <option value="7">france</option>
-                                        <option value="8">new york</option>
-                                        <option value="9">germany</option>
+                                        @foreach($countries as $country)
+                                            <option value="{{$country->country_id}}" {{$country->country_id == Auth::user()->country_id ? 'selected' : ''}}>{{$country->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -228,15 +217,15 @@
                                 <div class="col">
                                     <p class="mb-1" style="font-size:14px;">Availablity</p>
                                     <select class="popup pt-0 pb-0" name="availability">
-                                        <option value="daily">Daily</option>
-                                        <option value="weekly" selected="">Weekly</option>
-                                        <option value="week-end">Weekend</option>
-                                        <option value="monthly">Monthly</option>
+                                        <option value="daily" {{Auth::user()->availability == 'daily' ? 'selected' : ''}}>Daily</option>
+                                        <option value="weekly" {{Auth::user()->availability == 'weekly' ? 'selected' : ''}}>Weekly</option>
+                                        <option value="weekend" {{Auth::user()->availability == 'weekend' ? 'selected' : ''}}>Weekend</option>
+                                        <option value="monthly" {{Auth::user()->availability == 'monthly' ? 'selected' : ''}}>Monthly</option>
                                     </select>
                                 </div>
                                 <div class="col">
                                     <p class="mb-1" style="font-size:14px;">LinkedIn</p>
-                                    <input type="url" class="popup" name="linked_in_url" value="https://www.tutorialrepublic.com/codelab.php?topic=php&amp;file=add-newline-to-a-string" placeholder="Enter linkedIn URL" required="">
+                                    <input type="url" class="popup" name="linked_in_url" value="{{Auth::user()->linked_in_url}}" placeholder="Enter linkedIn URL">
                                 </div>
                             </div>
                         </div>
