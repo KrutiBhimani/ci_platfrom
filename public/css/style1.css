@@ -585,6 +585,14 @@ body a {
   height:calc(20px + 2vw);
 }
 
+.h308{
+  height:calc(30px + 8vw);
+}
+
+.w308{
+  width:calc(30px + 8vw);
+}
+
 .h22020{
   height: calc(200px + 15vw);
 }
@@ -685,6 +693,11 @@ body a {
   font-size:calc(16px + 0.3vw);
 }
 
+.brbs{
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+
 .ppt{
   padding-top:60px;
   position: sticky;
@@ -726,6 +739,14 @@ body a {
 
 .m25{
   margin: 0 22px 0 5px;
+}
+
+.bsg{
+  border:solid 1px #d9d9d9;
+}
+
+.ofy{
+  overflow-y: auto !important;
 }
 
 .under{

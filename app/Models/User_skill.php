@@ -15,6 +15,8 @@ class User_skill extends Authenticatable
     protected $table = 'user_skill';
     protected $primaryKey = 'user_skill_id';
     protected $fillable = [
+        'user_id',
+        'skill_id',
     ];
 
 }

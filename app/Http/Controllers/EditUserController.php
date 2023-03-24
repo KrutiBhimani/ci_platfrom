@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Hash;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\City;
 use App\Models\Country;
@@ -29,7 +30,7 @@ class EditUserController extends Controller
         return response()->json($data);
     }
 
-    public function store(Request $request)
+    public function store(Request $request) //password change
     {
         $request->validate([
             'old_password' => 'required',
@@ -75,6 +76,17 @@ class EditUserController extends Controller
         if ($request->hasFile('avatar')) {
             $request->avatar->store('public/uplodes');
             User::where('user_id', $user_id)->update(["avatar" => $request->avatar->hashName()]);
+        }
+        if ($request->get('skill')) {
+            User_skill::where('user_id', $user_id)->delete();
+            $skill = $request->get('skill');
+            foreach ($skill as $item) {
+                User_skill::insert([
+                    'user_id' => $user_id,
+                    'skill_id' => $item,
+                    'created_at' => Carbon::now()->toDateTimeString(),
+                ]);
+            }
         }
         return back()->with('message', 'User updated sucessfully');
     }

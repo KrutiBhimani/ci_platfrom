@@ -6,10 +6,9 @@
         <div id="popup1" class="modal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content p-2">
-                    <div class="modal-header pb-0" style="border-bottom:0 ;">
-                        <p class="mb-0" style="font-size:20px ;">Change Password </p>
-                        <img class="text-end mt-2 mb-2" src="mvc/Assets/images/cancel1.png" data-bs-dismiss="modal"
-                            style="cursor: pointer;height:13px">
+                    <div class="modal-header pb-0 border-bottom-0">
+                        <p class="mb-0 fs20">Change Password </p>
+                        <img class="text-end mt-2 mb-2 pe-auto h13" src="mvc/Assets/images/cancel1.png" data-bs-dismiss="modal">
                     </div>
                     <div class="modal-body pb-2">
                         <input type="password" class="popup" name="old_password" placeholder="Enter old password">
@@ -26,7 +25,7 @@
                             <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                         @endif
                     </div>
-                    <div class="modal-footer" style="border-top:0 ;">
+                    <div class="modal-footer border-top-0">
                         <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
                         </button>
                         <button type="submit" name='change' class="col-example7" data-bs-dismiss="modal">Change Password
@@ -43,16 +42,15 @@
         <div id="popup3" class="modal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content p-3">
-                    <div class="modal-header pb-0" style="border-bottom:0 ;">
-                        <p class="mb-0" style="font-size:20px ;">Add Your Skills</p>
-                        <img class="text-end mt-2 mb-2" src="/storage/images/cancel1.png" data-bs-dismiss="modal"
-                            style="cursor: pointer;height:13px">
+                    <div class="modal-header pb-0 border-bottom-0">
+                        <p class="mb-0 fs20">Add Your Skills</p>
+                        <img class="text-end mt-2 mb-2 pe-auto h13" src="/storage/images/cancel1.png" data-bs-dismiss="modal">
                     </div>
                     <div class="modal-body pb-0">
-                        <div class="row" style="font-size:10px ;">
-                            <div class="col p-3" style="border:solid 1px #d9d9d9">
-                                <select id="selectCountries" class="w-100 border-none" name="skill[]" multiple="multiple"
-                                    size="26" style="border: none;overflow-y: auto; font-size:12px">
+                        <div class="row fs10">
+                            <div class="col p-3 bsg">
+                                <select id="selectCountries" class="w-100 border-0 fs12 ofy" name="skill[]" multiple="multiple"
+                                    size="26">
                                     @foreach ($skills as $skill)
                                         <option value="{{ $skill->skill_id }}"
                                             @foreach ($selected_skills as $selected) {{ $selected->skill_id == $skill->skill_id ? 'selected' : '' }} @endforeach>
@@ -84,7 +82,7 @@
                                         if (selectedOptions.length > 0) {
                                             var resultString = '';
                                             selectedOptions.each(function() {
-                                                resultString += $(this).text() + '<br/>';
+                                                resultString += $(this).text().trim() + '<br/>';
                                             });
                                             $('#divResult').html(resultString);
                                         }
@@ -94,15 +92,15 @@
                                 function myFunction() {
                                     var rslt = document.getElementById("divResult").innerHTML;
                                     const chars = rslt.replace(/<br>/g, '\n');
-                                    document.getElementById("divskill").innerHTML = chars;
+                                    document.getElementById("divskill").innerHTML = chars.trim();
                                 }
                             </script>
-                            <div class="col p-3" style="border:solid 1px #d9d9d9">
-                                <div id="divResult" style="font-size: 12px;"></div>
+                            <div class="col p-3 bsg">
+                                <div id="divResult fs12"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer p-0 pt-2" style="border-top:0 ;justify-content:flex-start;">
+                    <div class="modal-footer p-0 pt-2 border-top-0 d-flex justify-content-start">
                         <button type="button" class="col-example8" data-bs-dismiss="modal">Cancle
                         </button>
                         <button type="button" class="col-example7" data-bs-dismiss="modal" onclick="myFunction()">Save
@@ -141,16 +139,15 @@
                             <label for="choose-file2">
                                 <img id="blah"
                                     src="{{ Auth::user()->avatar != null ? '/storage/uplodes/' . Auth::user()->avatar : '/storage/images/user1.png' }}"
-                                    class="rounded-circle mt-4 mb-3"
-                                    style="height:calc(30px + 8vw);width:calc(30px + 8vw);cursor:pointer;">
+                                    class="rounded-circle mt-4 mb-3 h308 w308 pe-auto">
                             </label>
                             <input type="file" name="avatar" id="choose-file2" onchange="readURL(this);"
-                                style="display: none;" accept="image/x-png,image/jpg,image/jpeg">
+                                class="dnone" accept="image/x-png,image/jpg,image/jpeg">
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-5 col-5" style="margin: auto;">
-                            <h4 class="" style="font-size:calc(15px + 0.1vw);">
+                        <div class="col-lg-12 col-md-12 col-sm-5 col-5">
+                            <h4 class="fs151">
                                 {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</h4>
-                            <a href="#" style="font-size:calc(11px + 0.1vw); color: black;" data-bs-toggle="modal"
+                            <a href="#" class="fs111 text-dark" data-bs-toggle="modal"
                                 data-bs-target="#popup1">change password</a><br>
                         </div>
                     </div>
@@ -167,7 +164,7 @@
                             <div class="tab-pane show active" id="mission">
                                 <div class="row mt-4">
                                     <div class="col">
-                                        <p class="mb-1" style="font-size:14px;">Name</p>
+                                        <p class="mb-1 fs14">Name</p>
                                         <input type="text" class="popup" name="first_name"
                                             value="{{ Auth::user()->first_name }}" placeholder="Enter your name">
                                         @if ($errors->has('first_name'))
@@ -175,7 +172,7 @@
                                         @endif
                                     </div>
                                     <div class="col">
-                                        <p class="mb-1" style="font-size:14px;">Surname</p>
+                                        <p class="mb-1 fs14">Surname</p>
                                         <input type="text" class="popup" name="last_name"
                                             value="{{ Auth::user()->last_name }}" placeholder="Enter your surname">
                                         @if ($errors->has('last_name'))
@@ -185,7 +182,7 @@
                                 </div>
                                 <div class="row mt-4">
                                     <div class="col">
-                                        <p class="mb-1" style="font-size:14px;">Employee ID</p>
+                                        <p class="mb-1 fs14">Employee ID</p>
                                         <input type="text" class="popup" name="employee_id"
                                             value="{{ Auth::user()->employee_id }}" placeholder="Enter your employee id">
                                         @if ($errors->has('employee_id'))
@@ -193,14 +190,14 @@
                                         @endif
                                     </div>
                                     <div class="col">
-                                        <p class="mb-1" style="font-size:14px;">Manager</p>
+                                        <p class="mb-1 fs14">Manager</p>
                                         <input type="text" class="popup" name="manager"
                                             value="{{ Auth::user()->manager }}" placeholder="Enter your manager details">
                                     </div>
                                 </div>
                                 <div class="row mt-4">
                                     <div class="col">
-                                        <p class="mb-1" style="font-size:14px;">Title</p>
+                                        <p class="mb-1 fs14">Title</p>
                                         <input type="text" class="popup" name="title"
                                             value="{{ Auth::user()->title }}" placeholder="Enter your employee id">
                                         @if ($errors->has('title'))
@@ -208,7 +205,7 @@
                                         @endif
                                     </div>
                                     <div class="col">
-                                        <p class="mb-1" style="font-size:14px;">Department</p>
+                                        <p class="mb-1 fs14">Department</p>
                                         <input type="text" class="popup" name="department"
                                             value="{{ Auth::user()->department }}"
                                             placeholder="Enter your manager details">
@@ -217,9 +214,9 @@
                                         @endif
                                     </div>
                                 </div>
-                                <p class="mb-1 mt-4" style="font-size:14px;">My Profile</p>
+                                <p class="mb-1 mt-4 fs14">My Profile</p>
                                 <textarea rows="4" placeholder="Enter your message" name="profile_text" class="popup1">{{ Auth::user()->profile_text }}</textarea>
-                                <p class="mb-1 mt-4" style="font-size:14px;">Why I Volunteer?</p>
+                                <p class="mb-1 mt-4 fs14">Why I Volunteer?</p>
                                 <textarea rows="4" placeholder="Enter your message" name="why_i_volunteer" class="popup1">{{ strip_tags(Auth::user()->why_i_volunteer) }}</textarea>
                             </div>
                         </div>
@@ -235,7 +232,7 @@
                             <div class="tab-pane show active" id="mission">
                                 <div class="row mt-4">
                                     <div class="col">
-                                        <p class="mb-1" style="font-size:14px;">Country</p>
+                                        <p class="mb-1 fs14">Country</p>
                                         <select id="country-dd" class="popup pt-0 pb-0" name="country_id">
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->country_id }}"
@@ -248,7 +245,7 @@
                                         @endif
                                     </div>
                                     <div class="col">
-                                        <p class="mb-1" style="font-size:14px;">City</p>
+                                        <p class="mb-1 fs14">City</p>
                                         <select id="city-dd" class="popup pt-0 pb-0" name="city_id">
                                             @foreach ($cities as $city)
                                                 <option value="{{ $city->city_id }}"
@@ -276,7 +273,7 @@
                             <div class="tab-pane show active" id="mission">
                                 <div class="row mt-4">
                                     <div class="col">
-                                        <p class="mb-1" style="font-size:14px;">Availablity</p>
+                                        <p class="mb-1 fs14">Availablity</p>
                                         <select class="popup pt-0 pb-0" name="availability">
                                             <option value="daily"
                                                 {{ Auth::user()->availability == 'daily' ? 'selected' : '' }}>Daily
@@ -293,7 +290,7 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <p class="mb-1" style="font-size:14px;">LinkedIn</p>
+                                        <p class="mb-1 fs14">LinkedIn</p>
                                         <input type="url" class="popup" name="linked_in_url"
                                             value="{{ Auth::user()->linked_in_url }}" placeholder="Enter linkedIn URL">
                                     </div>
@@ -310,12 +307,7 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane show active" id="mission">
-                                <textarea rows="6" class="popup1 mt-3" id="divskill" placeholder="select your skill" disabled=""
-                                    style="background-color:white;">
-@foreach ($selected_skills as $selected)
-@php echo $selected->skill_name.'&#13;&#10;';@endphp
-@endforeach
-</textarea>
+                                <textarea rows="6" class="popup1 mt-3 bgw" id="divskill" placeholder="select your skill" disabled="">@foreach ($selected_skills as $selected)@php echo $selected->skill_name.'&#13;&#10;';@endphp @endforeach</textarea>
                                 <button type="button" class="col-example8 mt-3" data-bs-toggle="modal"
                                     data-bs-target="#popup3">Add Skills</button>
                             </div>
