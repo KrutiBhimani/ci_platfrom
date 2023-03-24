@@ -12,7 +12,7 @@ class Contact extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='contact';
+    protected $table = 'contact';
     protected $primaryKey = 'contact_id';
     protected $fillable = [
         'subject',

@@ -12,7 +12,7 @@ class Time_mission extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='time_mission';
+    protected $table = 'time_mission';
     protected $primaryKey = 'time_mission';
     protected $fillable = [
         'total_seat',

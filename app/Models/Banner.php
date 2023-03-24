@@ -12,7 +12,7 @@ class Banner extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='banner';
+    protected $table = 'banner';
     protected $primaryKey = 'banner_id';
     protected $fillable = [
         'title',

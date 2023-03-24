@@ -4,8 +4,10 @@
             <nav class="navbar navbar-expand-sm ps-0 pe-0 bgw">
                 <a href="/home"><img class="d-none d-sm-block" src="/storage/images/logo.png"></a>
                 <div class="container-fluid">
-                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"><img src="/storage/images/list.png"></span>
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"><img src="/storage/images/list.png"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -23,8 +25,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                     <ul class="navbar-nav me-auto mb-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="/storage/uplodes/avatar-9.jpg" class="rounded-circle col h30">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="/storage/uplodes/avatar-9.jpg" class="rounded-circle col h30">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/edit_user">My Profile</a></li>
@@ -39,9 +42,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                     <ul class="navbar-nav me-auto mb-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{Auth::user()->avatar!=null ? '/storage/uplodes/'.Auth::user()->avatar : '/storage/images/user1.png'}}" class="rounded-circle col p-0" style="height: 30px;width: 30px;">
-                            <label>{{Auth::user()->first_name.' '.Auth::user()->last_name}}</label>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ Auth::user()->avatar != null ? '/storage/uplodes/' . Auth::user()->avatar : '/storage/images/user1.png' }}"
+                                    class="rounded-circle col p-0" style="height: 30px;width: 30px;">
+                                <label>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</label>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/edit_user">My Profile</a></li>
@@ -67,9 +72,10 @@
                 @csrf
                 <div class="modal-body pb-0">
                     <p class="mb-1">Name*</p>
-                    <input type="text" class="popup" name="" value="{{Auth::user()->first_name.' '.Auth::user()->last_name}}" disabled>
+                    <input type="text" class="popup" name=""
+                        value="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" disabled>
                     <p class="mb-1 mt-3">Email Address*</p>
-                    <input type="email" class="popup" name="" value="{{Auth::user()->email}}" disabled>
+                    <input type="email" class="popup" name="" value="{{ Auth::user()->email }}" disabled>
                     <p class="mb-1 mt-3">Subject*</p>
                     <input type="text" class="popup" name="subject" placeholder="Enter your subject">
                     @if ($errors->has('subject'))

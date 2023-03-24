@@ -12,7 +12,7 @@ class Skill extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='skill';
+    protected $table = 'skill';
     protected $primaryKey = 'skill_id';
     protected $fillable = [
         'skill_name',

@@ -12,7 +12,7 @@ class City extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='city';
+    protected $table = 'city';
     protected $primaryKey = 'city_id';
     protected $fillable = [
         'name',

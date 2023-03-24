@@ -12,7 +12,7 @@ class Mission_document extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='mission_document';
+    protected $table = 'mission_document';
     protected $primaryKey = 'mission_document_id';
     protected $fillable = [
         'mission_id',

@@ -1,5 +1,5 @@
 <?php
- 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
@@ -15,7 +15,7 @@ use App\Http\Controllers\VolunteeringController;
 use App\Http\Controllers\ShareStoryController;
 use App\Http\Controllers\StoryDetailController;
 use App\Http\Controllers\ContactController;
- 
+
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\AppController;
 use App\Http\Controllers\admin\BannerController;
@@ -43,18 +43,18 @@ Route::resource('policy', PolicyController::class);
 // user side
 Route::middleware(['authenticate-user'])->group(function () {
     Route::resource('home', HomeController::class);
-    Route::get('like/{mission_id}',[HomeController::class, 'like']); 
-    Route::get('unlike/{mission_id}',[HomeController::class, 'unlike']); 
+    Route::get('like/{mission_id}', [HomeController::class, 'like']);
+    Route::get('unlike/{mission_id}', [HomeController::class, 'unlike']);
     Route::resource('volunteering_mission', VolunteeringController::class);
-    Route::get('edit_rating/{rating}/{mission_id}',[VolunteeringController::class, 'edit_rating']); 
-    Route::get('add_rating/{rating}/{mission_id}',[VolunteeringController::class, 'add_rating']);
+    Route::get('edit_rating/{rating}/{mission_id}', [VolunteeringController::class, 'edit_rating']);
+    Route::get('add_rating/{rating}/{mission_id}', [VolunteeringController::class, 'add_rating']);
     Route::resource('share_story', ShareStoryController::class);
-
     Route::resource('stories', StoriesController::class);
     Route::resource('contact', ContactController::class);
     Route::resource('story_detail', StoryDetailController::class);
-    
+
     Route::resource('edit_user', EditUserController::class);
+    Route::post('api/fetch-cities', [EditUserController::class, 'fetchCity']);
     Route::resource('timesheet', TimesheetController::class);
 });
 
@@ -68,8 +68,8 @@ Route::middleware(['authenticate-admin'])->group(function () {
     Route::resource('admin/mission', MissionController::class);
     Route::resource('admin/app', AppController::class);
     Route::resource('admin/story', StoryController::class);
-    Route::get('admin/approve_app/{mission_application_id}',[AppController::class, 'approve_app']); 
-    Route::get('admin/decline_app/{mission_application_id}',[AppController::class, 'decline_app']); 
-    Route::get('admin/approve_story/{story_id}',[StoryController::class, 'approve_story']); 
-    Route::get('admin/decline_story/{story_id}',[StoryController::class, 'decline_story']); 
+    Route::get('admin/approve_app/{mission_application_id}', [AppController::class, 'approve_app']);
+    Route::get('admin/decline_app/{mission_application_id}', [AppController::class, 'decline_app']);
+    Route::get('admin/approve_story/{story_id}', [StoryController::class, 'approve_story']);
+    Route::get('admin/decline_story/{story_id}', [StoryController::class, 'decline_story']);
 });

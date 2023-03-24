@@ -4,9 +4,6 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Hash;
-use App\Models\User;
-use App\Models\Admin;
 use App\Models\Mission;
 use App\Models\Goal_mission;
 use App\Models\Mission_document;
@@ -18,34 +15,33 @@ use App\Models\City;
 use App\Models\Mission_theme;
 use App\Models\Skill;
 use Carbon\Carbon;
-use Auth;
- 
+
 class MissionController extends Controller
 {
     public function index(Request $request)
     {
         $pagecount = 5;
         if (isset($_REQUEST['page'])) {
-          $page = $_REQUEST['page'];
+            $page = $_REQUEST['page'];
         } else
-          $page = 1;
+            $page = 1;
         $cnts = Mission::where('deleted_at', null)->get()->count();
         $cnt = ceil($cnts / $pagecount);
         $missions = Mission::where('deleted_at', null)->paginate($pagecount);
-  
-        if ($request->get('search')) { 
+
+        if ($request->get('search')) {
             $missions = Mission::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return view('admin.mission', compact('missions', 'page','cnt'));
+        return view('admin.mission', compact('missions', 'page', 'cnt'));
     }
-    
+
     public function create()
     {
         $countries = Country::get();
         $cities = City::get();
         $themes = Mission_theme::where('deleted_at', null)->get();
         $skills = Skill::where('deleted_at', null)->get();
-        return view('admin.add_mission',compact('countries','cities','themes','skills'));
+        return view('admin.add_mission', compact('countries', 'cities', 'themes', 'skills'));
     }
 
     public function store(Request $request)
@@ -77,7 +73,7 @@ class MissionController extends Controller
 
         $mission_id = Mission::max('mission_id');
 
-        if ($request->get('skill_id')) { 
+        if ($request->get('skill_id')) {
             $skil = $request->get('skill_id');
             foreach ($skil as $item) {
                 $skill = new Mission_skill([
@@ -88,7 +84,7 @@ class MissionController extends Controller
             }
         }
 
-        if($request->hasFile('media_name')){
+        if ($request->hasFile('media_name')) {
             foreach ($request->file('media_name') as $image) {
                 $name = $image->hashName();
                 $image->store('public/uplodes');
@@ -96,13 +92,13 @@ class MissionController extends Controller
                     "mission_id" => $mission_id,
                     "media_name" => $name,
                     "media_type" => $image->extension(),
-                    "media_path" => '/storage/uplodes/'.$name,
+                    "media_path" => '/storage/uplodes/' . $name,
                 ]);
                 $media->save();
             }
         }
 
-        if($request->hasFile('document_name')){
+        if ($request->hasFile('document_name')) {
             foreach ($request->file('document_name') as $file) {
                 $name = $file->hashName();
                 $file->store('public/uplodes');
@@ -110,13 +106,13 @@ class MissionController extends Controller
                     "mission_id" => $mission_id,
                     "document_name" => $name,
                     "document_type" => $file->extension(),
-                    "document_path" => '/storage/uplodes/'.$name,
+                    "document_path" => '/storage/uplodes/' . $name,
                 ]);
                 $document->save();
             }
         }
 
-        if($request->get('mission_type')=='TIME'){
+        if ($request->get('mission_type') == 'TIME') {
             $time = new Time_mission([
                 "mission_id" => $mission_id,
                 "total_seat" => $request->get('total_seat'),
@@ -125,7 +121,7 @@ class MissionController extends Controller
             $time->save();
         }
 
-        if($request->get('mission_type')=='GOAL'){
+        if ($request->get('mission_type') == 'GOAL') {
             $request->validate([
                 'goal_value' => 'required'
             ]);
@@ -149,7 +145,7 @@ class MissionController extends Controller
         $selected_skills = Mission_skill::where(['mission_id' => $mission_id])->get();
         $goal = Goal_mission::where(['mission_id' => $mission_id])->first();
         $time = Time_mission::where(['mission_id' => $mission_id])->first();
-        return view('admin.edit_mission',compact('mission','countries','cities','themes','skills','goal','time','selected_skills'));
+        return view('admin.edit_mission', compact('mission', 'countries', 'cities', 'themes', 'skills', 'goal', 'time', 'selected_skills'));
     }
 
     public function update(Request $request, $mission_id)
@@ -190,7 +186,7 @@ class MissionController extends Controller
             }
         }
 
-        if($request->hasFile('media_name')){
+        if ($request->hasFile('media_name')) {
             Mission_media::where('mission_id', $mission_id)->delete();
             foreach ($request->file('media_name') as $image) {
                 $name = $image->hashName();
@@ -199,14 +195,14 @@ class MissionController extends Controller
                     "mission_id" => $mission_id,
                     "media_name" => $name,
                     "media_type" => $image->extension(),
-                    "media_path" => '/storage/uplodes/'.$name,
+                    "media_path" => '/storage/uplodes/' . $name,
                 ]);
                 $media->save();
             }
         }
 
-        if($request->hasFile('document_name')){
-            Mission_document::where('mission_id',$mission_id)->delete();
+        if ($request->hasFile('document_name')) {
+            Mission_document::where('mission_id', $mission_id)->delete();
             foreach ($request->file('document_name') as $file) {
                 $name = $file->hashName();
                 $file->store('public/uplodes');
@@ -214,22 +210,21 @@ class MissionController extends Controller
                     "mission_id" => $mission_id,
                     "document_name" => $name,
                     "document_type" => $file->extension(),
-                    "document_path" => '/storage/uplodes/'.$name,
+                    "document_path" => '/storage/uplodes/' . $name,
                 ]);
                 $document->save();
             }
         }
 
-        if($request->get('mission_type')=='TIME'){
-            $update = Time_mission::where('mission_id',$mission_id)->first();
-            if($update){
+        if ($request->get('mission_type') == 'TIME') {
+            $update = Time_mission::where('mission_id', $mission_id)->first();
+            if ($update) {
                 $time = [
                     "total_seat" => $request->get('total_seat'),
                     "deadline" => $request->get('deadline'),
                 ];
                 Time_mission::where('mission_id', $mission_id)->update($time);
-            }
-            else{
+            } else {
                 $time = new Time_mission([
                     "mission_id" => $mission_id,
                     "total_seat" => $request->get('total_seat'),
@@ -239,19 +234,18 @@ class MissionController extends Controller
             }
         }
 
-        if($request->get('mission_type')=='GOAL'){
+        if ($request->get('mission_type') == 'GOAL') {
             $request->validate([
                 'goal_value' => 'required'
             ]);
             $update = Goal_mission::where('mission_id', $mission_id)->first();
-            if($update){
+            if ($update) {
                 $goal = [
                     "goal_objective_text" => $request->get('goal_objective_text'),
                     "goal_value" => $request->get('goal_value'),
                 ];
                 Goal_mission::where('mission_id', $mission_id)->update($goal);
-            }
-            else{
+            } else {
                 $goal = new Goal_mission([
                     "mission_id" => $mission_id,
                     "goal_objective_text" => $request->get('goal_objective_text'),

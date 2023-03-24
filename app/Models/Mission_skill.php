@@ -12,7 +12,7 @@ class Mission_skill extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='mission_skill';
+    protected $table = 'mission_skill';
     protected $primaryKey = 'mission_skill_id';
     protected $fillable = [
         'mission_id',

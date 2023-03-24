@@ -18,8 +18,7 @@ class AuthAdmin
     {
         if (Auth::guard('admin')->user()) {
             return $next($request);
-        }
-        else{
+        } else {
             return redirect('/login')->with('error', 'you are not allowed to access please try login!');
         }
     }

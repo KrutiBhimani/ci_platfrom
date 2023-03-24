@@ -12,7 +12,7 @@ class Mission_rating extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='mission_rating';
+    protected $table = 'mission_rating';
     protected $primaryKey = 'mission_rating_id';
     protected $fillable = [
         'mission_id',

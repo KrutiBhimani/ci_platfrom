@@ -12,7 +12,7 @@ class Favourite_mission extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='favourite_mission';
+    protected $table = 'favourite_mission';
     protected $primaryKey = 'favourite_mission_id';
     protected $fillable = [
         'user_id',

@@ -12,7 +12,7 @@ class Mission_theme extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='mission_theme';
+    protected $table = 'mission_theme';
     protected $primaryKey = 'mission_theme_id';
     protected $fillable = [
         'title',

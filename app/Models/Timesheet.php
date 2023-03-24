@@ -12,7 +12,7 @@ class Timesheet extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='timesheet';
+    protected $table = 'timesheet';
     protected $primaryKey = 'timesheet_id';
     protected $fillable = [
     ];

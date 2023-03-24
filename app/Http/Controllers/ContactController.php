@@ -16,8 +16,8 @@ class ContactController extends Controller
             'message' => 'required|max:60000'
         ]);
         Contact::insert([
-            'message' => $request->message, 
-            'user_id' => Auth::user()->user_id, 
+            'message' => $request->message,
+            'user_id' => Auth::user()->user_id,
             'subject' => $request->subject,
             'created_at' => Carbon::now()->toDateTimeString(),
         ]);

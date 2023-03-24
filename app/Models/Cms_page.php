@@ -12,7 +12,7 @@ class Cms_page extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='cms_page';
+    protected $table = 'cms_page';
     protected $primaryKey = 'cms_page_id';
     protected $fillable = [
         'title',

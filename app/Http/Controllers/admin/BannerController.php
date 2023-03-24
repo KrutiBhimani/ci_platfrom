@@ -4,37 +4,33 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Hash;
-use App\Models\User;
-use App\Models\Admin;
 use Carbon\Carbon;
 use App\Models\Banner;
-use Auth;
- 
+
 class BannerController extends Controller
 {
     public function index(Request $request)
     {
         $pagecount = 5;
         if (isset($_REQUEST['page'])) {
-          $page = $_REQUEST['page'];
+            $page = $_REQUEST['page'];
         } else
-          $page = 1;
+            $page = 1;
         $cnts = Banner::where('deleted_at', null)->get()->count();
         $cnt = ceil($cnts / $pagecount);
         $banners = Banner::where('deleted_at', null)->paginate($pagecount);
-  
-        if ($request->get('search')) { 
+
+        if ($request->get('search')) {
             $banners = Banner::where('title', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return view('admin.banner', compact('banners', 'page','cnt'));
+        return view('admin.banner', compact('banners', 'page', 'cnt'));
     }
 
     public function create()
     {
         return view('admin.add_banner');
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -57,9 +53,9 @@ class BannerController extends Controller
     public function edit($banner_id)
     {
         $banner = Banner::where(['banner_id' => $banner_id])->first();
-        return view('admin.edit_banner',compact('banner'));
+        return view('admin.edit_banner', compact('banner'));
     }
-    
+
     public function update(Request $request, $banner_id)
     {
         $request->validate([
@@ -70,7 +66,7 @@ class BannerController extends Controller
         ]);
         $banner = Banner::where('banner_id', $banner_id)->first();
         $image = $banner->image;
-        if($request->hasFile('image')){ 
+        if ($request->hasFile('image')) {
             $image = $request->image->hashName();
             $request->image->store('public/uplodes');
         }

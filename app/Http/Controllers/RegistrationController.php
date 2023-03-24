@@ -1,26 +1,24 @@
 <?php
- 
+
 namespace App\Http\Controllers;
- 
+
 use Illuminate\Http\Request;
 use Hash;
-use Session;
 use App\Models\User;
-use App\Models\Admin;
 use App\Models\Banner;
 use Illuminate\Support\Facades\Auth;
- 
+
 class RegistrationController extends Controller
 {
- 
+
     public function index()
     {
-        $banners = Banner::where('deleted_at', null)->orderBy('sort_order','asc')->get();
+        $banners = Banner::where('deleted_at', null)->orderBy('sort_order', 'asc')->get();
         return view('registration', compact('banners'));
     }
-       
+
     public function store(Request $request)
-    {  
+    {
         $request->validate([
             'email' => 'required|email|unique:user',
             'password' => 'required|confirmed|min:3',
@@ -38,9 +36,9 @@ class RegistrationController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-        
+
         if (Auth::attempt($credentials)) {
-          return redirect()->intended('home');
+            return redirect()->intended('home');
         }
         return redirect('/login')->with('message', 'Your Registration is sucessfull');
     }

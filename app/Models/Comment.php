@@ -12,7 +12,7 @@ class Comment extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='comment';
+    protected $table = 'comment';
     protected $primaryKey = 'comment_id';
     protected $fillable = [
         'user_id',

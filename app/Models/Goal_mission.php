@@ -12,7 +12,7 @@ class Goal_mission extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='goal_mission';
+    protected $table = 'goal_mission';
     protected $primaryKey = 'goal_mission_id';
     protected $fillable = [
         'goal_objective_text',

@@ -12,7 +12,7 @@ class Country extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='country';
+    protected $table = 'country';
     protected $primaryKey = 'country_id';
     protected $fillable = [
         'name',

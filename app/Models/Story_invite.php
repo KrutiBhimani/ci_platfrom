@@ -12,7 +12,7 @@ class Story_invite extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table='story_invite';
+    protected $table = 'story_invite';
     protected $primaryKey = 'story_invite_id';
     protected $fillable = [
         'from_user_id',

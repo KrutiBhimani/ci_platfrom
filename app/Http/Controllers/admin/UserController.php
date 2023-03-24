@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Country;
 use App\Models\City;
-use App\Models\Admin;
-use Auth;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -18,23 +16,23 @@ class UserController extends Controller
     {
         $pagecount = 5;
         if (isset($_REQUEST['page'])) {
-          $page = $_REQUEST['page'];
+            $page = $_REQUEST['page'];
         } else
-          $page = 1;
-        $cnts = User::where('deleted_at', null)->orderBy('user_id','desc')->get()->count();
+            $page = 1;
+        $cnts = User::where('deleted_at', null)->orderBy('user_id', 'desc')->get()->count();
         $cnt = ceil($cnts / $pagecount);
-        $users = User::where('deleted_at', null)->orderBy('user_id','desc')->paginate($pagecount);
-        if ($request->get('search')) { 
+        $users = User::where('deleted_at', null)->orderBy('user_id', 'desc')->paginate($pagecount);
+        if ($request->get('search')) {
             $users = User::where('first_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('last_name', 'LIKE', '%' . $request->get('search') . '%')->orwhere('email', 'LIKE', '%' . $request->get('search') . '%')->where('deleted_at', null)->get();
         }
-        return view('admin.user', compact('users', 'page','cnt'));
+        return view('admin.user', compact('users', 'page', 'cnt'));
     }
 
     public function create()
     {
         $countries = Country::get();
         $cities = City::get();
-        return view('admin.add_user',compact('countries','cities'));
+        return view('admin.add_user', compact('countries', 'cities'));
     }
 
     public function store(Request $request)
@@ -48,7 +46,7 @@ class UserController extends Controller
             'avatar' => 'mimes:jpeg,bmp,png'
         ]);
         $avatar = null;
-        if($request->hasFile('avatar')){ 
+        if ($request->hasFile('avatar')) {
             $avatar = $request->avatar->hashName();
             $request->avatar->store('public/uplodes');
         }
@@ -75,7 +73,7 @@ class UserController extends Controller
         $user = User::where(['user_id' => $user_id])->first();
         $countries = Country::get();
         $cities = City::get();
-        return view('admin.edit_user',compact('countries','cities','user'));
+        return view('admin.edit_user', compact('countries', 'cities', 'user'));
     }
 
     public function update(Request $request, $user_id)
@@ -90,7 +88,7 @@ class UserController extends Controller
         ]);
         $user = User::where('user_id', $user_id)->first();
         $avatar = $user->avatar;
-        if($request->hasFile('avatar')){ 
+        if ($request->hasFile('avatar')) {
             $avatar = $request->avatar->hashName();
             $request->avatar->store('public/uplodes');
         }
