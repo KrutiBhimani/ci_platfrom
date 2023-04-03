@@ -52,7 +52,7 @@
                         <p class="mb-1 mt-4 fs14">Department</p>
                         <input type="text" name="department" class="popup" value="{{ old('department') }}">
                         <p class="mb-1 mt-4 fs14">Country</p>
-                        <select class="popup pt-0 pb-0" id="selectCountries" name="country_id">
+                        <select class="popup pt-0 pb-0" id="country-dd" name="country_id">
                             <option value="none" selected="" disabled="" hidden=""></option>
                             @foreach ($countries as $country)
                                 <option value="{{ $country->country_id }}">{{ $country->name }}</option>
@@ -63,7 +63,7 @@
                         @endif
                         <input type="number" name="selected_country_id" id="divResult" value="" hidden="">
                         <p class="mb-1 mt-4 fs14">City</p>
-                        <select class="popup pt-0 pb-0" name="city_id">
+                        <select class="popup pt-0 pb-0" id="city-dd" name="city_id">
                             <option value="none" selected="" disabled="" hidden=""></option>
                             @foreach ($cities as $city)
                                 <option value="{{ $city->city_id }}">{{ $city->name }}</option>
@@ -92,4 +92,28 @@
             </button>
         </div>
     </form>
+    <script>
+        $(document).ready(function() {
+            $('#country-dd').on('change', function() {
+                var idState = this.value;
+                $("#city-dd").html('');
+                $.ajax({
+                    url: "{{ url('api/fetch-cities') }}",
+                    type: "POST",
+                    data: {
+                        country_id: idState,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        $('#city-dd').html('<option value="">Select City</option>');
+                        $.each(res.cities, function(key, value) {
+                            $("#city-dd").append('<option value="' + value
+                                .city_id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -37,18 +37,8 @@
                         @endif
                         <p class="mb-1 mt-4 fs14">Description</p>
                         <textarea rows="5" name="description" class="popup1">{{ $mission->description }}</textarea>
-                        <p class="mb-1 mt-4 fs14">City</p>
-                        <select class="popup pt-0 pb-0" name="city_id">
-                            @foreach ($cities as $city)
-                                <option value="{{ $city->city_id }}"
-                                    {{ $city->city_id == $mission->city_id ? 'selected' : '' }}>{{ $city->name }}</option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('city_id'))
-                            <span class="text-danger">{{ $errors->first('city_id') }}</span>
-                        @endif
                         <p class="mb-1 mt-4 fs14">Country</p>
-                        <select class="popup pt-0 pb-0" id="selectCountries" name="country_id">
+                        <select class="popup pt-0 pb-0" id="country-dd" name="country_id">
                             @foreach ($countries as $country)
                                 <option value="{{ $country->country_id }}"
                                     {{ $country->country_id == $mission->country_id ? 'selected' : '' }}>{{ $country->name }}
@@ -57,6 +47,16 @@
                         </select>
                         @if ($errors->has('country_id'))
                             <span class="text-danger">{{ $errors->first('country_id') }}</span>
+                        @endif
+                        <p class="mb-1 mt-4 fs14">City</p>
+                        <select class="popup pt-0 pb-0" name="city_id" id="city-dd">
+                            @foreach ($cities as $city)
+                                <option value="{{ $city->city_id }}"
+                                    {{ $city->city_id == $mission->city_id ? 'selected' : '' }}>{{ $city->name }}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('city_id'))
+                            <span class="text-danger">{{ $errors->first('city_id') }}</span>
                         @endif
                         <p class="mb-1 mt-4 fs14">Organisation Name</p>
                         <input type="text" class="popup" name="organization_name"
@@ -163,6 +163,28 @@
                     });
                     $('#divResult').html(resultString);
                 }
+            });
+        });
+        $(document).ready(function() {
+            $('#country-dd').on('change', function() {
+                var idState = this.value;
+                $("#city-dd").html('');
+                $.ajax({
+                    url: "{{ url('api/fetch-cities') }}",
+                    type: "POST",
+                    data: {
+                        country_id: idState,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        $('#city-dd').html('<option value="">Select City</option>');
+                        $.each(res.cities, function(key, value) {
+                            $("#city-dd").append('<option value="' + value
+                                .city_id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
             });
         });
     </script>

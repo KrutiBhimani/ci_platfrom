@@ -72,7 +72,7 @@ class UserController extends Controller
     {
         $user = User::where(['user_id' => $user_id])->first();
         $countries = Country::get();
-        $cities = City::get();
+        $cities = City::where("country_id", $user->country_id)->get();
         return view('admin.edit_user', compact('countries', 'cities', 'user'));
     }
 

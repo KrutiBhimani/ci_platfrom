@@ -8,7 +8,8 @@
                 <div class="modal-content p-2">
                     <div class="modal-header pb-0 border-bottom-0">
                         <p class="mb-0 fs20">Change Password </p>
-                        <img class="text-end mt-2 mb-2 pe-auto h13" src="mvc/Assets/images/cancel1.png" data-bs-dismiss="modal">
+                        <img class="text-end mt-2 mb-2 pe-auto h13" src="mvc/Assets/images/cancel1.png"
+                            data-bs-dismiss="modal">
                     </div>
                     <div class="modal-body pb-2">
                         <input type="password" class="popup" name="old_password" placeholder="Enter old password">
@@ -44,13 +45,14 @@
                 <div class="modal-content p-3">
                     <div class="modal-header pb-0 border-bottom-0">
                         <p class="mb-0 fs20">Add Your Skills</p>
-                        <img class="text-end mt-2 mb-2 pe-auto h13" src="/storage/images/cancel1.png" data-bs-dismiss="modal">
+                        <img class="text-end mt-2 mb-2 pe-auto h13" src="/storage/images/cancel1.png"
+                            data-bs-dismiss="modal">
                     </div>
                     <div class="modal-body pb-0">
                         <div class="row fs10">
                             <div class="col p-3 bsg">
-                                <select id="selectCountries" class="w-100 border-0 fs12 ofy" name="skill[]" multiple="multiple"
-                                    size="26">
+                                <select id="selectCountries" class="w-100 border-0 fs12 ofy" name="skill[]"
+                                    multiple="multiple" size="26">
                                     @foreach ($skills as $skill)
                                         <option value="{{ $skill->skill_id }}"
                                             @foreach ($selected_skills as $selected) {{ $selected->skill_id == $skill->skill_id ? 'selected' : '' }} @endforeach>
@@ -96,7 +98,7 @@
                                 }
                             </script>
                             <div class="col p-3 bsg">
-                                <div id="divResult fs12"></div>
+                                <div id="divResult" class="fs12"></div>
                             </div>
                         </div>
                     </div>
@@ -148,7 +150,8 @@
                             <h4 class="fs151">
                                 {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</h4>
                             <a href="#" class="fs111 text-dark" data-bs-toggle="modal"
-                                data-bs-target="#popup1">change password</a><br>
+                                data-bs-target="#popup1">change
+                                password</a><br>
                         </div>
                     </div>
                 </div>
@@ -307,7 +310,11 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane show active" id="mission">
-                                <textarea rows="6" class="popup1 mt-3 bgw" id="divskill" placeholder="select your skill" disabled="">@foreach ($selected_skills as $selected)@php echo $selected->skill_name.'&#13;&#10;';@endphp @endforeach</textarea>
+                                <textarea rows="6" class="popup1 mt-3 bgw" id="divskill" placeholder="select your skill" disabled="">
+@foreach ($selected_skills as $selected)
+@php echo $selected->skill_name.'&#13;&#10;';@endphp
+@endforeach
+</textarea>
                                 <button type="button" class="col-example8 mt-3" data-bs-toggle="modal"
                                     data-bs-target="#popup3">Add Skills</button>
                             </div>

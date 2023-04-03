@@ -139,7 +139,7 @@ class MissionController extends Controller
     {
         $mission = Mission::where(['mission_id' => $mission_id])->first();
         $countries = Country::get();
-        $cities = City::get();
+        $cities = City::where("country_id", $mission->country_id)->get();
         $themes = Mission_theme::where('deleted_at', null)->get();
         $skills = Skill::where('deleted_at', null)->get();
         $selected_skills = Mission_skill::where(['mission_id' => $mission_id])->get();

@@ -15,6 +15,7 @@ use App\Http\Controllers\VolunteeringController;
 use App\Http\Controllers\ShareStoryController;
 use App\Http\Controllers\StoryDetailController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FetchCityController;
 
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\AppController;
@@ -39,6 +40,7 @@ Route::resource('forget-password', ForgotPasswordController::class);
 Route::resource('reset-password', ResetPasswordController::class);
 Route::resource('logout', LogoutController::class);
 Route::resource('policy', PolicyController::class);
+Route::post('api/fetch-cities', [FetchCityController::class, 'fetchCity']);
 
 // user side
 Route::middleware(['authenticate-user'])->group(function () {
@@ -54,7 +56,6 @@ Route::middleware(['authenticate-user'])->group(function () {
     Route::resource('story_detail', StoryDetailController::class);
 
     Route::resource('edit_user', EditUserController::class);
-    Route::post('api/fetch-cities', [EditUserController::class, 'fetchCity']);
     Route::resource('timesheet', TimesheetController::class);
 });
 

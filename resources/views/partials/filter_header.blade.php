@@ -126,9 +126,9 @@
                                         <img src="/storage/images/search.png" alt=""
                                             class="input-group-text p-0 m-0 border-0 bgw" id="basic-addon1">
                                     </div>
-                                    <input type="text" value="" id="clickedButton" name="search"
-                                        value="{{ request()->search }}" placeholder="Search mission..."
-                                        class="form-control shadow-none m-2 fs18 border-0" onchange="showHide()">
+                                    <input type="text" value="{{ request()->search }}" id="clickedButton" name="search"
+                                        placeholder="Search mission..."
+                                        class="form-control shadow-none m-2 fs18 border-0" onkeyup="showHide()">
                                 </div>
                             </td>
                             <td class="border-end wd8">

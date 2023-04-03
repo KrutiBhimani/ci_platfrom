@@ -56,7 +56,7 @@
                         <p class="mb-1 mt-4 fs14">Department</p>
                         <input type="text" name="department" class="popup" value="{{ $user->department }}">
                         <p class="mb-1 mt-4 fs14">Country</p>
-                        <select class="popup pt-0 pb-0" name="country_id">
+                        <select class="popup pt-0 pb-0" name="country_id" id="country-dd">
                             @foreach ($countries as $country)
                                 <option value="{{ $country->country_id }}"
                                     {{ $user->country_id == $country->country_id ? 'selected' : '' }}>{{ $country->name }}
@@ -67,7 +67,7 @@
                             <span class="text-danger">{{ $errors->first('country_id') }}</span>
                         @endif
                         <p class="mb-1 mt-4 fs14">City</p>
-                        <select class="popup pt-0 pb-0" name="city_id">
+                        <select class="popup pt-0 pb-0" name="city_id" id="city-dd">
                             @foreach ($cities as $city)
                                 <option value="{{ $city->city_id }}"
                                     {{ $user->city_id == $city->city_id ? 'selected' : '' }}>{{ $city->name }}</option>
@@ -97,4 +97,28 @@
             </button>
         </div>
     </form>
+    <script>
+        $(document).ready(function() {
+            $('#country-dd').on('change', function() {
+                var idState = this.value;
+                $("#city-dd").html('');
+                $.ajax({
+                    url: "{{ url('api/fetch-cities') }}",
+                    type: "POST",
+                    data: {
+                        country_id: idState,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        $('#city-dd').html('<option value="">Select City</option>');
+                        $.each(res.cities, function(key, value) {
+                            $("#city-dd").append('<option value="' + value
+                                .city_id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

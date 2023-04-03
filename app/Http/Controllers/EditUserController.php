@@ -11,6 +11,7 @@ use App\Models\Country;
 use App\Models\User_skill;
 use App\Models\Skill;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class EditUserController extends Controller
 {
@@ -22,12 +23,6 @@ class EditUserController extends Controller
             ->leftJoin('skill', 'skill.skill_id', '=', 'user_skill.skill_id')->get();
         $skills = Skill::where('deleted_at', null)->get();
         return view('edit_user', compact('countries', 'cities', 'selected_skills', 'skills'));
-    }
-
-    public function fetchCity(Request $request)
-    {
-        $data['cities'] = City::where("country_id", $request->get('country_id'))->get();
-        return response()->json($data);
     }
 
     public function store(Request $request) //password change
