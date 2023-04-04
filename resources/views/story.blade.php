@@ -16,16 +16,22 @@
         </div>
     </div>
     <div class="container-lg">
-        @if (Session::has('message'))
-            <div class="alert alert-success mb-0 mt-3" role="alert">
-                {{ Session::get('message') }}
-            </div>
-        @endif
-        @if (Session::has('error'))
-            <div class="alert alert-danger mb-0 mt-3" role="alert">
-                {{ Session::get('error') }}
-            </div>
-        @endif
+        <script>
+            @if (Session::has('message'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.success("{{ session('message') }}");
+            @endif
+            @if (Session::has('error'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.error("{{ session('error') }}");
+            @endif
+        </script>
         <div class="row row-eq-height justify-content-center mt-5">
             @foreach ($stories as $story)
                 <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5 d-flex align-items-stretch">
@@ -49,7 +55,7 @@
                                 {{ $story->story_description ? substr($story->story_description, 0, 99) . '...' : '' }}</p>
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-2">
-                                    <img src="{{ $story->avatar ? '/storage/images/' . $story->avatar : '/storage/images/user1.png' }}"
+                                    <img src="{{ $story->avatar ? '/storage/uplodes/' . $story->avatar : '/storage/images/user1.png' }}"
                                         class="rounded-circle" height="34px" width="34px">
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-8 pt-2 pb-2">

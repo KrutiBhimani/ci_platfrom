@@ -12,7 +12,8 @@
                             data-bs-dismiss="modal">
                     </div>
                     <div class="modal-body pb-2">
-                        <input type="password" class="popup" name="old_password" placeholder="Enter old password">
+                        <input type="password" class="popup" name="old_password" placeholder="Enter old password"
+                            value="{{ old('old_password') }}">
                         @if ($errors->has('old_password'))
                             <span class="text-danger">{{ $errors->first('old_password') }}</span>
                         @endif
@@ -112,16 +113,22 @@
             </div>
         </div>
         <div class="container-lg">
-            @if (Session::has('message'))
-                <div class="alert alert-success" role="alert">
-                    {{ Session::get('message') }}
-                </div>
-            @endif
-            @if (Session::has('error'))
-                <div class="alert alert-danger" role="alert">
-                    {{ Session::get('error') }}
-                </div>
-            @endif
+            <script>
+                @if (Session::has('message'))
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true
+                    }
+                    toastr.success("{{ session('message') }}");
+                @endif
+                @if (Session::has('error'))
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true
+                    }
+                    toastr.error("{{ session('error') }}");
+                @endif
+            </script>
             <div class="row mt-5">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-12 mb-5">
                     <div class="row col col-example10 text-center m-0">
@@ -143,14 +150,13 @@
                                     src="{{ Auth::user()->avatar != null ? '/storage/uplodes/' . Auth::user()->avatar : '/storage/images/user1.png' }}"
                                     class="rounded-circle mt-4 mb-3 h308 w308 pe-auto">
                             </label>
-                            <input type="file" name="avatar" id="choose-file2" onchange="readURL(this);"
-                                class="dnone" accept="image/x-png,image/jpg,image/jpeg">
+                            <input type="file" name="avatar" id="choose-file2" onchange="readURL(this);" class="dnone"
+                                accept="image/x-png,image/jpg,image/jpeg">
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-5 col-5">
                             <h4 class="fs151">
                                 {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</h4>
-                            <a href="#" class="fs111 text-dark" data-bs-toggle="modal"
-                                data-bs-target="#popup1">change
+                            <a href="#" class="fs111 text-dark" data-bs-toggle="modal" data-bs-target="#popup1">change
                                 password</a><br>
                         </div>
                     </div>
@@ -351,5 +357,8 @@
                 });
             });
         });
+        @if ($errors->has('old_password') || $errors->has('password_confirmation') || $errors->has('password'))
+            $('#popup1').modal('show');
+        @endif
     </script>
 @endsection

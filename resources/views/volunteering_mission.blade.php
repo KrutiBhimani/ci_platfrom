@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-5 pt-4">
-                @if (Session::has('message'))
+                {{-- @if (Session::has('message'))
                     <div class="alert alert-success" role="alert">
                         {{ Session::get('message') }}
                     </div>
@@ -44,7 +44,23 @@
                     <div class="alert alert-danger" role="alert">
                         {{ Session::get('error') }}
                     </div>
-                @endif
+                @endif --}}
+                <script>
+                    @if (Session::has('message'))
+                        toastr.options = {
+                            "closeButton": true,
+                            "progressBar": true
+                        }
+                        toastr.success("{{ session('message') }}");
+                    @endif
+                    @if (Session::has('error'))
+                        toastr.options = {
+                            "closeButton": true,
+                            "progressBar": true
+                        }
+                        toastr.error("{{ session('error') }}");
+                    @endif
+                </script>
                 <p class="mb-3 fs1501">{{ $mission->mission_title }}</p>
                 <p class="mb-3 text-secondary fs1115">{{ $mission->short_description }}</p>
                 <div class="d-flex align-items-center">
@@ -366,7 +382,8 @@
                                                 class="rounded-circle h45">
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-10 col-12 p-0">
-                                            <p class="mb-1 fs14">{{ $comment->first_name . ' ' . $comment->last_name }}</p>
+                                            <p class="mb-1 fs14">{{ $comment->first_name . ' ' . $comment->last_name }}
+                                            </p>
                                             <p class="mb-2 fs10">
                                                 {{ date('l, F d, Y, h:i A', strtotime($comment->comment_date)) }}</p>
                                             <p class="mb-0 fs12">{{ $comment->comment_text }}</p>
@@ -654,7 +671,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0">
                                                                 <img src="/storage/images/Seats-left.png" alt=""
-                                                                    class="h23"></div>
+                                                                    class="h23">
+                                                            </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                 @foreach ($applications as $application)
                                                                     @if ($application->missionid == $mission->missionid)
@@ -671,7 +689,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0">
                                                                 <img src="/storage/images/Already-volunteered.png"
-                                                                    alt="" class="h20"></div>
+                                                                    alt="" class="h20">
+                                                            </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                 @foreach ($applications as $application)
                                                                     @if ($application->missionid == $mission->missionid)
@@ -689,7 +708,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0">
                                                                 <img src="/storage/images/deadline.png" alt=""
-                                                                    class="h28"></div>
+                                                                    class="h28">
+                                                            </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                 {{ date('d-m-Y', strtotime($mission->deadline)) }}
                                                                 <h6 class="mb-2 text-secondary fs12">Deadline</h6>
@@ -768,5 +788,8 @@
             var height = parseInt(mainImageElement.attr('height'));
             var width = parseInt(mainImageElement.attr('width'))
         });
+        @if ($errors->has('email'))
+            $('#popup{{ $mission->missionid }}').modal('show');
+        @endif
     </script>
 @endsection

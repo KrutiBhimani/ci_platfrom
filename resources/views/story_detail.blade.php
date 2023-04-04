@@ -41,16 +41,22 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-5 pt-5">
-                @if (Session::has('message'))
-                    <div class="alert alert-success" role="alert">
-                        {{ Session::get('message') }}
-                    </div>
-                @endif
-                @if (Session::has('error'))
-                    <div class="alert alert-danger" role="alert">
-                        {{ Session::get('error') }}
-                    </div>
-                @endif
+                <script>
+                    @if (Session::has('message'))
+                        toastr.options = {
+                            "closeButton": true,
+                            "progressBar": true
+                        }
+                        toastr.success("{{ session('message') }}");
+                    @endif
+                    @if (Session::has('error'))
+                        toastr.options = {
+                            "closeButton": true,
+                            "progressBar": true
+                        }
+                        toastr.error("{{ session('error') }}");
+                    @endif
+                </script>
                 <div class="d-flex justify-content-between">
                     <div>
                         <img src="{{ $story->avatar != null ? '/storage/uplodes/' . $story->avatar : '/storage/images/user1.png' }}"
@@ -149,5 +155,8 @@
             var height = parseInt(mainImageElement.attr('height'));
             var width = parseInt(mainImageElement.attr('width'))
         });
+        @if ($errors->has('email'))
+            $('#popup{{ $story->story_id }}').modal('show');
+        @endif
     </script>
 @endsection

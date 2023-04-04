@@ -1,16 +1,22 @@
 @extends('layouts.admin_header')
 
 @section('content')
-    @if (Session::has('message'))
-        <div class="alert alert-success" role="alert">
-            {{ Session::get('message') }}
-        </div>
-    @endif
-    @if (Session::has('error'))
-        <div class="alert alert-danger" role="alert">
-            {{ Session::get('error') }}
-        </div>
-    @endif
+    <script>
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+    </script>
     <br />
     <form action="{{ route('mission.update', $mission->mission_id) }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -41,7 +47,8 @@
                         <select class="popup pt-0 pb-0" id="country-dd" name="country_id">
                             @foreach ($countries as $country)
                                 <option value="{{ $country->country_id }}"
-                                    {{ $country->country_id == $mission->country_id ? 'selected' : '' }}>{{ $country->name }}
+                                    {{ $country->country_id == $mission->country_id ? 'selected' : '' }}>
+                                    {{ $country->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -52,7 +59,8 @@
                         <select class="popup pt-0 pb-0" name="city_id" id="city-dd">
                             @foreach ($cities as $city)
                                 <option value="{{ $city->city_id }}"
-                                    {{ $city->city_id == $mission->city_id ? 'selected' : '' }}>{{ $city->name }}</option>
+                                    {{ $city->city_id == $mission->city_id ? 'selected' : '' }}>{{ $city->name }}
+                                </option>
                             @endforeach
                         </select>
                         @if ($errors->has('city_id'))
@@ -123,7 +131,8 @@
                         <p class="mb-1 mt-4 fs14">Availability</p>
                         <select class="popup pt-0 pb-0" name="availability">
                             <option value="none" selected="" disabled="" hidden=""></option>
-                            <option value="daily" {{ $mission->availability == 'daily' ? 'selected' : '' }}>Daily</option>
+                            <option value="daily" {{ $mission->availability == 'daily' ? 'selected' : '' }}>Daily
+                            </option>
                             <option value="weekly" {{ $mission->availability == 'weekly' ? 'selected' : '' }}>Weekly
                             </option>
                             <option value="weekend" {{ $mission->availability == 'weekend' ? 'selected' : '' }}>Weekend

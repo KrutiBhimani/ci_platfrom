@@ -1,16 +1,22 @@
 @extends('layouts.home_header1')
 @section('content')
     <div class="container-lg">
-        @if (Session::has('message'))
-            <div class="alert alert-success mb-0 mt-3" role="alert">
-                {{ Session::get('message') }}
-            </div>
-        @endif
-        @if (Session::has('error'))
-            <div class="alert alert-danger mb-0 mt-3" role="alert">
-                {{ Session::get('error') }}
-            </div>
-        @endif
+        <script>
+            @if (Session::has('message'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.success("{{ session('message') }}");
+            @endif
+            @if (Session::has('error'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.error("{{ session('error') }}");
+            @endif
+        </script>
     </div>
     <main id="main">
         <section id="story">
@@ -183,7 +189,8 @@
                                                                         <div
                                                                             class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0">
                                                                             <img src="/storage/images/Seats-left.png"
-                                                                                alt="" class="h23"></div>
+                                                                                alt="" class="h23">
+                                                                        </div>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                             @foreach ($applications as $application)
                                                                                 @if ($application->missionid == $mission->missionid)
@@ -202,7 +209,8 @@
                                                                         <div
                                                                             class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0">
                                                                             <img src="/storage/images/Already-volunteered.png"
-                                                                                alt="" class="h20"></div>
+                                                                                alt="" class="h20">
+                                                                        </div>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                             @foreach ($applications as $application)
                                                                                 @if ($application->missionid == $mission->missionid)
@@ -222,7 +230,8 @@
                                                                         <div
                                                                             class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0">
                                                                             <img src="/storage/images/deadline.png"
-                                                                                alt="" class="h28"></div>
+                                                                                alt="" class="h28">
+                                                                        </div>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                             <h4 class="mb-2 fs131">
                                                                                 {{ date('d-m-Y', strtotime($mission->deadline)) }}
@@ -240,7 +249,8 @@
                                                                     <div
                                                                         class="col-lg-1 col-md-1 col-sm-1 col-1 m-1 mt-0 mb-0">
                                                                         <img src="/storage/images/achieved.png"
-                                                                            alt="" class="h22"></div>
+                                                                            alt="" class="h22">
+                                                                    </div>
                                                                     @php
                                                                         $goal_value = $mission->goal_value;
                                                                         $goal_achieved = 0;
@@ -474,7 +484,8 @@
                                                                             <div
                                                                                 class="col-lg-1 col-md-1 col-sm-1 col-1 me-1">
                                                                                 <img src="/storage/images/achieved.png"
-                                                                                    alt="" class="h22"></div>
+                                                                                    alt="" class="h22">
+                                                                            </div>
                                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                                 <div class="mt-2 mb-2 under"
                                                                                     id="forwidth">
@@ -505,7 +516,8 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-1 col-md-1 col-sm-1 col-1 me-1">
                                                                             <img src="/storage/images/calender.png"
-                                                                                alt="" class="h20"></div>
+                                                                                alt="" class="h20">
+                                                                        </div>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                             <h4 class="mb-1 fs11">
                                                                                 @if ($mission->mission_type == 'TIME')
@@ -528,7 +540,8 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-1 col-md-1 col-sm-1 col-1 me-1">
                                                                             <i class="fa fa-cogs text-secondary"
-                                                                                aria-hidden="true"></i></div>
+                                                                                aria-hidden="true"></i>
+                                                                        </div>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-9">
                                                                             <h4 class="mb-1 fs121">Skills</h4>
                                                                             <h6 class="mb-0 text-secondary fs12">

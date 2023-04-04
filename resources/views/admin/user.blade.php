@@ -1,16 +1,22 @@
 @extends('layouts.admin_header')
 
 @section('content')
-    @if (Session::has('message'))
-        <div class="alert alert-success mb-0 mt-3" role="alert">
-            {{ Session::get('message') }}
-        </div>
-    @endif
-    @if (Session::has('error'))
-        <div class="alert alert-danger mb-0 mt-3" role="alert">
-            {{ Session::get('error') }}
-        </div>
-    @endif
+    <script>
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+    </script>
     <div class="p-3">
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -58,7 +64,8 @@
                                     <td class="p-3 pe-0 fs13">{{ $user->email }}</td>
                                     <td class="p-3 pe-0 fs13">{{ $user->employee_id }}</td>
                                     <td class="p-3 pe-0 fs13">{{ $user->department }}</td>
-                                    <td class="p-3 pe-0 fs13 text-success">{{ $user->status == '1' ? 'Active' : 'Inactive' }}
+                                    <td class="p-3 pe-0 fs13 text-success">
+                                        {{ $user->status == '1' ? 'Active' : 'Inactive' }}
                                     </td>
                                     <td class="p-3 pe-0 p-0 fs20">
                                         <a href="/admin/user/{{ $user->user_id }}/edit"><i
@@ -112,8 +119,8 @@
                                     <li class='page-item'><a class='page-link peginate' href='/admin/user?page=1'><img
                                                 src='/storage/images/previous.png' alt=''></a></li>
                                     <li class='page-item'><a class='page-link peginate'
-                                            href='/admin/user?page={{ $previous }}'><img
-                                                src='/storage/images/left.png' alt=''></a></li>
+                                            href='/admin/user?page={{ $previous }}'><img src='/storage/images/left.png'
+                                                alt=''></a></li>
                                 @endif
                                 @for ($i = 1; $i <= $cnt; $i++)
                                     @if ($i == $page)

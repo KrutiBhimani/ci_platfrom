@@ -1,16 +1,12 @@
 @extends('layouts.home_header2')
 @section('content')
-    <link rel="stylesheet" type="text/css" href="/../css/toastr.min.css">
-    <script src="/../js/toastr.min.js"></script>
-
     @foreach ($timesheets as $timesheet)
         <div id="popupdelete{{ $timesheet->timesheet_id }}" class="modal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content p-2">
                     <div class="modal-header pb-0 border-bottom-0">
                         <p class="mb-0 fs20">Confirm Delete</p>
-                        <img class="text-end mt-2 mb-2 pe-auto h13" src="/storage/images/cancel1.png"
-                            data-bs-dismiss="modal">
+                        <img class="text-end mt-2 mb-2 pe-auto h13" src="/storage/images/cancel1.png" data-bs-dismiss="modal">
                     </div>
                     <input type="text" value="16" name="timesheet_id" hidden="">
                     <div class="modal-body pb-0">
@@ -42,7 +38,7 @@
                     @csrf
                     <div class="modal-body pb-0">
                         <p class="mb-1">Mission</p>
-                        <select class="popup pt-0 pb-0" name="mission_id">
+                        <select class="popup pt-0 pb-0" name="mission_id1">
                             <option value="none" selected="" disabled="" hidden="">Select your mission</option>
                             @foreach ($missions as $mission)
                                 @if ($mission->mission_type == 'TIME')
@@ -50,13 +46,14 @@
                                 @endif
                             @endforeach
                         </select>
-                        @if ($errors->has('mission_id'))
-                            <span class="text-danger">{{ $errors->first('mission_id') }}</span>
+                        @if ($errors->has('mission_id1'))
+                            <span class="text-danger">{{ $errors->first('mission_id1') }}</span>
                         @endif
                         <p class="mb-1 mt-3">Date Volunteered</p>
-                        <input type="date" name="date_volunteered" class="popup" value="Select date">
-                        @if ($errors->has('date_volunteered'))
-                            <span class="text-danger">{{ $errors->first('date_volunteered') }}</span>
+                        <input type="date" name="date_volunteered1" class="popup"
+                            value="{{ old('date_volunteered1') }}">
+                        @if ($errors->has('date_volunteered1'))
+                            <span class="text-danger">{{ $errors->first('date_volunteered1') }}</span>
                         @endif
                         <div class="row">
                             <div class="col">
@@ -92,7 +89,7 @@
                     @csrf
                     <div class="modal-body pb-0">
                         <p class="mb-1">Mission</p>
-                        <select class="popup pt-0 pb-0" name="missionid">
+                        <select class="popup pt-0 pb-0" name="mission_id2">
                             <option value="none" selected="" disabled="" hidden="">Select your mission
                             </option>
                             @foreach ($missions as $mission)
@@ -101,13 +98,14 @@
                                 @endif
                             @endforeach
                         </select>
-                        @if ($errors->has('missionid'))
-                            <span class="text-danger">{{ $errors->first('missionid') }}</span>
+                        @if ($errors->has('mission_id2'))
+                            <span class="text-danger">{{ $errors->first('mission_id2') }}</span>
                         @endif
                         <p class="mb-1 mt-3">Date Volunteered</p>
-                        <input type="date" name="datevolunteered" class="popup">
-                        @if ($errors->has('datevolunteered'))
-                            <span class="text-danger">{{ $errors->first('datevolunteered') }}</span>
+                        <input type="date" name="date_volunteered2" class="popup"
+                            value="{{ old('date_volunteered2') }}">
+                        @if ($errors->has('date_volunteered2'))
+                            <span class="text-danger">{{ $errors->first('date_volunteered2') }}</span>
                         @endif
                         <p class="mb-1 mt-3">Action</p>
                         <input type="text" class="popup" name="action" placeholder="Enter Action">
@@ -201,7 +199,7 @@
                                                 <input type="text" value="16" name="timesheet_id" hidden="">
                                                 <div class="modal-body pb-0">
                                                     <p class="mb-1">Mission</p>
-                                                    <select class="popup pt-0 pb-0" name="mission_id">
+                                                    <select class="popup pt-0 pb-0" name="mission_id3">
                                                         @foreach ($missions as $mission)
                                                             @if ($mission->mission_type == 'TIME')
                                                                 <option value="{{ $mission->mission_id }}"
@@ -211,11 +209,11 @@
                                                         @endforeach
                                                     </select>
                                                     <p class="mb-1 mt-3">Date Volunteered</p>
-                                                    <input type="date" name="date_volunteered"
+                                                    <input type="date" name="date_volunteered3"
                                                         value="{{ $timesheet->date_volunteered }}" class="popup">
-                                                    @if ($errors->has('date_volunteered'))
+                                                    @if ($errors->has('date_volunteered3'))
                                                         <span
-                                                            class="text-danger">{{ $errors->first('date_volunteered') }}</span>
+                                                            class="text-danger">{{ $errors->first('date_volunteered3') }}</span>
                                                     @endif
                                                     <div class="row">
                                                         <div class="col">
@@ -246,6 +244,11 @@
                                         </div>
                                     </div>
                                 </form>
+                                {{-- <script>
+                                    @if ($errors->has('date_volunteered3'))
+                                        $('#popupedit{{ $timesheet->timesheet_id }}').modal('show');
+                                    @endif
+                                </script> --}}
                             @endif
                         @endforeach
                     </tbody>
@@ -307,7 +310,7 @@
                                                 <input type="text" value="15" name="timesheet_id" hidden="">
                                                 <div class="modal-body pb-0">
                                                     <p class="mb-1">Mission</p>
-                                                    <select class="popup pt-0 pb-0" name="mission_id">
+                                                    <select class="popup pt-0 pb-0" name="mission_id4">
                                                         @foreach ($missions as $mission)
                                                             @if ($mission->mission_type == 'GOAL')
                                                                 <option value="{{ $mission->mission_id }}"
@@ -317,11 +320,11 @@
                                                         @endforeach
                                                     </select>
                                                     <p class="mb-1 mt-3">Date Volunteered</p>
-                                                    <input type="date" name="datevolunteered"
+                                                    <input type="date" name="date_volunteered4"
                                                         value="{{ $timesheet->date_volunteered }}" class="popup">
-                                                    @if ($errors->has('datevolunteered'))
+                                                    @if ($errors->has('date_volunteered4'))
                                                         <span
-                                                            class="text-danger">{{ $errors->first('datevolunteered') }}</span>
+                                                            class="text-danger">{{ $errors->first('date_volunteered4') }}</span>
                                                     @endif
                                                     <p class="mb-1 mt-3">Action</p>
                                                     <input type="text" class="popup" name="action"
@@ -341,6 +344,11 @@
                                         </div>
                                     </div>
                                 </form>
+                                {{-- <script>
+                                    @if ($errors->has('date_volunteered4'))
+                                        $('#popupedit{{ $timesheet->timesheet_id }}').modal('show');
+                                    @endif
+                                </script> --}}
                             @endif
                         @endforeach
                     </tbody>
@@ -348,4 +356,12 @@
             </div>
         </div>
     </div>
+    <script>
+        @if ($errors->has('mission_id1') || $errors->has('date_volunteered1'))
+            $('#popup1').modal('show');
+        @endif
+        @if ($errors->has('mission_id2') || $errors->has('date_volunteered2'))
+            $('#popup2').modal('show');
+        @endif
+    </script>
 @endsection

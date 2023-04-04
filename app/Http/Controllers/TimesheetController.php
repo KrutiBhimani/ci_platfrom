@@ -22,14 +22,14 @@ class TimesheetController extends Controller
     {
         if (isset($_POST['add_hours'])){
             $request->validate([
-                'mission_id' => 'required',
-                'date_volunteered' => 'required',
+                'mission_id1' => 'required',
+                'date_volunteered1' => 'required',
             ]);
             Timesheet::insert([
-                "mission_id" => $request->mission_id,
+                "mission_id" => $request->mission_id1,
                 "user_id" => Auth::user()->user_id,
                 "time" => ($request->h ? $request->h : '00').':'.($request->m ? $request->m : '00').':00',
-                "date_volunteered" => $request->date_volunteered,
+                "date_volunteered" => $request->date_volunteered1,
                 "notes" => $request->notes,
                 "status" => 'APPROVED',
                 "created_at" => Carbon::now()->toDateTimeString()
@@ -37,14 +37,14 @@ class TimesheetController extends Controller
         }
         else{
             $request->validate([
-                'missionid' => 'required',
-                'datevolunteered' => 'required',
+                'mission_id2' => 'required',
+                'date_volunteered2' => 'required',
             ]);
             Timesheet::insert([
-                "mission_id" => $request->missionid,
+                "mission_id" => $request->mission_id2,
                 "user_id" => Auth::user()->user_id,
                 "action" => $request->action,
-                "date_volunteered" => $request->datevolunteered,
+                "date_volunteered" => $request->datevolunteered2,
                 "notes" => $request->notes,
                 "status" => 'APPROVED',
                 "created_at" => Carbon::now()->toDateTimeString()
@@ -57,23 +57,23 @@ class TimesheetController extends Controller
     {
         if (isset($_POST['edit_hours'])){
             $request->validate([
-                'date_volunteered' => 'required',
+                'date_volunteered3' => 'required',
             ]);
             Timesheet::where('timesheet_id', $timesheet_id)->update([
-                "mission_id" => $request->mission_id,
+                "mission_id" => $request->mission_id3,
                 "time" => ($request->h ? $request->h : '00').':'.($request->m ? $request->m : '00').':00',
-                "date_volunteered" => $request->date_volunteered,
+                "date_volunteered" => $request->date_volunteered3,
                 "notes" => $request->notes,
             ]);
         }
         else{
             $request->validate([
-                'datevolunteered' => 'required',
+                'date_volunteered4' => 'required',
             ]);
             Timesheet::where('timesheet_id', $timesheet_id)->update([
-                "mission_id" => $request->mission_id,
+                "mission_id" => $request->mission_id4,
                 "action" => $request->action,
-                "date_volunteered" => $request->datevolunteered,
+                "date_volunteered" => $request->datevolunteered4,
                 "notes" => $request->notes,
             ]);
         }

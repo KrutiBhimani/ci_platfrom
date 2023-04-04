@@ -1,16 +1,22 @@
 @extends('layouts.admin_header')
 
 @section('content')
-    @if (Session::has('message'))
-        <div class="alert alert-success mb-0 mt-3" role="alert">
-            {{ Session::get('message') }}
-        </div>
-    @endif
-    @if (Session::has('error'))
-        <div class="alert alert-danger mb-0 mt-3" role="alert">
-            {{ Session::get('error') }}
-        </div>
-    @endif
+    <script>
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+    </script>
     <div class="p-3">
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -118,10 +124,10 @@
                                     @endif
                                 @endfor
                                 @if ($pag == $cnt)
-                                    <li class='page-item'><a class='page-link peginate'><img
-                                                src='/storage/images/arrow.png' alt=''></a></li>
-                                    <li class='page-item'><a class='page-link peginate'><img
-                                                src='/storage/images/next.png' alt=''></a></li>
+                                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/arrow.png'
+                                                alt=''></a></li>
+                                    <li class='page-item'><a class='page-link peginate'><img src='/storage/images/next.png'
+                                                alt=''></a></li>
                                 @else
                                     <li class='page-item'><a class='page-link peginate'
                                             href='/admin/page?page={{ $next }}'><img

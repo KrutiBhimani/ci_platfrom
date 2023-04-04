@@ -77,12 +77,13 @@
                     <p class="mb-1 mt-3">Email Address*</p>
                     <input type="email" class="popup" name="" value="{{ Auth::user()->email }}" disabled>
                     <p class="mb-1 mt-3">Subject*</p>
-                    <input type="text" class="popup" name="subject" placeholder="Enter your subject">
+                    <input type="text" class="popup" name="subject" placeholder="Enter your subject"
+                        value="{{ old('subject') }}">
                     @if ($errors->has('subject'))
                         <span class="text-danger">{{ $errors->first('subject') }}</span>
                     @endif
                     <p class="mb-1 mt-3">Message*</p>
-                    <textarea class="popup1" rows="4" name="message" placeholder="Enter your message"></textarea>
+                    <textarea class="popup1" rows="4" name="message" placeholder="Enter your message">{{ old('message') }}</textarea>
                     @if ($errors->has('message'))
                         <span class="text-danger">{{ $errors->first('message') }}</span>
                     @endif
@@ -97,3 +98,8 @@
         </div>
     </div>
 </div>
+<script>
+    @if ($errors->has('subject') || $errors->has('message'))
+        $('#contactpopup').modal('show');
+    @endif
+</script>
